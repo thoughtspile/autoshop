@@ -1,7 +1,14 @@
 var keystone = require('keystone');
 
-exports = module.exports = function (req, res) {
+var test = require('../test');
 
+var Shop = keystone.list('Shop');
+var Good = keystone.list('Good');
+var GoodsByShops = keystone.list('GoodsByShops');
+
+test();
+
+exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
@@ -9,6 +16,16 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'home';
 
-	// Render the view
-	view.render('index');
+    Shop.model.find({}).exec()
+        .then(shops => {
+            locals.shops = shops;
+        })
+        .then(() => Good.model.find({}).exec())
+        .then(goods => {
+            locals.goods = goods;
+        })
+        .then(
+            () => view.render('index'),
+            err => console.log('err', err)
+        );
 };

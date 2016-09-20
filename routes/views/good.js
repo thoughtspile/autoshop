@@ -3,6 +3,7 @@ var _ = require('lodash');
 
 var Shop = keystone.list('Shop');
 var Good = keystone.list('Good');
+var Cart = keystone.list('Cart');
 var GoodsByShops = keystone.list('GoodsByShops');
 
 exports = module.exports = function (req, res) {
@@ -10,6 +11,24 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	locals.section = 'home';
+
+    var user = req.user;
+
+    view.on('post', { action: 'add-to-cart' }, function(next) {
+        if (!user) {
+            next();
+        }
+        var orderData = {
+            good: req.params['id'],
+            uid: user._id,
+            qty: 1
+        };
+		Cart.model.create(orderData)
+            .then(
+                () => next(),
+                err => console.log(err)
+            );
+	});
 
     var present = [];
 

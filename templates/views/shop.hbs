@@ -12,10 +12,12 @@
             <ul>
         		{{#each goods }}
                     <li>
-                        <img src='{{ img.[0] }}' />
-                        <h3>{{ name }}</h3>
-                        {{ desc }}
-                        {{ prices.cat1 }} руб.
+                        <a href='/goods/{{ _id }}'>
+                            <img src='{{ img.[0] }}' />
+                            <h3>{{ name }}</h3>
+                            {{ desc }}
+                            {{ prices.cat1 }} руб.
+                        </a>
                     </li>
                 {{/each}}
             </ul>

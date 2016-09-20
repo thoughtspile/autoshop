@@ -1,0 +1,29 @@
+{{!< default}}
+<div class="container">
+	<div class="jumbotron">
+        <div>
+            <div class='gallery'>
+                {{#each img}}
+                    <img src='{{ . }}' />
+                {{/each}}
+            </div>
+            <h2>{{ good.name }}</h2>
+            <div>
+                {{ good.desc }}
+            </div>
+        </div>
+        <div>
+            <h2>Товар в наличии в магазинах</h2>
+            <ul>
+        		{{#each present }}
+                    <li>
+                        <a href='/shops/{{ shopData._id }}'>
+                            {{ shopData.address }}
+                            <span>{{ qty }}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+	</div>
+</div>

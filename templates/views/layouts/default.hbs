@@ -41,10 +41,11 @@
 								{{/each}}
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
+                                <li><a href='/cart'>Корзина</a></li>
 								{{#if user}}
-								<li><a href="/keystone/signout">Sign Out</a></li>
+    								<li><a href="/keystone/signout">Sign Out</a></li>
 								{{else}}
-								<li><a href="/keystone/signin">Sign In</a></li>
+    								<li><a href="/keystone/signin">Sign In</a></li>
 								{{/if}}
 							</ul>
 						</div>

@@ -1,5 +1,8 @@
 var keystone = require('keystone');
 var _ = require('lodash');
+
+var User = keystone.list('User');
+var Cart = keystone.list('Cart');
 var Shop = keystone.list('Shop');
 var Good = keystone.list('Good');
 var GoodsByShops = keystone.list('GoodsByShops');
@@ -135,30 +138,51 @@ const makeShop = () => ({
     phone: '+79122344565',
 });
 
-const makeRel = (goods, shops) => {
-    return {
-        good: randItem(goods)._id,
-        shop: randItem(shops)._id,
-        qty: Math.floor(Math.random() * 60)
-    };
-};
+const makeRel = (goods, shops) => ({
+    good: randItem(goods)._id,
+    shop: randItem(shops)._id,
+    qty: Math.floor(Math.random() * 60)
+});
+
+const makeCartItem = (users, goods) => ({
+    uid: randItem(users)._id,
+    good: randItem(goods)._id,
+    qty: Math.floor(Math.random() * 12)
+});
 
 module.exports = () => {
+    var shops = [];
+    var goods = [];
+    var users = [];
+
+    // make goods
     Good.model.find({}).remove().exec()
-        .then(() => Shop.model.find({}).remove().exec())
-        .then(() => GoodsByShops.model.find({}).remove().exec())
         .then(() => Good.model.create(_.range(200).map(makeGood)))
+        // make shops
+        .then(() => Shop.model.find({}).remove().exec())
         .then(() => Shop.model.create(_.range(11).map(makeShop)))
+        // fetch goods, shops, and users
+        .then(() => Shop.model.find({}).exec()
+            .then(_shops => shops = _shops)
+            .then(() => Good.model.find({}).exec())
+            .then(_goods => goods = _goods)
+            .then(() => User.model.find({}).exec())
+            .then(_users => users = _users)
+        )
+        // assign goods to shops
+        .then(() => GoodsByShops.model.find({}).remove().exec())
         .then(() => {
-            var shops = [];
-            var goods = [];
-            return Shop.model.find({}).exec()
-                .then(_shops => shops = _shops)
-                .then(() => Good.model.find({}).exec())
-                .then(_goods => goods = _goods)
-                .then(() => {
-                    const rels = _.range(1200).map(() => makeRel(goods, shops));
-                    return GoodsByShops.model.create(rels);
-                })
-        });
+            const rels = _.range(1200).map(() => makeRel(goods, shops));
+            return GoodsByShops.model.create(rels);
+        })
+        // fill carts
+        .then(() => Cart.model.find({}).remove().exec())
+        .then(() => {
+            const cart = _.range(users.length * 6).map(() => makeCartItem(users, goods));
+            return Cart.model.create(cart);
+        })
+        .then(
+            () => console.log('test filled'),
+            err => console.log('test error: ', err)
+        );
 }

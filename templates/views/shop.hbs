@@ -2,12 +2,10 @@
 <div class="container">
 	<div class="jumbotron">
         <div>
-            <h2>Наши магазины</h2>
-            <ul>
-        		{{#each shops }}
-                    <li><a href='/shops/{{ _id }}'>{{ address }}</a></li>
-                {{/each}}
-            </ul>
+            <h2>Магазин по адресу {{ shop.address }}</h2>
+            <div>
+                {{ shop.desc }}
+            </div>
         </div>
         <div>
             <h2>Товары</h2>

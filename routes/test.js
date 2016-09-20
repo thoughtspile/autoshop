@@ -135,11 +135,13 @@ const makeShop = () => ({
     phone: '+79122344565',
 });
 
-const makeRel = (goods, shops) => ({
-    good: randItem(locals.goods)._id,
-    shop: randItem(locals.shops)._id,
-    qty: Math.floor(Math.random() * 60)
-});
+const makeRel = (goods, shops) => {
+    return {
+        good: randItem(goods)._id,
+        shop: randItem(shops)._id,
+        qty: Math.floor(Math.random() * 60)
+    };
+};
 
 module.exports = () => {
     Good.model.find({}).remove().exec()
@@ -147,5 +149,16 @@ module.exports = () => {
         .then(() => GoodsByShops.model.find({}).remove().exec())
         .then(() => Good.model.create(_.range(200).map(makeGood)))
         .then(() => Shop.model.create(_.range(11).map(makeShop)))
-        .then(() => GoodsByShops.model.create(_.range(800).map(makeRel)));
+        .then(() => {
+            var shops = [];
+            var goods = [];
+            return Shop.model.find({}).exec()
+                .then(_shops => shops = _shops)
+                .then(() => Good.model.find({}).exec())
+                .then(_goods => goods = _goods)
+                .then(() => {
+                    const rels = _.range(1200).map(() => makeRel(goods, shops));
+                    return GoodsByShops.model.create(rels);
+                })
+        });
 }

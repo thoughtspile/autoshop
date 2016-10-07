@@ -11,9 +11,9 @@
         </div>
         <div>
             <h2>Товары</h2>
-            <ul>
+            <ul class='row'>
         		{{#each goods }}
-                    <li>
+                    <li class='col-xs-4'>
                         <a href='/goods/{{ _id }}'>
                             <img src='{{ img.[0] }}' />
                             <h3>{{ name }}</h3>

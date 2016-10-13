@@ -11,8 +11,8 @@ var handlebars = require('express-handlebars');
 // and documentation.
 
 keystone.init({
-	'name': 'My Site',
-	'brand': 'My Site',
+	'name': 'Idemitsu — магазин автосмазок',
+	'brand': 'Idemitsu — магазин автосмазок',
 
 	'sass': 'public',
 	'static': 'public',

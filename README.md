@@ -1,0 +1,3 @@
+- Put `COOKIE_SECRET=<some crazy string>` into `/.env`
+- Start mongod
+- Serve with `node keystone` (on port 3000)

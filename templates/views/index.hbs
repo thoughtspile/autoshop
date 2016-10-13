@@ -11,18 +11,19 @@
         </div>
         <div>
             <h2>Товары</h2>
-            <ul class='row'>
+            <div class='snipcart-categories'>
+				<!-- for each category -->
         		{{#each goods }}
-                    <li class='col-xs-4'>
+                    <div class='snipcart-item block'>
                         <a href='/goods/{{ _id }}'>
                             <img src='{{ img.[0] }}' />
                             <h3>{{ name }}</h3>
                             {{ desc }}
                             {{ prices.cat1 }} руб.
                         </a>
-                    </li>
+                    </div>
                 {{/each}}
-            </ul>
+            </div>
         </div>
 	</div>
 </div>

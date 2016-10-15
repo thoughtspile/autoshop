@@ -1,26 +1,24 @@
 {{!< default}}
 <div class="container">
-	<div class="jumbotron">
+    <div>
+        <h2>Магазин по адресу {{ shop.address }}</h2>
         <div>
-            <h2>Магазин по адресу {{ shop.address }}</h2>
-            <div>
-                {{ shop.desc }}
-            </div>
+            {{ shop.desc }}
         </div>
-        <div>
-            <h2>Товары</h2>
-            <ul>
-        		{{#each goods }}
-                    <li>
-                        <a href='/goods/{{ _id }}'>
-                            <img src='{{ img.[0] }}' />
-                            <h3>{{ name }}</h3>
-                            {{ desc }}
-                            {{ prices.cat1 }} руб.
-                        </a>
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
-	</div>
+    </div>
+    <div>
+        <h2>Товары</h2>
+        <ul>
+    		{{#each goods }}
+                <li>
+                    <a href='/goods/{{ _id }}'>
+                        <img src='{{ img.[0] }}' />
+                        <h3>{{ name }}</h3>
+                        {{ desc }}
+                        {{ prices.cat1 }} руб.
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>

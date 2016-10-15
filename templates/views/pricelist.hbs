@@ -1,19 +1,17 @@
 {{!< default}}
 <div class="container">
-	<div class="jumbotron">
-        <div>
-            <h2>Товары</h2>
-            <table class='snipcart-products block-group' style='width:100%;'>
-				<tbody>
-	        		{{#each goods }}
-	                    <tr style='width: 100%; margin-bottom: .5em; border-top: 1px solid #eee;'>
-							<td><a href='/goods/{{ _id }}'>{{ name }}</a></td>
-							<td><a href='/goods/{{ _id }}'>{{ desc }}</a></td>
-							<td><a href='/goods/{{ _id }}'>{{ prices.cat1 }}</a></td>
-	                    </tr>
-	                {{/each}}
-				</tbody>
-            </table>
-        </div>
-	</div>
+    <div>
+        <h2>Товары</h2>
+        <table class='snipcart-products block-group' style='width:100%;'>
+			<tbody>
+        		{{#each goods }}
+                    <tr style='width: 100%; margin-bottom: .5em; border-top: 1px solid #eee;'>
+						<td><a href='/goods/{{ _id }}'>{{ name }}</a></td>
+						<td><a href='/goods/{{ _id }}'>{{ desc }}</a></td>
+						<td><a href='/goods/{{ _id }}'>{{ prices.cat1 }}</a></td>
+                    </tr>
+                {{/each}}
+			</tbody>
+        </table>
+    </div>
 </div>

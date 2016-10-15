@@ -1,33 +1,31 @@
 {{!< default}}
 <div class="container">
-	<div class="jumbotron">
-        <div>
-            <div class='gallery'>
-                {{#each good.img}}
-                    <img src='{{ . }}' />
-                {{/each}}
-            </div>
-            <h2>{{ good.name }}</h2>
-            <div>
-                {{ good.desc }}
-            </div>
-            <form method='post'>
-                <input type='hidden' name='action' value='add-to-cart'>
-                <button>Добавить к заказу</button>
-            </form>
+    <div>
+        <div class='gallery'>
+            {{#each good.img}}
+                <img src='{{ . }}' />
+            {{/each}}
         </div>
+        <h2>{{ good.name }}</h2>
         <div>
-            <h2>Товар в наличии в магазинах</h2>
-            <ul>
-        		{{#each present }}
-                    <li>
-                        <a href='/shops/{{ shopData._id }}'>
-                            {{ shopData.address }}
-                            <span>{{ qty }}</span>
-                        </a>
-                    </li>
-                {{/each}}
-            </ul>
+            {{ good.desc }}
         </div>
-	</div>
+        <form method='post'>
+            <input type='hidden' name='action' value='add-to-cart'>
+            <button>Добавить к заказу</button>
+        </form>
+    </div>
+    <div>
+        <h2>Товар в наличии в магазинах</h2>
+        <ul>
+    		{{#each present }}
+                <li>
+                    <a href='/shops/{{ shopData._id }}'>
+                        {{ shopData.address }}
+                        <span>{{ qty }}</span>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>

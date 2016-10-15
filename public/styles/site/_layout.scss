@@ -1,7 +1,3 @@
-#header {
-	margin-top: 30px;
-}
-
 #footer {
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;
@@ -45,12 +41,14 @@ b,strong,label,th{font-weight:600}
 @media only all and (max-width: 47.938em){.padding-horiz,.fullwidth #header,.fullwidth #breadcrumbs,.fullwidth .blog-header,.fullwidth .blog-content-item,.fullwidth .content-wrapper,.fullwidth ul.pagination,.fullwidth #body>.modular-row,#body,#header{padding-left:1rem;padding-right:1rem}
 }
 .padding-vert{padding-top:3rem;padding-bottom:3rem}
-#header{position:fixed;z-index:10;width:100%;height:5rem;background-color:rgb(247, 244, 202);box-shadow:0 5px 12px rgba(0,0,0,0.2)}
-#header.scrolled{height:3rem;background-color:rgba(255,255,255,.5) !important;box-shadow:0 0.05rem 1rem rgba(0,0,0,0.15) !important}
-#header.scrolled #logo h3{color:#444 !important;font-size:1.6rem !important}
-#header.scrolled #logo a,#header.scrolled #navbar span{color:#444 !important}
-#header.scrolled #navbar a:hover{color:#ff2000 !important}
-#header.scrolled .navigation{margin-top:0.5rem !important}
+#header{
+    position: fixed;
+    z-index: 10;
+    width:100%;
+    height:5rem;
+    background-color: rgb(255,255,255) !important;
+    box-shadow:0 5px 12px rgba(0,0,0,0.2);
+}
 #header>.grid,#header #logo,#header #navbar{height:100%}
 #header #logo{float:left}
 #header #logo h3{font-size:2rem;line-height:2rem;margin:0;text-transform:uppercase}
@@ -108,8 +106,6 @@ h1{font-size:3.2rem}
 @media only all and (max-width: 47.938em){h4{font-size:1.25rem}
 }
 h1{text-align:center;letter-spacing:0;}
-h2{letter-spacing:-2px}
-h3{letter-spacing:-1px}
 h1+h2{margin:-2rem 0 2rem 0;font-size:2rem;line-height:1;text-align:center;font-family:"PT Sans","Helvetica","Tahoma","Geneva","Arial",sans-serif;font-weight:300}
 @media only all and (min-width: 48em) and (max-width: 59.938em){h1+h2{font-size:1.6rem}
 }
@@ -382,9 +378,13 @@ ul.pagination{margin:0 0 3rem;text-align:center}
   margin: 0 !important; }
 
 .block {
+  img {
+      max-height: 100px;
+  }
   float: left;
   width: 100%;
-  height: 200px; }
+  height: 200px;
+}
 
 .snipcart-summary {
   display: inline-block;

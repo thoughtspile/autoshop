@@ -13,6 +13,7 @@ Good.add({
         cat2: { type: Types.Number, initial: false, required: true },
         cat3: { type: Types.Number, initial: false, required: true }
     },
+    category: { type: String, initial: false, required: true },
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
     img: { type: Types.TextArray, default: [], required: true }

@@ -126,6 +126,7 @@ const makeGood = () => {
     return {
         prices: { cat1: basePrice, cat2: .9 * basePrice, cat3: .6 * basePrice },
         name: randGoodName(),
+        category: randItem([ 'масла', "смазки", "дворники", "тряпки" ]),
         desc: 'Невероятно гладкое скольжение в любых условиях мотор радуется',
         img: randImgs()
     }

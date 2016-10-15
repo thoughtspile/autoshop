@@ -10,21 +10,19 @@
             </ul>
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=uSqA7iG3iZLEEYEEATgo8jiPNUYIfK4b&amp;width=100%&amp;height=493&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>
         </div>
-        <div>
+        <div class='snipcart-categories' style='padding: 20px; margin-top: 20px;'>
             <h2>Товары</h2>
-            <div class='snipcart-categories'>
-				<!-- for each category -->
-        		{{#each goods }}
-                    <div class='snipcart-item block'>
-                        <a href='/goods/{{ _id }}'>
-                            <img src='{{ img.[0] }}' />
-                            <h3>{{ name }}</h3>
-                            {{ desc }}
-                            {{ prices.cat1 }} руб.
-                        </a>
-                    </div>
-                {{/each}}
-            </div>
+    		{{#each goodsByCategory }}
+                <div class='snipcart-item block'>
+                    <a href='/goods/{{ _id }}'>
+                        <!-- {{ 'cat link' }} -->
+                        <img src='{{ itemImg.[0] }}' />
+                        <h3>{{ _id }}</h3>
+                        {{ itemName }} и {{ count }} других товаров
+                        от {{ minPrice }} руб.
+                    </a>
+                </div>
+            {{/each}}
         </div>
 	</div>
 </div>

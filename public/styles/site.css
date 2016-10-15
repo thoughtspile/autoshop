@@ -5881,7 +5881,6 @@ b, strong, label, th {
 #body {
   background: #fff;
   padding-top: 8rem;
-  padding-bottom: 11rem;
   min-height: 100vh; }
 
 .left {
@@ -6887,10 +6886,14 @@ ul.pagination {
   color: #fff !important; }
 
 .snipcart-categories {
-  background: white none repeat scroll 0% 0%;
-  padding-top: 3em;
-  padding-bottom: 3em;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24); }
+  background-color: white;
+  margin-top: 2em;
+  padding: 1.5em;
+}
+
+ymaps, .snipcart-categories {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+}
 
 .snipcart-categories:after {
   content: "";
@@ -6898,9 +6901,10 @@ ul.pagination {
   clear: both; }
 
 .snipcart-categories .snipcart-item {
-  width: 33%;
-  float: left;
-  text-align: center; }
+    margin-top: 10px;
+    width: 33%;
+    float: left;
+}
 
 .snipcart-categories .snipcart-item.block {
   width: 33%; }

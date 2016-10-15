@@ -20,9 +20,18 @@ exports = module.exports = function (req, res) {
         .then(shops => {
             locals.shops = shops;
         })
-        .then(() => Good.model.find({}).exec())
-        .then(goods => {
-            locals.goods = goods;
+        .then(() => Good.model.aggregate([ {
+                $group : {
+                    _id : '$category',
+                    count: { $sum: 1 },
+                    itemName: { $first: '$name' },
+                    itemImg: { $first: '$img' },
+                    minPrice: { $min: '$prices.cat1' }
+                }
+            } ]).exec()
+        )
+        .then(goodsByCategory => {
+            locals.goodsByCategory = goodsByCategory;
         })
         .then(
             () => view.render('index'),

@@ -10,9 +10,16 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'pricelist';
 
-    Good.model.find({}).exec()
+    var filter = req.query['category']? { category: req.query['category'] }: {};
+    locals.activeCategory = req.query['category'];
+
+    Good.model.find(filter).exec()
         .then(goods => {
             locals.goods = goods;
+        })
+        .then(() => Good.model.distinct('category', {}).exec())
+        .then(categories => {
+            locals.categories = categories;
         })
         .then(
             () => view.render('pricelist'),

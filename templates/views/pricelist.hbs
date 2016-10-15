@@ -2,6 +2,15 @@
 <div class="container">
     <div>
         <h2>Товары</h2>
+        <form>
+            <select type='text' name='category'>
+                <option value=''>Любая категория</option>
+                {{#each categories}}
+                    <option value={{.}}>{{.}}</option>
+                {{/each}}
+            </select>
+            <button type='submit'>Искать</button>
+        </form>
         <table class='snipcart-products block-group' style='width:100%;'>
 			<tbody>
         		{{#each goods }}

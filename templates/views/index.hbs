@@ -14,7 +14,7 @@
             <h2>Товары</h2>
     		{{#each goodsByCategory }}
                 <div class='snipcart-item block'>
-                    <a href='/goods/{{ _id }}'>
+                    <a href='/pricelist?category={{ _id }}'>
                         <!-- {{ 'cat link' }} -->
                         <img src='{{ itemImg.[0] }}' />
                         <h3>{{ _id }}</h3>

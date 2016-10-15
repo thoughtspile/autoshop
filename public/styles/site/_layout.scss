@@ -31,7 +31,11 @@ body{background:#fff;color:#444;-webkit-font-smoothing:antialiased;-moz-osx-font
 b,strong,label,th{font-weight:600}
 #container{min-height:100%;position:relative}
 .fullwidth #body{padding-left:0;padding-right:0}
-#body{background:#fff;padding-top:8rem;padding-bottom:11rem;min-height:100vh;}
+#body{
+    background:#fff;
+    padding-top:8rem;
+    min-height:100vh;
+}
 .left{float:left}
 .right{float:right}
 .default-animation,#body,#header,#header #logo h3,#header #navbar ul.navigation,.modular .showcase .button{-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;transition:all 0.5s ease}

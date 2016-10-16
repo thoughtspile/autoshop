@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700&subset=latin,cyrillic);
+
 #footer {
 	margin-top: 30px;
 	border-top: 1px solid #eeeeee;
@@ -22,29 +24,11 @@ body {
 }
 
 // template
-@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700&subset=latin,cyrillic);
 #header #logo h3,#header #navbar .panel-activation{position:relative;top:50%;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-o-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
-.button,.button-secondary{display:inline-block;padding:7px 20px}
-.button-small.button,.button-small.button-secondary{padding:3px 10px;font-size:.9rem}
-html,body{height:100%}
-body{background:#fff;color:#444;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-b,strong,label,th{font-weight:600}
-#container{min-height:100%;position:relative}
-.fullwidth #body{padding-left:0;padding-right:0}
 #body{
-    background:#fff;
     padding-top:8rem;
     min-height:100vh;
 }
-.left{float:left}
-.right{float:right}
-.default-animation,#body,#header,#header #logo h3,#header #navbar ul.navigation,.modular .showcase .button{-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;transition:all 0.5s ease}
-.padding-horiz,.fullwidth #header,.fullwidth #breadcrumbs,.fullwidth .blog-header,.fullwidth .blog-content-item,.fullwidth .content-wrapper,.fullwidth ul.pagination,.fullwidth #body>.modular-row,#body,#header{padding-left:7rem;padding-right:7rem}
-@media only all and (max-width: 59.938em){.padding-horiz,.fullwidth #header,.fullwidth #breadcrumbs,.fullwidth .blog-header,.fullwidth .blog-content-item,.fullwidth .content-wrapper,.fullwidth ul.pagination,.fullwidth #body>.modular-row,#body,#header{padding-left:4rem;padding-right:4rem}
-}
-@media only all and (max-width: 47.938em){.padding-horiz,.fullwidth #header,.fullwidth #breadcrumbs,.fullwidth .blog-header,.fullwidth .blog-content-item,.fullwidth .content-wrapper,.fullwidth ul.pagination,.fullwidth #body>.modular-row,#body,#header{padding-left:1rem;padding-right:1rem}
-}
-.padding-vert{padding-top:3rem;padding-bottom:3rem}
 #header{
     position: fixed;
     z-index: 10;
@@ -289,8 +273,19 @@ ul.pagination{margin:0 0 3rem;text-align:center}
 
 #body > p, #body > ymaps, .card, .list-item {
   background: white none repeat scroll 0% 0%;
-  padding: 2em 3em;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);}
+  padding: 1em;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  display: block;
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.card h3 {
+    margin-top: 0;
+}
 
 .snipcart-thumb.card:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}

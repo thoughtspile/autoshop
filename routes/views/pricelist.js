@@ -11,7 +11,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'pricelist';
 
     var filter = req.query['category']? { category: req.query['category'] }: {};
-    locals.activeCategory = req.query['category'];
+    locals.activeCategory = req.query['category'] || 'Любая категория';
 
     Good.model.find(filter).exec()
         .then(goods => {

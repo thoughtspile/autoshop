@@ -1,26 +1,33 @@
 {{!< default}}
 <div class="container">
-    <div>
-        <h2>Товары</h2>
-        <form>
-            <select type='text' name='category'>
-                <option value=''>Любая категория</option>
-                {{#each categories}}
-                    <option value={{.}}>{{.}}</option>
-                {{/each}}
-            </select>
-            <button type='submit'>Искать</button>
-        </form>
-        <table class='snipcart-products block-group' style='width:100%;'>
-			<tbody>
-        		{{#each goods }}
-                    <tr style='width: 100%; margin-bottom: .5em; border-top: 1px solid #eee;'>
-						<td><a href='/goods/{{ _id }}'>{{ name }}</a></td>
-						<td><a href='/goods/{{ _id }}'>{{ desc }}</a></td>
-						<td><a href='/goods/{{ _id }}'>{{ prices.cat1 }}</a></td>
-                    </tr>
-                {{/each}}
-			</tbody>
-        </table>
+    <div class='snipcart-categories row' style='padding-left: 20px; padding-right: 20px;'>
+        <h2 class='col-xs-6' style='margin-top: 0;'>Товары</h2>
+        <div class="col-xs-6">
+            <div class='dropdown' style='float: right'>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ activeCategory }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href='pricelist' value=''>Любая категория</a></li>
+                    {{#each categories}}
+                        <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class='col-xs-12'>
+            <table style='width: 100%;'>
+    			<tbody>
+            		{{#each goods }}
+                        <tr style='width: 100%; line-height: 1.7; border-top: 1px solid #eee;'>
+    						<td><a href='/goods/{{ _id }}'>{{ name }}</a></td>
+    						<td><a href='/goods/{{ _id }}'>{{ desc }}</a></td>
+    						<td><a href='/goods/{{ _id }}'>{{ prices.cat1 }}</a></td>
+                        </tr>
+                    {{/each}}
+    			</tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -10,16 +10,18 @@
             </ul>
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=uSqA7iG3iZLEEYEEATgo8jiPNUYIfK4b&amp;width=100%&amp;height=493&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>
         </div>
-        <div class='snipcart-categories' style='padding: 20px; margin-top: 20px;'>
+        <div class='snipcart-categories row' style='padding: 20px; margin-top: 20px;'>
             <h2>Товары</h2>
     		{{#each goodsByCategory }}
-                <div class='snipcart-item block'>
-                    <a href='/pricelist?category={{ _id }}'>
+                <div class='col-xs-4'>
+                    <a class='card row no-gutter' href='/pricelist?category={{ _id }}' style='margin: inherit; margin-top: 20px;'>
                         <!-- {{ 'cat link' }} -->
-                        <img src='{{ itemImg.[0] }}' />
-                        <h3>{{ _id }}</h3>
-                        {{ itemName }} и {{ count }} других товаров
-                        от {{ minPrice }} руб.
+                        <img class='col-xs-4' src='{{ itemImg.[0] }}' style='max-height: 100px; width: auto;'/>
+                        <div class='col-xs-8'>
+                            <h3>{{ _id }}</h3>
+                            {{ itemName }} и {{ count }} других товаров
+                            от {{ minPrice }} руб.
+                        </div>
                     </a>
                 </div>
             {{/each}}

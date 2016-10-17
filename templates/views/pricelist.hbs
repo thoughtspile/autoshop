@@ -17,17 +17,22 @@
             </div>
         </div>
         <div class='col-xs-12'>
-            <table style='width: 100%;'>
-    			<tbody>
-            		{{#each goods }}
-                        <tr style='width: 100%; line-height: 1.7; border-top: 1px solid #eee;'>
-    						<td><a href='/goods/{{ _id }}'>{{ name }}</a></td>
-    						<td><a href='/goods/{{ _id }}'>{{ desc }}</a></td>
-    						<td><a href='/goods/{{ _id }}'>{{ prices.cat1 }}</a></td>
-                        </tr>
-                    {{/each}}
-    			</tbody>
-            </table>
+    		{{#each goods }}
+                <a class='pricelist__item row' href='/goods/{{ _id }}'>
+					<div class='col-xs-4' style='height: 150px; position: relative;'>
+                        <div style='position: absolute; right: 0; left: 0; top: 0; bottom: 0; background-image: url({{ img.[0] }}); background-position: center; background-size: contain; background-repeat: no-repeat;'></div>
+                    </div>
+                    <div class='col-xs-8'>
+                        <div>
+                            <h2 style='display: inline-block'>{{ name }}</h2>
+                            <div style='float: right; font-size: 16px; margin-top: 9px;'>
+                                {{ prices.cat1 }} руб.
+                            </div>
+                        </div>
+    					{{ desc }}
+                    </div>
+                </a>
+            {{/each}}
         </div>
     </div>
 </div>

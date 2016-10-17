@@ -103,7 +103,7 @@ function randItem(arr) {
 }
 
 function randImgs() {
-    return _.range(4).map(() => randItem(IMG));
+    return _.range(3).map(() => randItem(IMG));
 }
 
 function randGoodName() {

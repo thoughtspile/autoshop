@@ -118,7 +118,7 @@ function randShopLocation() {
         randItem(['Дергунко', 'Петровского', 'Борисова', 'Акопяна']) +
         ', д. ' +
         Math.floor(Math.random() * 84) +
-        (Math.random() > .5? '': ' к. ' + Math.floor(Math.random() * 5));
+        (Math.random() > .5 ? '' : ' к. ' + Math.floor(Math.random() * 5));
 }
 
 const makeGood = () => {
@@ -134,7 +134,7 @@ const makeGood = () => {
 
 const makeShop = () => ({
     address: randShopLocation(),
-    coords: '28.5N 54.6E',
+    coords: (55.7558 + .2 * Math.random() - .1) + ',' + (37.6173 + .2 * Math.random() - .1),
     desc: 'Флагманский магазин со складом.',
     phone: '+79122344565',
 });

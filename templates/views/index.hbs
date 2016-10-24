@@ -2,13 +2,7 @@
 <div class="container">
 	<div>
         <div>
-            <h2>Наши магазины</h2>
-            <ul>
-        		{{#each shops }}
-                    <li><a href='/shops/{{ _id }}'>{{ address }}</a></li>
-                {{/each}}
-            </ul>
-            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=uSqA7iG3iZLEEYEEATgo8jiPNUYIfK4b&amp;width=100%&amp;height=493&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>
+            <div style='height: 400px;' id="mapid"></div>
         </div>
         <div class='snipcart-categories row' style='padding: 20px; margin-top: 20px;'>
             <h2>Товары</h2>
@@ -27,4 +21,26 @@
             {{/each}}
         </div>
 	</div>
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  <script>
+      var mymap = L.map('mapid').setView([55.7558, 37.6173], 10);
+      L.tileLayer('https://api.mapbox.com/styles/v1/klepov/ciuo3rqmf00g62inogy2c5v2v/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+        maxZoom: 18,
+        accessToken: 'pk.eyJ1Ijoia2xlcG92IiwiYSI6ImNpanZvOTZ0ajAwNGl3OGphcnQwdzVweG4ifQ.jCM8K6R_MxlX92wgz0IMqw'
+      }).addTo(mymap);
+      var shops = [
+        {{#each shops}}
+          {
+            coords: "{{ coords }}".split(',').map(Number),
+            address: "{{ address }}",
+            href: "/shops/{{ _id }}",
+            desc: "{{ desc }}"
+          },
+        {{/each }}
+      ];
+      shops.forEach(function(shop) {
+        var marker = L.marker(shop.coords).addTo(mymap);
+        marker.bindPopup("<a href='" + shop.href + "'>" + shop.address + "</a>");
+      });
+  </script>
 </div>

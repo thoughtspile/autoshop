@@ -24,9 +24,8 @@ exports = module.exports = function (req, res) {
                 $group : {
                     _id : '$category',
                     count: { $sum: 1 },
-                    itemName: { $first: '$name' },
-                    itemImg: { $first: '$img' },
-                    minPrice: { $min: '$prices.cat1' }
+                    minPrice: { $min: '$prices.cat1' },
+                    items: { $push: '$$ROOT' },
                 }
             } ]).exec()
         )

@@ -1,26 +1,38 @@
 {{!< default}}
 <div class="container">
-	<div>
+    <div>
         <div>
             <div style='height: 400px;' id="mapid"></div>
         </div>
-        <div class='snipcart-categories row' style='padding: 20px; margin-top: 20px;'>
-            <h2>Товары</h2>
-    		{{#each goodsByCategory }}
-                <div class='col-xs-4'>
-                    <a class='card row no-gutter' href='/pricelist?category={{ _id }}' style='margin: inherit; margin-top: 20px;'>
-                        <!-- {{ 'cat link' }} -->
-                        <img class='col-xs-4' src='{{ itemImg.[0] }}' style='max-height: 100px; width: auto;'/>
-                        <div class='col-xs-8'>
-                            <h3>{{ _id }}</h3>
-                            {{ itemName }} и {{ count }} других товаров
-                            от {{ minPrice }} руб.
+        {{#each goodsByCategory }}
+            <div class='cat-promo row'>
+                <div class='col-xs-6'>
+                    <a class='card cat-promo__main' href='/pricelist?category={{ _id }}'>
+                        <h1 class='cat-promo__title'>{{ _id }}</h1>
+                        <div class='cat-promo__details'>
+                            {{ count }} товаров от {{ minPrice }} руб.
                         </div>
                     </a>
+                    <div class='row'>
+                        <div class='col-xs-6'>
+                            {{>card product=items.[0]}}
+                        </div>
+                        <div class='col-xs-6'>
+                            {{>card product=items.[1]}}
+                        </div>
+                    </div>
                 </div>
-            {{/each}}
-        </div>
-	</div>
+                <div class='col-xs-3'>
+                    {{>card product=items.[2] extend="card--double"}}
+                </div>
+                <div class='col-xs-3'>
+                    {{>card product=items.[3]}}
+                    {{>card product=items.[4]}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
   <script>
       var mymap = L.map('mapid').setView([55.7558, 37.6173], 10);
@@ -43,4 +55,5 @@
         marker.bindPopup("<a href='" + shop.href + "'>" + shop.address + "</a>");
       });
   </script>
+
 </div>

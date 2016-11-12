@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class='col-xs-3'>
-                    {{>card product=items.[2] extend="card--double"}}
+                    {{>card product=items.[2] extend="double"}}
                 </div>
                 <div class='col-xs-3'>
                     {{>card product=items.[3]}}
@@ -43,10 +43,10 @@
       var shops = [
         {{#each shops}}
           {
-            coords: "{{ coords }}".split(',').map(Number),
+            coords: [{{lat}}, {{lon}}],
             address: "{{ address }}",
             href: "/shops/{{ _id }}",
-            desc: "{{ desc }}"
+            desc: "{{ name }} ({{ type }})"
           },
         {{/each }}
       ];

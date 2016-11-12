@@ -7,6 +7,8 @@ var Shop = keystone.list('Shop');
 var Good = keystone.list('Good');
 var GoodsByShops = keystone.list('GoodsByShops');
 
+var shopData = require('../shops.json');
+
 const IMG = [
     "http://ozon-st.cdn.ngenix.net/multimedia/c300/1005657505.jpg",
     "http://ozon-st.cdn.ngenix.net/multimedia/c300/1011997640.jpg",
@@ -112,15 +114,6 @@ function randGoodName() {
         randItem(['смазка', 'мазилка', 'тряпка', 'незамерзайка']);
 }
 
-function randShopLocation() {
-    return randItem(['Маршала', 'Академика', 'Алексея', 'Космонавта']) +
-        ' ' +
-        randItem(['Дергунко', 'Петровского', 'Борисова', 'Акопяна']) +
-        ', д. ' +
-        Math.floor(Math.random() * 84) +
-        (Math.random() > .5 ? '' : ' к. ' + Math.floor(Math.random() * 5));
-}
-
 const makeGood = () => {
     const basePrice = Math.floor(Math.random() * 6000);
     return {
@@ -131,13 +124,6 @@ const makeGood = () => {
         img: randImgs()
     }
 };
-
-const makeShop = () => ({
-    address: randShopLocation(),
-    coords: (55.7558 + .2 * Math.random() - .1) + ',' + (37.6173 + .2 * Math.random() - .1),
-    desc: 'Флагманский магазин со складом.',
-    phone: '+79122344565',
-});
 
 const makeRel = (goods, shops) => ({
     good: randItem(goods)._id,
@@ -161,7 +147,7 @@ module.exports = () => {
         .then(() => Good.model.create(_.range(200).map(makeGood)))
         // make shops
         .then(() => Shop.model.find({}).remove().exec())
-        .then(() => Shop.model.create(_.range(11).map(makeShop)))
+        .then(() => Shop.model.create(shopData))
         // fetch goods, shops, and users
         .then(() => Shop.model.find({}).exec()
             .then(_shops => shops = _shops)

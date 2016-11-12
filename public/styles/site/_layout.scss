@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700&subset=latin,cyrillic);
 
 $salad: #55ab55;
+$red: rgb(255, 59, 48);
+$bg: #e0e0e0;
 
 #footer {
 	margin-top: 30px;
@@ -16,7 +18,7 @@ $salad: #55ab55;
 }
 
 body {
-	background-color: $salad;
+	background-color: $bg;
 }
 
 .logo--img {
@@ -79,6 +81,7 @@ body {
 
     &__title {
         margin-top: 0;
+        color: $red;
         font-size: 36px;
     }
 
@@ -107,7 +110,7 @@ body {
     }
 
     &:hover {
-        border-color: rgb(255, 59, 48);
+        border-color: $red;
         // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     }
 
@@ -116,18 +119,54 @@ body {
         float: left;
         max-width: 20%;
         max-height: 100%;
+
+        &--double {
+            float: none;
+            max-width: 100%;
+            max-height: 50%;
+            margin: 0 auto;
+        }
     }
 
     &__content {
         display: block;
-        max-height: 100%;
-        max-width: 70%;
+        height: 100%;
+        width: 70%;
         margin-left: 30%;
+        position: relative;
+
+        &--double {
+            width: 100%;
+            margin: 0;
+            margin-top: 10%;
+            height: 40%;
+            text-align: center;
+        }
     }
 
     &__title {
-        font-size: 16px;
+        font-size: 20px;
         margin-top: 0;
+    }
+
+    &__price {
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+    }
+
+    &__btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-radius: 0;
+        color: white;
+        background-color: $red;
+        text-align: right;
+
+        &:hover {
+            color: yellow;
+        }
     }
 }
 

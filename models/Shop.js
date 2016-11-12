@@ -8,11 +8,12 @@ var Types = keystone.Field.Types;
 var Shop = new keystone.List('Shop');
 
 Shop.add({
-	address: { type: Types.Text, initial: false, required: true },
-	coords: { type: Types.Text, initial: false, required: true },
-	desc: { type: Types.Text, initial: true, required: true, default: '' },
-	phone: { type: Types.Text, initial: true, required: true, default: '+79652650061' },
-    // good_ids: { type: [ String ], default: [], required: true }
+    name: { type: Types.Text, initial: false, required: true },
+    phone: { type: Types.Text, initial: false, required: false },
+    type: { type: Types.Text, initial: false, required: false },
+    address: { type: Types.Text, initial: false, required: true },
+    lat: { type: Types.Number, initial: false, required: true },
+    lon: { type: Types.Number, initial: false, required: true },
 });
 
 Shop.register();

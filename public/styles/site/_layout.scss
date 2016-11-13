@@ -73,7 +73,7 @@ body {
 }
 
 .cat-promo {
-    margin-top: 10px;
+    margin-top: 20px;
 
     &__main, &__main:hover, &__main:active {
         @include no-def-link;
@@ -200,8 +200,6 @@ body {
 }
 
 .intro {
-    height: 400px;
-
     &__map {
         height: 400px;
     }

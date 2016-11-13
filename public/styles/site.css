@@ -5871,7 +5871,7 @@ body {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); }
 
 .cat-promo {
-  margin-top: 10px; }
+  margin-top: 20px; }
   .cat-promo__main, .cat-promo__main:hover, .cat-promo__main:active, .cat-promo__main:focus, .cat-promo__main:hover, .cat-promo__main:hover:hover, .cat-promo__main:hover:active, .cat-promo__main:hover:focus, .cat-promo__main:active, .cat-promo__main:active:hover, .cat-promo__main:active:active, .cat-promo__main:active:focus {
     text-decoration: none;
     color: #333333; }
@@ -5962,14 +5962,13 @@ body {
 #logo {
   overflow: hidden; }
 
-.intro {
+.intro__map {
   height: 400px; }
-  .intro__map {
-    height: 400px; }
-  .intro__promo-copy {
-    margin-top: 0;
-    height: 400px; }
-    .intro__promo-copy:hover {
-      border-color: white; }
-    .intro__promo-copy__body {
-      font-size: 16px; }
+
+.intro__promo-copy {
+  margin-top: 0;
+  height: 400px; }
+  .intro__promo-copy:hover {
+    border-color: white; }
+  .intro__promo-copy__body {
+    font-size: 16px; }

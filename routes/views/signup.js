@@ -30,7 +30,7 @@ exports = module.exports = (req, res) => {
 				email: req.body.email,
 				phone: req.body.phone,
 				password: req.body.password,
-			})
+			}))
             .then(() => auth.signin(req, res, next))
             .then(
                 () => {},

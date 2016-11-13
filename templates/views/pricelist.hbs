@@ -1,8 +1,8 @@
 {{!< default}}
 <div class="container">
     <div class='snipcart-categories row' style='padding-left: 20px; padding-right: 20px;'>
-        <h2 class='col-xs-6' style='margin-top: 0;'>Товары</h2>
-        <div class="col-xs-6">
+        <h2 class='col-sm-6' style='margin-top: 0;'>Товары</h2>
+        <div class="col-sm-6">
             <div class='dropdown' style='float: right'>
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     {{ activeCategory }}
@@ -16,13 +16,13 @@
                 </ul>
             </div>
         </div>
-        <div class='col-xs-12'>
+        <div class='col-sm-12'>
     		{{#each goods }}
                 <a class='pricelist__item row' href='/goods/{{ _id }}'>
-					<div class='col-xs-4' style='height: 150px; position: relative;'>
+					<div class='col-sm-4' style='height: 150px; position: relative;'>
                         <div style='position: absolute; right: 0; left: 0; top: 0; bottom: 0; background-image: url({{ img.[0] }}); background-position: center; background-size: contain; background-repeat: no-repeat;'></div>
                     </div>
-                    <div class='col-xs-8'>
+                    <div class='col-sm-8'>
                         <div>
                             <h2 style='display: inline-block'>{{ name }}</h2>
                             <div style='float: right; font-size: 16px; margin-top: 9px;'>

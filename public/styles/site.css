@@ -5883,7 +5883,7 @@ body {
     font-size: 20px;
     float: left; }
 
-.card {
+.card, .intro__promo-copy {
   padding: 10px;
   overflow: hidden;
   display: block;
@@ -5891,14 +5891,14 @@ body {
   margin-top: 15px;
   background-color: white;
   border: 1px solid white; }
-  .card, .card:hover, .card:active, .card:focus {
+  .card, .intro__promo-copy, .card:hover, .intro__promo-copy:hover, .card:active, .intro__promo-copy:active, .card:focus, .intro__promo-copy:focus {
     text-decoration: none;
     color: #333333; }
   .card--double {
     height: 215px; }
-  .card h3 {
+  .card h3, .intro__promo-copy h3 {
     margin-top: 0; }
-  .card:hover {
+  .card:hover, .intro__promo-copy:hover {
     border-color: #ff3b30; }
   .card__thumb {
     display: block;
@@ -5961,3 +5961,13 @@ body {
 
 #logo {
   overflow: hidden; }
+
+.intro {
+  height: 400px; }
+  .intro__map {
+    height: 400px; }
+  .intro__promo-copy {
+    margin-top: 0;
+    height: 400px; }
+    .intro__promo-copy:hover {
+      border-color: white; }

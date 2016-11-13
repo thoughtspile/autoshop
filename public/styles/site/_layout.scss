@@ -198,3 +198,20 @@ body {
 #logo {
     overflow: hidden;
 }
+
+.intro {
+    height: 400px;
+
+    &__map {
+        height: 400px;
+    }
+
+    &__promo-copy {
+        @extend .card;
+        margin-top: 0;
+        height: 400px;
+        &:hover {
+            border-color: white;
+        }
+    }
+}

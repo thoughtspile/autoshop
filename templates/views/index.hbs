@@ -1,8 +1,13 @@
 {{!< default}}
 <div class="container">
     <div>
-        <div>
-            <div style='height: 400px;' id="mapid"></div>
+        <div class='row intro'>
+            <div class='col-xs-4'>
+                <div class='intro__map' id="mapid"></div>
+            </div>
+            <div class='col-xs-8'>
+                <div class='intro__promo-copy'></div>
+            </div>
         </div>
         {{#each goodsByCategory }}
             <div class='cat-promo row'>
@@ -34,11 +39,14 @@
     </div>
 
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  <script src="/js/Leaflet.Sleep.js"></script>
   <script>
-      var mymap = L.map('mapid').setView([55.7558, 37.6173], 10);
+      var mymap = L.map('mapid').setView([55.7558, 37.6173], 8);
       L.tileLayer('https://api.mapbox.com/styles/v1/klepov/ciuo3rqmf00g62inogy2c5v2v/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
         maxZoom: 18,
-        accessToken: 'pk.eyJ1Ijoia2xlcG92IiwiYSI6ImNpanZvOTZ0ajAwNGl3OGphcnQwdzVweG4ifQ.jCM8K6R_MxlX92wgz0IMqw'
+        accessToken: 'pk.eyJ1Ijoia2xlcG92IiwiYSI6ImNpanZvOTZ0ajAwNGl3OGphcnQwdzVweG4ifQ.jCM8K6R_MxlX92wgz0IMqw',
+        sleepNote: true,
+        sleepOpacity: 0.9,
       }).addTo(mymap);
       var shops = [
         {{#each shops}}

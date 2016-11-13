@@ -5971,3 +5971,5 @@ body {
     height: 400px; }
     .intro__promo-copy:hover {
       border-color: white; }
+    .intro__promo-copy__body {
+      font-size: 16px; }

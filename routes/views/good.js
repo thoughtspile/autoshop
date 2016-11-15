@@ -23,11 +23,10 @@ exports = module.exports = function (req, res) {
             uid: user._id,
             qty: 1
         };
-		Cart.model.create(orderData)
-            .then(
-                () => next(),
-                err => console.log(err)
-            );
+		Cart.model.create(orderData).then(
+            () => next(),
+            err => console.log(err)
+        );
 	});
 
     var present = [];
@@ -47,6 +46,22 @@ exports = module.exports = function (req, res) {
                 var shopData = _.find(shops || [], shop => ''+ rel.shop === '' + shop._id);
                 return _.assignIn(rel, { shopData });
             });
+        })
+        .then(() => {
+            return Good.model.aggregate([
+                { $match: { category: locals.good.category } },
+                {
+                    $group : {
+                        _id : '$category',
+                        count: { $sum: 1 },
+                        minPrice: { $min: '$prices.cat1' },
+                        items: { $push: '$$ROOT' },
+                    },
+                }
+            ]).exec();
+        })
+        .then(parentCategory => {
+            locals.parentCategory = parentCategory[0];
         })
         .then(
             () => view.render('good'),

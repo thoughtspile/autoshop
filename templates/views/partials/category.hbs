@@ -1,0 +1,25 @@
+<div class='cat-promo row'>
+    <div class='col-sm-6'>
+        <a class='card cat-promo__main' href='/pricelist?category={{ _id }}'>
+            <h1 class='cat-promo__title'>{{ _id }}</h1>
+            <div class='cat-promo__details'>
+                {{ count }} товаров от {{ minPrice }} руб.
+            </div>
+        </a>
+        <div class='row'>
+            <div class='col-sm-6'>
+                {{>card product=items.[0]}}
+            </div>
+            <div class='col-sm-6'>
+                {{>card product=items.[1]}}
+            </div>
+        </div>
+    </div>
+    <div class='col-sm-3'>
+        {{>card product=items.[2] extend="double"}}
+    </div>
+    <div class='col-sm-3'>
+        {{>card product=items.[3]}}
+        {{>card product=items.[4]}}
+    </div>
+</div>

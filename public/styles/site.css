@@ -5887,19 +5887,21 @@ body {
   padding: 10px;
   overflow: hidden;
   display: block;
-  height: 100px;
   margin-top: 15px;
-  background-color: white;
-  border: 1px solid white; }
+  background-color: white; }
   .card, .intro__promo-copy, .card:hover, .intro__promo-copy:hover, .card:active, .intro__promo-copy:active, .card:focus, .intro__promo-copy:focus {
     text-decoration: none;
     color: #333333; }
+  .card--single {
+    height: 100px; }
   .card--double {
     height: 215px; }
-  .card h3, .intro__promo-copy h3 {
+  .card--link {
+    border: 1px solid white; }
+    .card--link:hover {
+      border-color: #ff3b30; }
+  .card h1, .intro__promo-copy h1, .card h2, .intro__promo-copy h2, .card h3, .intro__promo-copy h3 {
     margin-top: 0; }
-  .card:hover, .intro__promo-copy:hover {
-    border-color: #ff3b30; }
   .card__thumb {
     display: block;
     float: left;
@@ -5930,15 +5932,28 @@ body {
     bottom: 6px;
     left: 0; }
   .card__btn {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    border-color: #ff3b30;
     border-radius: 0;
     color: white;
     background-color: #ff3b30;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     text-align: right; }
     .card__btn:hover {
-      color: yellow; }
+      color: yellow;
+      background-color: #fc0d00;
+      border-color: #fc0d00; }
+
+.order__btn {
+  border-color: #ff3b30;
+  border-radius: 0;
+  color: white;
+  background-color: #ff3b30; }
+  .order__btn:hover {
+    color: yellow;
+    background-color: #fc0d00;
+    border-color: #fc0d00; }
 
 .cat-header {
   position: relative; }

@@ -72,6 +72,19 @@ body {
     }
 }
 
+@mixin brand-btn {
+    border-color: $red;
+    border-radius: 0;
+    color: white;
+    background-color: $red;
+
+    &:hover {
+        color: yellow;
+        background-color: darken($red, 10);
+        border-color: darken($red, 10);
+    }
+}
+
 .cat-promo {
     margin-top: 20px;
 
@@ -95,23 +108,28 @@ body {
     padding: 10px;
     overflow: hidden;
     display: block;
-    height: 100px;
     margin-top: 15px;
     background-color: white;
     @include no-def-link;
-    border: 1px solid white;
+
+    &--single {
+        height: 100px;
+    }
 
     &--double {
         height: 215px;
     }
 
-    h3 {
-        margin-top: 0;
+    &--link {
+        border: 1px solid white;
+
+        &:hover {
+            border-color: $red;
+        }
     }
 
-    &:hover {
-        border-color: $red;
-        // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    h1, h2, h3 {
+        margin-top: 0;
     }
 
     &__thumb {
@@ -156,17 +174,17 @@ body {
     }
 
     &__btn {
+        @include brand-btn;
         position: absolute;
         right: 0;
         bottom: 0;
-        border-radius: 0;
-        color: white;
-        background-color: $red;
         text-align: right;
+    }
+}
 
-        &:hover {
-            color: yellow;
-        }
+.order {
+    &__btn {
+        @include brand-btn;
     }
 }
 

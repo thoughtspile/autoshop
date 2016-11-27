@@ -5995,7 +5995,9 @@ body {
   .good-avail__list td {
     padding-bottom: 5px; }
   .good-avail__list__qty {
-    text-align: right; }
+    text-align: right;
+    min-width: 40px;
+    vertical-align: top; }
 
 .good {
   padding-top: 22px;
@@ -6006,3 +6008,16 @@ body {
     margin-bottom: 10px; }
     .good__desc__text {
       margin-bottom: 12px; }
+
+.popup {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #dddddd; }
+  .popup--signin {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 250px; }
+
+.signin-nav {
+  position: relative; }

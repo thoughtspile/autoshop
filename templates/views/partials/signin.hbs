@@ -1,0 +1,15 @@
+<div>
+    <form method='post' action='/signin'>
+        <input type='hidden' name='action' value='signin'>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name='email' class="form-control" id="email" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" name='password' class="form-control" id="password" placeholder="">
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+    <a href='/signup'>Или зарегистрируйтесь</a>
+</div>

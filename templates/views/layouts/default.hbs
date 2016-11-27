@@ -9,7 +9,7 @@
 
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		<link href="/styles/site.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
 
 		{{!-- This file provides the default styling for the KeystoneJS Content Editor
 			- only renders when user is logged in and admin--}}
@@ -50,7 +50,12 @@
                                     <li><a href='/cart'>Корзина</a></li>
     								<li><a href="/signout">Выйти</a></li>
 								{{else}}
-    								<li><a href="/signin">Войти</a></li>
+    								<li class='signin-nav'>
+                                        <a id='signin' href="#signin">Войти</a>
+                                        <div id='signin-popup' class='popup popup--signin hide'>
+                                            {{>signin }}
+                                        </div>
+                                    </li>
 								{{/if}}
 							</ul>
 						</div>
@@ -92,7 +97,6 @@
 		</div>
 		<div class="container">
 			<div id="footer">
-				<p>Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.</p>
 			</div>
 		</div>
 		{{!--
@@ -107,5 +111,6 @@
 		--}}
 		<script src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
 		{{{isAdminEditorJS user}}}
+        <script src="/js/signin-popup.js"></script>
 	</body>
 </html>

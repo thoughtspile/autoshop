@@ -2,17 +2,17 @@ const keystone = require('keystone');
 const auth = require('../auth');
 
 exports = module.exports = (req, res) => {
+    console.log(req.user);
     if (req.user) {
 		return res.redirect(req.cookies.target || '/');
 	}
 
 	const view = new keystone.View(req, res);
 	const locals = res.locals;
-
-	locals.section = 'signin';
 	locals.form = req.body;
 
-	view.on('post', { action: 'signin' }, (next) => auth.signin(req, res, next));
-
-    view.render('signin');
+    // Form processing
+    auth.signin(req, res, () => {
+        res.redirect('/');
+    });
 };

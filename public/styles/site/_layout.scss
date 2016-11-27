@@ -246,6 +246,8 @@ body {
         }
         &__qty {
             text-align: right;
+            min-width: 40px;
+            vertical-align: top;
         }
     }
 }
@@ -262,4 +264,21 @@ body {
             margin-bottom: 12px;
         }
     }
+}
+
+.popup {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #dddddd;
+
+    &--signin {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 250px;
+    }
+}
+
+.signin-nav {
+    position: relative;
 }

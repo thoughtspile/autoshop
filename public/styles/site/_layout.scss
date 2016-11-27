@@ -235,3 +235,31 @@ body {
         }
     }
 }
+
+.good-avail {
+    &__list {
+        padding-left: 0;
+        width: 100%;
+        max-width: 300px;
+        td {
+            padding-bottom: 5px;
+        }
+        &__qty {
+            text-align: right;
+        }
+    }
+}
+
+.good {
+    padding-top: 22px;
+    padding-bottom: 15px;
+    &__thumb {
+        text-align: center;
+    }
+    &__desc {
+        margin-bottom: 10px;
+        &__text {
+            margin-bottom: 12px;
+        }
+    }
+}

@@ -9,7 +9,7 @@
                     </div>
                     <div class='col-sm-6 good__desc'>
                         <div class='row good__desc__body'>
-                            <div class='col-xs-12'>
+                            <div class='col-xs-12 good__desc'>
                                 <h2 class='good__desc__title'>{{ good.name }}</h2>
                                 <div class='good__desc__text'>{{ good.desc }}</div>
                                 {{#if user}}
@@ -35,16 +35,18 @@
                         <div class='row good-avail'>
                             <div class='col-xs-12'>
                                 <h3 class='good-avail__title'>Товар в наличии в магазинах</h3>
-                                <ul class='good-avail__list'>
+                                <table class='good-avail__list'>
                             		{{#each present }}
-                                        <li>
-                                            <a class='good-avail__list__item' href='/shops/{{ shopData._id }}'>
-                                                {{ shopData.address }}
-                                                <span>{{ qty }}</span>
-                                            </a>
-                                        </li>
+                                        <tr class='good-avail__list__item'>
+                                            <td>
+                                                <a href='/shops/{{ shopData._id }}'>{{ shopData.address }}</a>
+                                            </td>
+                                            <td class='good-avail__list__qty'>
+                                                {{ qty }} ед.
+                                            </td>
+                                        </tr>
                                     {{/each}}
-                                </ul>
+                                </table>
                             </div>
                         </div>
                     </div>

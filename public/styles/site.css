@@ -5987,3 +5987,22 @@ body {
     border-color: white; }
   .intro__promo-copy__body {
     font-size: 16px; }
+
+.good-avail__list {
+  padding-left: 0;
+  width: 100%;
+  max-width: 300px; }
+  .good-avail__list td {
+    padding-bottom: 5px; }
+  .good-avail__list__qty {
+    text-align: right; }
+
+.good {
+  padding-top: 22px;
+  padding-bottom: 15px; }
+  .good__thumb {
+    text-align: center; }
+  .good__desc {
+    margin-bottom: 10px; }
+    .good__desc__text {
+      margin-bottom: 12px; }

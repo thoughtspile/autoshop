@@ -1,33 +1,18 @@
 {{!< default}}
 <div class="container">
-    <div class='snipcart-categories row'
-        <div>
-            <h2>Магазин по адресу {{ shop.address }}</h2>
+    <div class='snipcart-categories row'>
+        <div class='col-xs-12'>
+            <h1>Магазин по адресу {{ shop.address }}</h2>
             <div>
                 {{ shop.desc }}
             </div>
         </div>
-        <div>
-            <h2>Товары в этом магазине</h2>
-            <ul>
-                {{#each goods }}
-                    <a class='pricelist__item row' href='/goods/{{ _id }}'>
-                        <div class='col-sm-4' style='height: 150px; position: relative;'>
-                            <div style='position: absolute; right: 0; left: 0; top: 0; bottom: 0; background-image: url({{ img.[0] }}); background-position: center; background-size: contain; background-repeat: no-repeat;'></div>
-                        </div>
-                        <div class='col-sm-8'>
-                            <div>
-                                <h2 style='display: inline-block'>{{ name }}</h2>
-                                <div style='float: right; font-size: 16px; margin-top: 9px;'>
-                                    {{ prices.cat1 }} руб.
-                                </div>
-                            </div>
-                            {{ desc }}
-                        </div>
-                    </a>
-                {{/each}}
-
-            </ul>
-        </div>
+    </div>
+    <div class='snipcart-categories row'>
+        <h2 class='col-xs-12'>Товары в этом магазине</h2>
+    </div>
+    <div class='snipcart-categories row'>
+        {{#pricelistBlocks goods}}
+        {{/pricelistBlocks}}
     </div>
 </div>

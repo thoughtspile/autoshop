@@ -13,6 +13,10 @@ exports = module.exports = function (req, res) {
     var user = req.user;
     var items = [];
 
+    if (!user) {
+        return res.redirect('/');
+    }
+
     Cart.model.find({ uid: user._id }).exec()
         .then(_items => {
             items = _items;

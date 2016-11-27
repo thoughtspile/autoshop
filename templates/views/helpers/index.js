@@ -3,11 +3,22 @@ var _ = require('underscore');
 var hbs = require('handlebars');
 var keystone = require('keystone');
 var cloudinary = require('cloudinary');
+const fs = require('fs');
 
 // Collection of templates to interpolate
 var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
+
+const pNames = ['block-4-2h', 'block-4-2w', 'block-4-4'];
+const dependencies = ['card'];
+pNames.concat(dependencies).forEach((name) =>  {
+    const template = fs.readFileSync(__dirname + '/../partials/' + name + '.hbs', 'utf8');
+    hbs.registerPartial(name, template);
+});
+const blockPartials = pNames
+    .map(p => hbs.partials[p])
+    .map(p => typeof p === 'function' ? p : hbs.compile(p));
 
 module.exports = function () {
 
@@ -325,6 +336,28 @@ module.exports = function () {
 	_helpers.underscoreFormat = function (obj, underscoreMethod) {
 		return obj._[underscoreMethod].format();
 	};
+
+    _helpers.pricelistBlocks = (items) => {
+        let i = 0;
+        let res = '';
+
+        while (i < items.length) {
+            const type = Math.floor(Math.random() * 3);
+            let chunk = [];
+            if (type === 0) {
+                chunk = items.slice(i, i+3);
+                res += blockPartials[0](chunk);
+            } else if (type === 1) {
+                chunk = items.slice(i, i+3);
+                res += blockPartials[1](chunk);
+            } else {
+                chunk = items.slice(i, i+4);
+                res += blockPartials[2](chunk);
+            }
+            i += chunk.length;
+        }
+        return res;
+    };
 
 	return _helpers;
 };

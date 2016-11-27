@@ -17,22 +17,8 @@
             </div>
         </div>
         <div class='col-sm-12'>
-    		{{#each goods }}
-                <a class='pricelist__item row' href='/goods/{{ _id }}'>
-					<div class='col-sm-4' style='height: 150px; position: relative;'>
-                        <div style='position: absolute; right: 0; left: 0; top: 0; bottom: 0; background-image: url({{ img.[0] }}); background-position: center; background-size: contain; background-repeat: no-repeat;'></div>
-                    </div>
-                    <div class='col-sm-8'>
-                        <div>
-                            <h2 style='display: inline-block'>{{ name }}</h2>
-                            <div style='float: right; font-size: 16px; margin-top: 9px;'>
-                                {{ prices.cat1 }} руб.
-                            </div>
-                        </div>
-    					{{ desc }}
-                    </div>
-                </a>
-            {{/each}}
+            {{#pricelistBlocks goods}}
+            {{/pricelistBlocks}}
         </div>
     </div>
 </div>

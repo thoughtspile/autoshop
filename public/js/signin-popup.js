@@ -1,4 +1,7 @@
 (function() {
-    var popup = $('#signin-popup');
-    $('#signin').on('click', function() { popup.toggleClass('hide'); });
+    $('.popup-holder').each(function() {
+        var popupBody = $('.popup', this);
+        var popupCtrl = $('.popup-control', this);
+        popupCtrl.on('click', function() { popupBody.toggleClass('hide'); });
+    });
 }());

@@ -6009,7 +6009,11 @@ body {
     .good__desc__text {
       margin-bottom: 12px; }
 
+.popup-holder {
+  position: relative; }
+
 .popup {
+  z-index: 10000;
   background-color: white;
   padding: 10px;
   border: 1px solid #dddddd; }

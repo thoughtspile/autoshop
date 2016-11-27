@@ -50,9 +50,9 @@
                                     <li><a href='/cart'>Корзина</a></li>
     								<li><a href="/signout">Выйти</a></li>
 								{{else}}
-    								<li class='signin-nav'>
-                                        <a id='signin' href="#signin">Войти</a>
-                                        <div id='signin-popup' class='popup popup--signin hide'>
+    								<li class='popup-holder'>
+                                        <a class='popup-control' href="#signin">Войти</a>
+                                        <div class='popup popup--signin hide'>
                                             {{>signin }}
                                         </div>
                                     </li>

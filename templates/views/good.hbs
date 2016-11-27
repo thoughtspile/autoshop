@@ -24,7 +24,12 @@
                                     </form>
                                 {{else}}
                                     <div calss='login-invite'>
-                                        <a href='/signin'>Войдите</a>
+                                        <span class='popup-holder'>
+                                            <a class='popup-control' href='#signin'>Войдите</a>
+                                            <div class='popup popup--signin hide'>
+                                                {{>signin }}
+                                            </div>
+                                        </span>
                                         или
                                         <a href='/signup'>зарегистрируйтесь</a>,
                                         чтобы оформить заказ.

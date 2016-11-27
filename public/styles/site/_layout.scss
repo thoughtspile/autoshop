@@ -266,7 +266,12 @@ body {
     }
 }
 
+.popup-holder {
+    position: relative;
+}
+
 .popup {
+    z-index: 10000;
     background-color: white;
     padding: 10px;
     border: 1px solid #dddddd;

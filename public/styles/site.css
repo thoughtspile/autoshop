@@ -5885,7 +5885,7 @@ body {
 
 .card, .intro__promo-copy {
   padding: 10px;
-  overflow: hidden;
+  overflow: visible;
   display: block;
   margin-top: 15px;
   background-color: white; }
@@ -6023,5 +6023,5 @@ body {
     right: 0;
     width: 250px; }
 
-.signin-nav {
-  position: relative; }
+.signin-form__signup {
+  margin-left: 10px; }

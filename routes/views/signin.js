@@ -2,7 +2,6 @@ const keystone = require('keystone');
 const auth = require('../auth');
 
 exports = module.exports = (req, res) => {
-    console.log(req.user);
     if (req.user) {
 		return res.redirect(req.cookies.target || '/');
 	}
@@ -13,6 +12,6 @@ exports = module.exports = (req, res) => {
 
     // Form processing
     auth.signin(req, res, () => {
-        res.redirect('/');
+        res.redirect(req.headers.referer || '/');
     });
 };

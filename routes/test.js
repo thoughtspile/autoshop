@@ -131,12 +131,6 @@ const makeRel = (goods, shops) => ({
     qty: Math.floor(Math.random() * 60)
 });
 
-const makeCartItem = (users, goods) => ({
-    uid: randItem(users)._id,
-    good: randItem(goods)._id,
-    qty: Math.floor(Math.random() * 12)
-});
-
 module.exports = () => {
     var shops = [];
     var goods = [];
@@ -164,10 +158,6 @@ module.exports = () => {
         })
         // fill carts
         .then(() => Cart.model.find({}).remove().exec())
-        .then(() => {
-            const cart = _.range(users.length * 6).map(() => makeCartItem(users, goods));
-            return Cart.model.create(cart);
-        })
         .then(
             () => console.log('test filled'),
             err => console.log('test error: ', err)

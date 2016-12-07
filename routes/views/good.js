@@ -7,22 +7,21 @@ var Cart = keystone.list('Cart');
 var GoodsByShops = keystone.list('GoodsByShops');
 
 exports = module.exports = function (req, res) {
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
+	const view = new keystone.View(req, res);
+	const locals = res.locals;
 
 	locals.section = 'home';
 
-    var user = req.user;
+    const user = req.user;
+    const uid = user._id;
+    const goodId = req.params['id'];
+    // TODO: qty
 
     view.on('post', { action: 'add-to-cart' }, function(next) {
         if (!user) {
             next();
         }
-        var orderData = {
-            good: req.params['id'],
-            uid: user._id,
-            qty: 1
-        };
+        const orderData = { good: goodId, uid, qty: 1 };
 		Cart.model.create(orderData).then(
             () => next(),
             err => console.log(err)
@@ -31,22 +30,23 @@ exports = module.exports = function (req, res) {
 
     var present = [];
 
-    Good.model.findById(req.params['id']).exec()
-        .then(good => {
-            locals.good = good;
-            return GoodsByShops.model.find({ good: good._id }).exec();
-        })
-        .then(rels => {
-            present = rels || [];
-            const shop_ids = (rels || []).map(rel => rel.shop);
+    Good.model.findById(goodId).exec()
+        .then((good) => { locals.good = good; })
+        // Магазины, в которых есть товар
+        .then(() => GoodsByShops.model.find({ good: goodId }).exec())
+        .then((rels) => {
+            present = (rels || []).filter(rel => rel.qty > 0);
+            const shop_ids = present.map(rel => rel.shop);
             return Shop.model.find({ _id: { $in: shop_ids } }).exec();
         })
-        .then(shops => {
-            locals.present = present.map(rel => {
-                var shopData = _.find(shops || [], shop => ''+ rel.shop === '' + shop._id);
+        .then((shops) => {
+            const assembled = present.map(rel => {
+                const shopData = _.find(shops || [], shop => ''+ rel.shop === '' + shop._id);
                 return _.assignIn(rel, { shopData });
             });
+            locals.present = _.sortBy(assembled, rel => rel.shopData.address);
         })
+        // товары в категории
         .then(() => {
             return Good.model.aggregate([
                 { $match: { category: locals.good.category } },
@@ -60,9 +60,10 @@ exports = module.exports = function (req, res) {
                 }
             ]).exec();
         })
-        .then(parentCategory => {
-            locals.parentCategory = parentCategory[0];
-        })
+        .then(parentCategory => { locals.parentCategory = parentCategory[0]; })
+        // есть ли товар в корзине
+        .then(() => Cart.model.find({ uid, good: goodId }))
+        .then((cartItems) => { locals.inCart = !_.isEmpty(cartItems); })
         .then(
             () => view.render('good'),
             err => console.log('err', err)

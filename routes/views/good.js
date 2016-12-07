@@ -23,7 +23,7 @@ exports = module.exports = function (req, res) {
         }
         const orderData = { good: goodId, uid, qty: 1 };
 		Cart.model.create(orderData).then(
-            () => next(),
+            () => res.redirect(`/goods/${goodId}`),
             err => console.log(err)
         );
 	});
@@ -62,8 +62,8 @@ exports = module.exports = function (req, res) {
         })
         .then(parentCategory => { locals.parentCategory = parentCategory[0]; })
         // есть ли товар в корзине
-        .then(() => Cart.model.find({ uid, good: goodId }))
-        .then((cartItems) => { locals.inCart = !_.isEmpty(cartItems); })
+        .then(() => Cart.model.find({ uid, good: goodId }).exec())
+        .then((cartItems) => { console.log(cartItems); locals.inCart = !_.isEmpty(cartItems); })
         .then(
             () => view.render('good'),
             err => console.log('err', err)

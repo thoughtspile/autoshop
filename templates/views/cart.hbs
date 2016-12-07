@@ -1,11 +1,27 @@
 {{!< default}}
 <div class="container">
-    <div>
-        <h2>Ваш заказ</h2>
-        <ul>
-    		{{#each items }}
-                <li>{{ goodData.name }}: {{ qty }} x {{ goodData.prices.cat1 }}</li>
-            {{/each}}
-        </ul>
+    <div class='row'>
+        <div class='col-xs-12'>
+            <div class='good card'>
+                <h2>Ваш заказ</h2>
+                <table class='cart-list'>
+                    {{#each items }}
+                        <tr>
+                            <td>
+                                <a href="/goods/{{goodData._id}}">{{ goodData.name }}</a>
+                            </td>
+                            <td>
+                                {{ qty }}
+                            </td>
+                            <td>
+                                user cat
+                                {{ goodData.prices.cat1 }}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

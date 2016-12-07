@@ -13,7 +13,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'home';
 
     const user = req.user;
-    const uid = user._id;
+    const uid = user ? user._id : null;
     const goodId = req.params['id'];
     // TODO: qty
 

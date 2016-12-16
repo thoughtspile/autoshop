@@ -6,6 +6,8 @@ var Good = keystone.list('Good');
 var Cart = keystone.list('Cart');
 var GoodsByShops = keystone.list('GoodsByShops');
 
+const SPECIAL_FIELDS = ["_id", "img", "prices", "brand", "good_id", "name", "category", "desc_short", "desc"];
+
 exports = module.exports = function (req, res) {
 	const view = new keystone.View(req, res);
 	const locals = res.locals;
@@ -31,7 +33,13 @@ exports = module.exports = function (req, res) {
     var present = [];
 
     Good.model.findById(goodId).exec()
-        .then((good) => { locals.good = good; })
+        .then((good) => {
+          good.meta = Object.keys(good._doc)
+            .filter(key => SPECIAL_FIELDS.indexOf(key) === -1)
+            .map(key => ({ key, value: good._doc[key] }));
+          console.log(good, good.meta);
+          locals.good = good;
+        })
         // Магазины, в которых есть товар
         .then(() => GoodsByShops.model.find({ good: goodId }).exec())
         .then((rels) => {

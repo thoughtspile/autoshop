@@ -114,7 +114,7 @@ function randGoodName() {
         randItem(['смазка', 'мазилка', 'тряпка', 'незамерзайка']);
 }
 
-const makeGood = () => {
+const makeGood = (good) => {
     const basePrice = Math.floor(Math.random() * 6000);
     return {
         prices: { cat1: basePrice, cat2: .9 * basePrice, cat3: .6 * basePrice },
@@ -137,10 +137,11 @@ module.exports = () => {
     var users = [];
 
     // make goods
-    Good.model.find({}).remove().exec()
-        .then(() => Good.model.create(_.range(200).map(makeGood)))
-        // make shops
-        .then(() => Shop.model.find({}).remove().exec())
+    // Good.model.find({}).remove().exec()
+    //     .then(() => Good.model.create(_.range(200).map(makeGood)))
+    //     // make shops
+    //     .then(() => Shop.model.find({}).remove().exec())
+    Shop.model.find({}).remove().exec()
         .then(() => Shop.model.create(shopData))
         // fetch goods, shops, and users
         .then(() => Shop.model.find({}).exec()

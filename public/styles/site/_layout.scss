@@ -109,6 +109,7 @@ body {
     overflow: visible;
     display: block;
     margin-top: 15px;
+    position: relative;
     background-color: white;
     @include no-def-link;
 
@@ -154,7 +155,11 @@ body {
         position: relative;
 
         &--double {
-            width: 100%;
+            width: auto;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            left: 20px;
             margin: 0;
             margin-top: 10%;
             height: 40%;
@@ -164,6 +169,9 @@ body {
 
     &__title {
         font-size: 20px;
+        max-height: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
         margin-top: 0;
     }
 

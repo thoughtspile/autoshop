@@ -37,7 +37,6 @@ exports = module.exports = function (req, res) {
           good.meta = Object.keys(good._doc)
             .filter(key => SPECIAL_FIELDS.indexOf(key) === -1)
             .map(key => ({ key, value: good._doc[key] }));
-          console.log(good, good.meta);
           locals.good = good;
         })
         // Магазины, в которых есть товар
@@ -63,12 +62,13 @@ exports = module.exports = function (req, res) {
                         _id : '$category',
                         count: { $sum: 1 },
                         minPrice: { $min: '$prices.cat1' },
-                        items: { $push: '$$ROOT' },
                     },
                 }
             ]).exec();
         })
         .then(parentCategory => { locals.parentCategory = parentCategory[0]; })
+        .then(() => Good.model.find({ category: locals.good.category }).limit(8).exec())
+        .then((goods) => { locals.parentCategory.items = goods; })
         // есть ли товар в корзине
         .then(() => Cart.model.find({ uid, good: goodId }).exec())
         .then((cartItems) => { console.log(cartItems); locals.inCart = !_.isEmpty(cartItems); })

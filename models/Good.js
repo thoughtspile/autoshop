@@ -16,7 +16,13 @@ Good.add({
     category: { type: String, initial: false, required: true },
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
-    img: { type: Types.TextArray, default: [], required: true }
+    good_id: { type: Types.Text }
+});
+
+// Provide access to Keystone
+Good.schema.virtual('img').get(function () {
+  console.log('middleare', this, this.__proto__);
+	return ['/images/goods/' + this.good_id + '.jpg'];
 });
 
 Good.register();

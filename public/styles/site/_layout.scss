@@ -113,11 +113,11 @@ body {
     @include no-def-link;
 
     &--single {
-        height: 100px;
+        height: 170px;
     }
 
     &--double {
-        height: 215px;
+        height: 355px;
     }
 
     &--link {
@@ -262,6 +262,12 @@ body {
         margin-bottom: 10px;
         &__text {
             margin-bottom: 12px;
+        }
+        &__props {
+          margin-bottom: 10px;
+          &__key {
+            padding-right: 20px;
+          }
         }
     }
 }

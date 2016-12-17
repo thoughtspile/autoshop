@@ -5893,9 +5893,9 @@ body {
     text-decoration: none;
     color: #333333; }
   .card--single {
-    height: 100px; }
+    height: 170px; }
   .card--double {
-    height: 215px; }
+    height: 355px; }
   .card--link {
     border: 1px solid white; }
     .card--link:hover {
@@ -6008,6 +6008,10 @@ body {
     margin-bottom: 10px; }
     .good__desc__text {
       margin-bottom: 12px; }
+    .good__desc__props {
+      margin-bottom: 10px; }
+      .good__desc__props__key {
+        padding-right: 20px; }
 
 .popup-holder {
   position: relative; }

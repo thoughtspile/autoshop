@@ -10,11 +10,20 @@ var Good = new keystone.List('Good');
 
 Good.add({
     prices: {
-        cat1: { type: Types.Number, initial: false, required: true },
-        cat2: { type: Types.Number, initial: false, required: true },
-        cat3: { type: Types.Number, initial: false, required: true }
+      retail: { type: Types.Number, initial: false, required: true, label: 'Розничная цена' },
+      wholesale: {
+        lg: { type: Types.Number, initial: false, required: true, label: 'Розничная цена' },
+        md: { type: Types.Number, initial: false, required: true, label: 'Средний опт' },
+        sm: { type: Types.Number, initial: false, required: true, label: 'Мелкий опт' },
+      }
     },
     category: { type: String, initial: false, required: true },
+
+    category: { type: String, initial: false, required: true },
+    category: { type: String, initial: false, required: true },
+    category: { type: String, initial: false, required: true },
+    category: { type: String, initial: false, required: true },
+
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
     good_id: { type: Types.Text }
@@ -32,7 +41,7 @@ Good.schema.static('catSummary', (category, limit) => {
     { $group : {
       _id : '$category',
       count: { $sum: 1 },
-      minPrice: { $min: '$prices.cat1' }
+      minPrice: { $min: '$prices.retail' }
     } }
   ]).exec())
     .then(parentCategory => { summary = parentCategory[0]; })
@@ -47,7 +56,7 @@ Good.schema.static('byCategory', () => {
     $group : {
       _id : '$category',
       count: { $sum: 1 },
-      minPrice: { $min: '$prices.cat1' },
+      minPrice: { $min: '$prices.retail' },
     }
   } ]).exec())
     .then(goodsByCategory_ => {

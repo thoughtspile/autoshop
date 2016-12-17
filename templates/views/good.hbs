@@ -12,9 +12,12 @@
                             <div class='col-xs-12 good__desc'>
                                 <h2 class='good__desc__title'>{{ good.name }}</h2>
                                 <div class='good__desc__text'>{{{ good.desc }}}</div>
-                                <table>
+                                <table class='good__desc__props'>
                                   {{#each good.meta}}
-                                    <tr><td>{{key}}</td><td>{{value}}</td></tr>
+                                    <tr>
+                                      <td class='good__desc__props__key'>{{key}}</td>
+                                      <td class='good__desc__props__value'>{{value}}</td>
+                                    </tr>
                                   {{/each}}
                                 </table>
                                 {{#if user}}

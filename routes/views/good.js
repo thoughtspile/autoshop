@@ -54,21 +54,8 @@ exports = module.exports = function (req, res) {
             locals.present = _.sortBy(assembled, rel => rel.shopData.address);
         })
         // товары в категории
-        .then(() => {
-            return Good.model.aggregate([
-                { $match: { category: locals.good.category } },
-                {
-                    $group : {
-                        _id : '$category',
-                        count: { $sum: 1 },
-                        minPrice: { $min: '$prices.cat1' },
-                    },
-                }
-            ]).exec();
-        })
-        .then(parentCategory => { locals.parentCategory = parentCategory[0]; })
-        .then(() => Good.model.find({ category: locals.good.category }).limit(8).exec())
-        .then((goods) => { locals.parentCategory.items = goods; })
+        .then(() => Good.model.catSummary(locals.good.category))
+        .then(parentCategory => { locals.parentCategory = parentCategory; })
         // есть ли товар в корзине
         .then(() => Cart.model.find({ uid, good: goodId }).exec())
         .then((cartItems) => { console.log(cartItems); locals.inCart = !_.isEmpty(cartItems); })

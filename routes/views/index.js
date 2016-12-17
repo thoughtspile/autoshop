@@ -16,24 +16,12 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'home';
 
-    Shop.model.find({}).exec()
-        .then(shops => {
-            locals.shops = shops;
-        })
-        .then(() => Good.model.aggregate([ {
-                $group : {
-                    _id : '$category',
-                    count: { $sum: 1 },
-                    minPrice: { $min: '$prices.cat1' },
-                    items: { $push: '$$ROOT' },
-                }
-            } ]).exec()
-        )
-        .then(goodsByCategory => {
-            locals.goodsByCategory = goodsByCategory;
-        })
-        .then(
-            () => view.render('index'),
-            err => console.log('err', err)
-        );
+  Shop.model.find({}).exec()
+    .then(shops => { locals.shops = shops; })
+    .then(() => Good.model.byCategory())
+    .then(goodsByCategory => { locals.goodsByCategory = goodsByCategory; })
+    .then(
+      () => view.render('index'),
+      err => console.log('err', err)
+    );
 };

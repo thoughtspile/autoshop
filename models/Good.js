@@ -1,5 +1,6 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
+const _ = require('lodash');
 
 /**
  * User Model
@@ -21,8 +22,46 @@ Good.add({
 
 // Provide access to Keystone
 Good.schema.virtual('img').get(function () {
-  console.log('middleare', this, this.__proto__);
 	return ['/images/goods/' + this.good_id + '.jpg'];
+});
+
+Good.schema.static('catSummary', (category, limit) => {
+  let summary = null;
+  return (Good.model.aggregate([
+    { $match: { category } },
+    { $group : {
+      _id : '$category',
+      count: { $sum: 1 },
+      minPrice: { $min: '$prices.cat1' }
+    } }
+  ]).exec())
+    .then(parentCategory => { summary = parentCategory[0]; })
+    .then(() => Good.model.find({ category }).exec())
+    .then((goods) => { summary.items = goods; })
+    .then(() => summary);
+});
+
+Good.schema.static('byCategory', () => {
+  let goodsByCategory = null;
+  return (Good.model.aggregate([ {
+    $group : {
+      _id : '$category',
+      count: { $sum: 1 },
+      minPrice: { $min: '$prices.cat1' },
+    }
+  } ]).exec())
+    .then(goodsByCategory_ => {
+      goodsByCategory_.forEach(cat => { cat.items = []; });
+      goodsByCategory = goodsByCategory_;
+    })
+    .then(() => Good.model.find({}).exec())
+    .then(goods => {
+      goods.forEach(good => {
+        const cat = _.find(goodsByCategory, cat => '' + cat._id === '' + good.category);
+        cat.items.push(good);
+      });
+    })
+    .then(() => goodsByCategory);
 });
 
 Good.register();

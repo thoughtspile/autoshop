@@ -56,7 +56,10 @@ exports = module.exports = function (req, res) {
           `;
         }).join('\n');
         const userDesc = `Пользователь
-          (e-mail ${req.user.email}, тел. ${req.user.phone}, категория ${req.user.categoryName})
+          (e-mail ${req.user.email},
+            тел. ${req.user.phone},
+            категория ${req.user.categoryName}
+          )
           заказал:`;
         const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
         mailer.send(`${userDesc} <ul>${text}</ul> ${comment}`, (err) => {

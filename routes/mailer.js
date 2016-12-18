@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 
 var smtpConfig = {
-    host: 'smtp.gmail.com',
+    host: 'smtp.mailgun.org',
     port: 465,
     secure: true, // use SSL
     auth: {

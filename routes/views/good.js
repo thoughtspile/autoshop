@@ -20,15 +20,15 @@ exports = module.exports = function (req, res) {
     // TODO: qty
 
     view.on('post', { action: 'add-to-cart' }, function(next) {
-        if (!user) {
-            next();
-        }
-        const orderData = { good: goodId, uid, qty: 1 };
-		Cart.model.create(orderData).then(
-            () => res.redirect(`/goods/${goodId}`),
-            err => console.log(err)
-        );
-	});
+      if (!user) {
+        next();
+      }
+      const orderData = { good: goodId, uid, qty: req.body.qty };
+      Cart.model.create(orderData).then(
+        () => res.redirect(`/goods/${goodId}`),
+        err => console.log(err)
+      );
+    });
 
     var present = [];
 

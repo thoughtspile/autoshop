@@ -6012,6 +6012,8 @@ body {
   padding-bottom: 15px; }
   .good__thumb {
     text-align: center; }
+    .good__thumb img {
+      max-width: 100%; }
   .good__desc {
     margin-bottom: 10px; }
     .good__desc__text {

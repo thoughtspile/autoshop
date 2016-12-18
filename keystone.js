@@ -12,7 +12,7 @@ var handlebars = require('express-handlebars');
 
 keystone.init({
 	'name': 'Idemitsu — магазин автосмазок',
-	'brand': 'Idemitsu — магазин автосмазок',
+	'brand': 'Turboil — магазин автосмазок',
 
 	'sass': 'public',
 	'static': 'public',

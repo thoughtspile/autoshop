@@ -158,7 +158,7 @@ module.exports = () => {
             return GoodsByShops.model.create(rels);
         })
         // fill carts
-        .then(() => Cart.model.find({}).remove().exec())
+        // .then(() => Cart.model.find({}).remove().exec())
         .then(
             () => console.log('test filled'),
             err => console.log('test error: ', err)

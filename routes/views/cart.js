@@ -64,6 +64,7 @@ exports = module.exports = function (req, res) {
             Cart.model.remove({ uid: user._id }).exec()
               .then(() => res.redirect('/cart'));
           } else {
+            console.log('error sending mail:', err);
             res.redirect('/cart');
           }
         });

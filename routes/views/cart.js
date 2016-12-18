@@ -17,6 +17,14 @@ exports = module.exports = function (req, res) {
         return res.redirect('/');
     }
 
+    view.on('post', { action: 'checkout' }, function(next) {
+      if (!user) {
+        next();
+      }
+      console.log('checkout');
+      res.redirect('/cart');
+    });
+
     Cart.model.find({ uid: user._id }).exec()
         .then(_items => {
             items = _items;

@@ -22,18 +22,11 @@
                         </tr>
                       </thead>
                         {{#each items }}
-                            <tr>
-                                <td>
-                                    <a href="/goods/{{goodData._id}}">{{ goodData.name }}</a>
-                                </td>
-                                <td>
-                                    {{ qty }}
-                                </td>
-                                <td>
-                                    user cat
-                                    {{ goodData.prices.retail }}
-                                </td>
-                            </tr>
+                          <tr>
+                            <td><a href="/goods/{{goodData._id}}">{{ goodData.name }}</a></td>
+                            <td>{{ qty }}</td>
+                            <td>{{ goodData.price }}</td>
+                          </tr>
                         {{/each}}
                     </table>
                     <form method='post'>

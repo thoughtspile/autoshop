@@ -2,6 +2,7 @@ var keystone = require('keystone');
 var _ = require('lodash');
 
 var mailer = require('../mailer');
+const SPECIAL_FIELDS = ["_id", "img", "prices", "name", "category", "desc_short", "desc"];
 
 var Cart = keystone.list('Cart');
 var Good = keystone.list('Good');
@@ -27,6 +28,9 @@ exports = module.exports = function (req, res) {
           return Good.model.find({ _id: { $in: good_ids } }).exec();
         })
         .then(goods => {
+          goods.forEach(good => {
+            good.price = good.priceForUser(req.user);
+          })
           items.forEach(item => {
             item.goodData = _.find(goods, good => '' + good._id === '' + item.good);
           });
@@ -40,14 +44,20 @@ exports = module.exports = function (req, res) {
       }
       loadCart().then(items => {
         const text = items.map(item => {
-          console.log(item, item.goodData);
           return `<li>
             название: ${item.goodData.name}<br/>
-            цена: ${item.goodData.prices.retail} (USER CAT)<br/>
+            цена: ${item.goodData.priceForUser(req.user)}<br/>
             количество: ${item.qty}<br/>
+            ${Object.keys(item.goodData._doc)
+              .filter(key => SPECIAL_FIELDS.indexOf(key) === -1)
+              .map(key => `${key}: ${item.goodData._doc[key]}`)
+              .join('<br/>')
+            }
           `;
         }).join('\n');
-        const userDesc = `Пользователь (e-mail ${req.user.email}, тел. ${req.user.phone}) заказал:`;
+        const userDesc = `Пользователь
+          (e-mail ${req.user.email}, тел. ${req.user.phone}, категория ${req.user.categoryName})
+          заказал:`;
         const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
         mailer.send(`${userDesc} <ul>${text}</ul> ${comment}`, (err) => {
           if (!err) {

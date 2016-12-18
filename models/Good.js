@@ -34,7 +34,14 @@ Good.schema.virtual('img').get(function () {
 	return ['/images/goods/' + this.good_id + '.jpg'];
 });
 
-Good.schema.static('catSummary', (category, limit) => {
+Good.schema.method('priceForUser', function (user) {
+  if (!user || !user.categoryKey) {
+    return null;
+  }
+	return _.get(this, user.categoryKey, null);
+});
+
+Good.schema.static('catSummary', (category, user, limit) => {
   let summary = null;
   return (Good.model.aggregate([
     { $match: { category } },
@@ -46,11 +53,17 @@ Good.schema.static('catSummary', (category, limit) => {
   ]).exec())
     .then(parentCategory => { summary = parentCategory[0]; })
     .then(() => Good.model.find({ category }).exec())
+    .then(goods => {
+      goods.forEach(good => {
+        good.price = good.priceForUser(user);
+      });
+      return goods;
+    })
     .then((goods) => { summary.items = goods; })
     .then(() => summary);
 });
 
-Good.schema.static('byCategory', () => {
+Good.schema.static('byCategory', (user) => {
   let goodsByCategory = null;
   return (Good.model.aggregate([ {
     $group : {
@@ -66,6 +79,7 @@ Good.schema.static('byCategory', () => {
     .then(() => Good.model.find({}).exec())
     .then(goods => {
       goods.forEach(good => {
+        good.price = good.priceForUser(user);
         const cat = _.find(goodsByCategory, cat => '' + cat._id === '' + good.category);
         cat.items.push(good);
       });

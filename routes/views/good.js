@@ -54,7 +54,7 @@ exports = module.exports = function (req, res) {
             locals.present = _.sortBy(assembled, rel => rel.shopData.address);
         })
         // товары в категории
-        .then(() => Good.model.catSummary(locals.good.category))
+        .then(() => Good.model.catSummary(locals.good.category, req.user))
         .then(parentCategory => { locals.parentCategory = parentCategory; })
         // есть ли товар в корзине
         .then(() => Cart.model.find({ uid, good: goodId }).exec())

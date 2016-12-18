@@ -15,6 +15,9 @@ exports = module.exports = function (req, res) {
 
     Good.model.find(filter).exec()
         .then(goods => {
+            goods.forEach(good => {
+              good.price = good.priceForUser(req.user);
+            });
             locals.goods = goods;
         })
         .then(() => Good.model.distinct('category', {}).exec())

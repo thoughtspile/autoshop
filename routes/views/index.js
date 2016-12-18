@@ -18,7 +18,7 @@ exports = module.exports = function (req, res) {
 
   Shop.model.find({}).exec()
     .then(shops => { locals.shops = shops; })
-    .then(() => Good.model.byCategory())
+    .then(() => Good.model.byCategory(req.user))
     .then(goodsByCategory => { locals.goodsByCategory = goodsByCategory; })
     .then(
       () => view.render('index'),

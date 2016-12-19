@@ -311,6 +311,10 @@ module.exports = function () {
 				output += '<p>' + messages[i].detail + '</p>';
 			}
 
+      if (typeof messages[i] === 'string') {
+				output += '<p>' + messages[i] + '</p>';
+			}
+
 			if (messages[i].list) {
 				output += '<ul>';
 				for (var ctr = 0; ctr < messages[i].list.length; ctr++) {

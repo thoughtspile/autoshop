@@ -2,7 +2,7 @@ var keystone = require('keystone');
 
 module.exports.signin = (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-        req.flash('error', 'Please enter your username and password.');
+        req.flash('error', 'Введите логин и пароль.');
         return next();
     }
 

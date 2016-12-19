@@ -69,6 +69,14 @@ keystone.set('email locals', {
 	},
 });
 
+keystone.set('404', function(req, res, next) {
+  if (req.originalUrl.indexOf('images') !== -1) {
+    res.redirect('/images/no-image.png');
+  } else {
+    res.notfound();
+  }
+});
+
 // Load your project's email test routes
 keystone.set('email tests', require('./routes/emails'));
 

@@ -15,6 +15,7 @@ exports = module.exports = (req, res) => {
 
     view.on('post', { action: 'signup' }, (next) => {
 		if (!req.body.email || !req.body.password) {
+      console.log('flash error');
 			req.flash('error', 'Заполните обязательные поля');
 			return next();
 		}

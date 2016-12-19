@@ -68,6 +68,7 @@ exports = module.exports = function (req, res) {
               .then(() => res.redirect('/cart'));
           } else {
             console.log('error sending mail:', err);
+            req.flash('error', 'Возникла проблема при оформлении заказа. Попробуйте позже.');
             res.redirect('/cart');
           }
         });

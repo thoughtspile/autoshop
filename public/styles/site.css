@@ -6006,7 +6006,8 @@ body {
   background-color: white;
   width: 150px;
   text-align: right;
-  float: right; }
+  float: right;
+  overflow: visible; }
 
 .good-avail__list {
   padding-left: 0;

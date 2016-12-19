@@ -36,7 +36,7 @@ Good.schema.virtual('img').get(function () {
 
 Good.schema.method('priceForUser', function (user) {
   if (!user || !user.categoryKey) {
-    return null;
+    return this.prices.retail || null;
   }
 	return _.get(this, user.categoryKey, null);
 });

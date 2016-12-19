@@ -6002,8 +6002,11 @@ body {
   .intro__promo-copy__body {
     font-size: 16px; }
 
-.navbar {
-  background-color: white; }
+.navbar-collapse.in, .navbar-collapse.collapsing {
+  background-color: white;
+  width: 150px;
+  text-align: right;
+  float: right; }
 
 .good-avail__list {
   padding-left: 0;

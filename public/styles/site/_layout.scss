@@ -250,8 +250,11 @@ body {
     }
 }
 
-.navbar {
+.navbar-collapse.in, .navbar-collapse.collapsing {
   background-color: white;
+  width: 150px;
+  text-align: right;
+  float: right;
 }
 
 .good-avail {

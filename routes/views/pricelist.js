@@ -18,7 +18,7 @@ exports = module.exports = function (req, res) {
             goods.forEach(good => {
               good.price = good.priceForUser(req.user);
             });
-            locals.goods = goods;
+            locals.goods = goods.filter(good => !!good.price);
         })
         .then(() => Good.model.distinct('category', {}).exec())
         .then(categories => {

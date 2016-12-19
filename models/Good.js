@@ -57,7 +57,7 @@ Good.schema.static('catSummary', (category, user, limit) => {
       goods.forEach(good => {
         good.price = good.priceForUser(user);
       });
-      return goods;
+      return goods.filter(g => !!g.price);
     })
     .then((goods) => { summary.items = goods; })
     .then(() => summary);
@@ -80,6 +80,9 @@ Good.schema.static('byCategory', (user) => {
     .then(goods => {
       goods.forEach(good => {
         good.price = good.priceForUser(user);
+        if (!good.price) {
+          return;
+        }
         const cat = _.find(goodsByCategory, cat => '' + cat._id === '' + good.category);
         cat.items.push(good);
       });

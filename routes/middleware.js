@@ -21,8 +21,8 @@ exports.initLocals = function (req, res, next) {
 	res.locals.navLinks = [
 		// no explicit home link, go there via logo click
 		// { label: 'Home', key: 'home', href: '/' },
-		// { label: 'Contact', key: 'contact', href: '/contact' },
 		{ label: 'Все товары', key: 'pricelist', href: '/pricelist' },
+    { label: 'Контакты', key: 'contact', href: '/contact' },
 	];
 	res.locals.user = req.user;
 	next();

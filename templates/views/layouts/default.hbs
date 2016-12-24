@@ -45,18 +45,18 @@
 										<a href="{{ href }}">{{ label }}</a>
 									</li>
 								{{/each}}
-							</ul>
+							</ul>	
 							<ul class="nav navbar-nav navbar-right">
 								{{#if user}}
-                                    <li><a href='/cart'>Корзина</a></li>
-    								<li><a href="/signout">Выйти</a></li>
+                  <li><a href='/cart'>Корзина</a></li>
+                  <li><a href="/signout">Выйти</a></li>
 								{{else}}
-    								<li class='popup-holder'>
-                                        <a class='popup-control' href="#signin">Войти</a>
-                                        <div class='popup popup--signin hide'>
-                                            {{>signin }}
-                                        </div>
-                                    </li>
+                  <li class='popup-holder'>
+                    <a class='popup-control' href="#signin">Войти</a>
+                    <div class='popup popup--signin hide'>
+                      {{>signin }}
+                    </div>
+                  </li>
 								{{/if}}
 							</ul>
 						</div>

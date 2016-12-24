@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700&subset=latin,cyrillic);
-
 $salad: #55ab55;
 $red: rgb(255, 59, 48);
 $bg: #e0e0e0;
@@ -11,10 +10,10 @@ $bg: #e0e0e0;
 	color: #777777;
 }
 
-.gallery-image img{
-    display: block;
-    max-width: 100%;
-    height: auto;
+.gallery-image img {
+	display: block;
+	max-width: 100%;
+	height: auto;
 }
 
 body {
@@ -28,328 +27,343 @@ body {
 }
 
 .pricelist__item {
-    display: block;
-    border-top: 1px solid #eee;
-    margin-bottom: 20px;
-    padding-top: 15px;
+	display: block;
+	border-top: 1px solid #eee;
+	margin-bottom: 20px;
+	padding-top: 15px;
 
-    &, &:hover {
-        color: #333;
-    }
+	&,
+	&:hover {
+		color: #333;
+	}
 
-    h2 {
-        margin-top: 0;
-    }
+	h2 {
+		margin-top: 0;
+	}
 
-    h2:hover {
-        color: $salad;
-        text-decoration: underline;
-    }
+	h2:hover {
+		color: $salad;
+		text-decoration: underline;
+	}
 }
-
 // template
-#header #logo h3,#header #navbar .panel-activation{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-#body{
-    padding-top:8rem;
-}
-#header{
-    position: fixed;
-    z-index: 10;
-    width:100%;
-    height:5rem;
-    background-color: rgb(255,255,255) !important;
-    box-shadow:0 5px 12px rgba(0,0,0,0.2);
+#header #logo h3,
+#header #navbar .panel-activation {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
+#body {
+	padding-top: 8rem;
+}
+
+#header {
+	position: fixed;
+	z-index: 10;
+	width: 100%;
+	height: 5rem;
+	background-color: rgb(255,255,255) !important;
+	box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
 @mixin no-def-link {
-    &, &:hover, &:active, &:focus {
-        text-decoration: none;
-        color: #333333;
-    }
+	&,
+	&:active,
+	&:focus,
+	&:hover {
+		text-decoration: none;
+		color: #333333;
+	}
 }
-
 @mixin brand-btn {
-    border-color: $red;
-    border-radius: 0;
-    color: white;
-    background-color: $red;
+	border-color: $red;
+	border-radius: 0;
+	color: white;
+	background-color: $red;
 
-    &:hover {
-        color: yellow;
-        background-color: darken($red, 10);
-        border-color: darken($red, 10);
-    }
+	&:hover {
+		color: yellow;
+		background-color: darken($red, 10);
+		border-color: darken($red, 10);
+	}
 }
 
 .cat-promo {
-    margin-top: 20px;
+	margin-top: 20px;
 
-    &__main, &__main:hover, &__main:active {
-        @include no-def-link;
-    }
+	&__main,
+	&__main:active,
+	&__main:hover {
+		@include no-def-link;
+	}
 
-    &__title {
-        margin-top: 0;
-        color: $red;
-        font-size: 36px;
-    }
+	&__title {
+		margin-top: 0;
+		color: $red;
+		font-size: 36px;
+	}
 
-    &__details {
-        font-size: 20px;
-        float: left;
-    }
+	&__details {
+		font-size: 20px;
+		float: left;
+	}
 }
 
 .card {
-    padding: 10px;
-    overflow: visible;
-    display: block;
-    margin-top: 15px;
-    position: relative;
-    background-color: white;
-    @include no-def-link;
+	padding: 10px;
+	overflow: visible;
+	display: block;
+	margin-top: 15px;
+	position: relative;
+	background-color: white;
+	@include no-def-link;
 
-    &--single {
-        height: 170px;
-    }
+	&--single {
+		height: 170px;
+	}
 
-    &--double {
-        height: 355px;
-    }
+	&--double {
+		height: 355px;
+	}
 
-    &--link {
-        border: 1px solid white;
+	&--link {
+		border: 1px solid white;
 
-        &:hover {
-            border-color: $red;
-        }
-    }
+		&:hover {
+			border-color: $red;
+		}
+	}
 
-    h1, h2, h3 {
-        margin-top: 0;
-    }
+	h1,
+	h2,
+	h3 {
+		margin-top: 0;
+	}
 
-    &__thumb {
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        display: block;
-        max-width: 20%;
-        max-height: 150px;
+	&__thumb {
+		position: absolute;
+		left: 10px;
+		top: 10px;
+		display: block;
+		max-width: 20%;
+		max-height: 150px;
 
-        &--double {
-            position: static;
-            float: none;
-            max-width: 100%;
-            max-height: 50%;
-            margin: 0 auto;
-        }
-    }
+		&--double {
+			position: static;
+			float: none;
+			max-width: 100%;
+			max-height: 50%;
+			margin: 0 auto;
+		}
+	}
 
-    &__content {
-        display: block;
-        height: 100%;
-        width: 70%;
-        margin-left: 30%;
-        position: relative;
+	&__content {
+		display: block;
+		height: 100%;
+		width: 70%;
+		margin-left: 30%;
+		position: relative;
 
-        &--double {
-            width: auto;
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            left: 20px;
-            margin: 0;
-            margin-top: 10%;
-            height: 40%;
-            text-align: center;
-        }
-    }
+		&--double {
+			width: auto;
+			position: absolute;
+			bottom: 15px;
+			right: 20px;
+			left: 20px;
+			margin: 10% 0 0;
+			height: 40%;
+			text-align: center;
+		}
+	}
 
-    &__title {
-        font-size: 20px;
-        max-height: 110px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-top: 0;
-    }
+	&__title {
+		font-size: 20px;
+		max-height: 110px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin-top: 0;
+	}
 
-    &__price {
-        position: absolute;
-        bottom: 6px;
-        left: 0;
-    }
+	&__price {
+		position: absolute;
+		bottom: 6px;
+		left: 0;
+	}
 
-    &__btn {
-        @include brand-btn;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        text-align: right;
-    }
+	&__btn {
+		@include brand-btn;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		text-align: right;
+	}
 }
 
 .order {
-    &__btn {
-        @include brand-btn;
-    }
+	&__btn {
+		@include brand-btn;
+	}
 }
 
 .cat-header {
-    position: relative;
+	position: relative;
 }
 
 .cat-header h2 {
-    display:inline-block;
-    letter-spacing: 0;
+	display: inline-block;
+	letter-spacing: 0;
 }
 
 .cat-header .button {
-    position: absolute;
-    right: 0;
-    margin-top: 1.5em;
+	position: absolute;
+	right: 0;
+	margin-top: 1.5em;
 }
 
 .product--price {
-    text-align: right;
+	text-align: right;
 }
-
 @media only all and (max-width: 715px) {
-    .header--contact {
-        display: none;
-    }
+	.header--contact {
+		display: none;
+	}
 }
 
 #logo {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .intro {
-    &__map {
-        height: 400px;
-        @media(max-height: 540px) and (max-width: 768px) {
-          display: none;
-        }
-        @media(max-height: 650px) {
-          height: 300px;
-        }
+	&__map {
+		height: 400px;
+		@media(max-height: 600px) and (max-width: 768px) {
+			display: none;
+		}
+		@media(max-height: 650px) and (max-width: 768px) {
+			height: 300px;
+		}
 
-        &--mobile {
-          font-size: 22px;
-          color: $red;
-          text-decoration: none;
+		&--mobile {
+			font-size: 22px;
+			color: $red;
+			text-decoration: none;
+			display: none;
+			@media(max-height: 600px) and (max-width: 768px) {
+				display: block;
+			}
+		}
+	}
 
-          display: none;
-          @media(max-height: 540px) and (max-width: 768px) {
-            display: block;
-          }
-        }
-    }
+	&__promo-copy {
+		@extend .card;
+		margin-top: 0;
+		height: 400px;
+		@media (max-width: 500px) {
+			height: auto;
+		}
 
-    &__promo-copy {
-        @extend .card;
-        margin-top: 0;
-        height: 400px;
-        @media (max-width: 500px) {
-          height: auto;
-        }
-        &:hover {
-            border-color: white;
-        }
+		&:hover {
+			border-color: white;
+		}
 
-        &__body {
-            font-size: 16px;
-        }
-    }
+		&__body {
+			font-size: 16px;
+		}
+	}
 }
 
 .map--mobile {
-  width: 100%;
-  height: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
+	width: 100%;
+	height: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
-.navbar-collapse.in, .navbar-collapse.collapsing {
-  background-color: white;
-  width: 150px;
-  text-align: right;
-  float: right;
-  overflow: hidden;
+.navbar-collapse.collapsing,
+.navbar-collapse.in {
+	background-color: white;
+	width: 150px;
+	text-align: right;
+	float: right;
+	overflow: hidden;
 }
 
 .good-avail {
-    &__list {
-        padding-left: 0;
-        width: 100%;
-        max-width: 300px;
-        td {
-            padding-bottom: 5px;
-        }
-        &__qty {
-            text-align: right;
-            min-width: 40px;
-            vertical-align: top;
-        }
-    }
+	&__list {
+		padding-left: 0;
+		width: 100%;
+		max-width: 300px;
+
+		td {
+			padding-bottom: 5px;
+		}
+
+		&__qty {
+			text-align: right;
+			min-width: 40px;
+			vertical-align: top;
+		}
+	}
 }
 
 .good {
-    padding-top: 22px;
-    padding-bottom: 15px;
-    &__thumb {
-        text-align: center;
-        img {
-            max-width: 100%;
-        }
-    }
-    &__desc {
-        margin-bottom: 10px;
-        &__text {
-            margin-bottom: 12px;
-        }
-        &__props {
-          margin-bottom: 10px;
-          &__key {
-            padding-right: 20px;
-          }
-        }
-    }
+	padding-top: 22px;
+	padding-bottom: 15px;
+
+	&__thumb {
+		text-align: center;
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	&__desc {
+		margin-bottom: 10px;
+
+		&__text {
+			margin-bottom: 12px;
+		}
+
+		&__props {
+			margin-bottom: 10px;
+
+			&__key {
+				padding-right: 20px;
+			}
+		}
+	}
 }
 
 .popup-holder {
-    position: relative;
+	position: relative;
 }
 
 .popup {
-    z-index: 10000;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #dddddd;
+	z-index: 10000;
+	background-color: white;
+	padding: 10px;
+	border: 1px solid #dddddd;
 
-    &--signin {
-        position: absolute;
-        top: 40px;
-        right: 0;
-        width: 250px;
-    }
+	&--signin {
+		position: absolute;
+		top: 40px;
+		right: 0;
+		width: 250px;
+	}
 }
 
 .signin-form__signup {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .cart-list {
-    width: 100%;
+	width: 100%;
 }
 
 .checkout__btn {
-  margin-top: 15px;
-  float: right;
+	margin-top: 15px;
+	float: right;
 }

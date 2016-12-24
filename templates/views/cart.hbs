@@ -1,48 +1,83 @@
 {{!< default}}
 <div class="container">
-    <div class='row'>
-        <div class='col-xs-12'>
-            <div class='good card'>
-                {{#if isEmpty}}
-                    <div class='lead'>Ваша корзина пуста.</div>
-                {{else}}
-                    <h2>Ваш заказ</h2>
-                    <table class='cart-list table table-hover'>
-                      <thead>
-                        <tr>
-                          <th>
-                            Наименование
-                          </th>
-                          <th>
-                            Количество
-                          </th>
-                          <th>
-                            Цена, руб.
-                          </th>
-                        </tr>
-                      </thead>
-                        {{#each items }}
-                          <tr>
-                            <td><a href="/goods/{{goodData._id}}">{{ goodData.name }}</a></td>
-                            <td>{{ qty }}</td>
-                            <td>{{ goodData.price }}</td>
-                          </tr>
-                        {{/each}}
-                    </table>
-                    <form method='post'>
-                      <div class='form-group' style='margin-top: 20px;' >
-                        <label>Комментарий к заказу:</label>
-                        <textarea class='form-control' name='comment'></textarea>
-                      </div>
-                      <div class='input-group-btn'>
-                          <input type='hidden' name='action' value='checkout'>
-                          <button type="submit" class='btn btn-default order__btn checkout__btn'>
-                              Оформить заказ
-                          </button>
-                      </div>
-                    </form>
-                {{/if}}
-            </div>
-        </div>
-    </div>
+	<div class='row'>
+		<div class='col-xs-12'>
+			<div class='good card'>
+				{{#if isEmpty}}
+					<div class='lead'>Ваша корзина пуста.</div>
+				{{else}}
+					<h2>Ваш заказ</h2>
+					<table class='cart-list table table-hover'>
+						<thead>
+							<tr>
+								<th>
+									Наименование
+								</th>
+								<th>
+									Количество
+								</th>
+								<th>
+									Цена, руб.
+								</th>
+							</tr>
+						</thead>
+						{{#each items }}
+							<tr>
+								<td><a href="/goods/{{goodData._id}}">{{ goodData.name }}</a></td>
+								<td>{{ qty }}</td>
+								<td>{{ goodData.price }}</td>
+							</tr>
+						{{/each}}
+            <tr style="font-weight: 600;">
+              <td>Всего:</td>
+              <td></td>
+              <td>{{ total }}</td>
+            </tr>
+					</table>
+					<form method='post'>
+						<div class='form-group' style='margin-top: 20px;'>
+							<label>Комментарий к заказу:</label>
+							<textarea class='form-control' name='comment'></textarea>
+						</div>
+						<div class='form-group' style='margin-top: 20px;'>
+							<label>Куда доставить:</label>
+							<div class='row'>
+                <div class="col-sm-6">
+                  <select class='form-control' name='deliv-shop'>
+                    {{#each shops}}
+                      <option value="{{_id}}">{{address}} ({{name}})</option>
+                    {{/each}}
+                    <option value="delivery">Доставить по адресу</option>
+                  </select>
+                </div>
+                <div class='col-sm-6'>
+                  <input placeholder="Адрес" type='text' class='form-control' id="addr-input" name='deliv-address'></input>
+                </div>
+              </div>
+						</div>
+						<div class='input-group-btn'>
+							<input type='hidden' name='action' value='checkout'>
+							<button type="submit" class='btn btn-default order__btn checkout__btn'>
+                Оформить заказ
+              </button>
+						</div>
+					</form>
+				{{/if}}
+			</div>
+		</div>
+	</div>
 </div>
+
+<script>
+  $('[name=deliv-shop]').change(function() {
+    const addr = $('[name=deliv-address]');
+    if ($(this).val() === 'delivery') {
+      addr.show()
+    } else {
+      addr.hide();
+    }
+  });
+  if ($('[name=deliv-shop]').val() !== 'delivery') {
+    $('[name=deliv-address]').hide();
+  }
+</script>

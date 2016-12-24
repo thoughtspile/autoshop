@@ -5854,7 +5854,8 @@ body {
     color: #55ab55;
     text-decoration: underline; }
 
-#header #logo h3, #header #navbar .panel-activation {
+#header #logo h3,
+#header #navbar .panel-activation {
   position: relative;
   top: 50%;
   transform: translateY(-50%); }
@@ -5872,7 +5873,7 @@ body {
 
 .cat-promo {
   margin-top: 20px; }
-  .cat-promo__main, .cat-promo__main:hover, .cat-promo__main:active, .cat-promo__main:focus, .cat-promo__main:hover, .cat-promo__main:hover:hover, .cat-promo__main:hover:active, .cat-promo__main:hover:focus, .cat-promo__main:active, .cat-promo__main:active:hover, .cat-promo__main:active:active, .cat-promo__main:active:focus {
+  .cat-promo__main, .cat-promo__main:active, .cat-promo__main:focus, .cat-promo__main:hover, .cat-promo__main:active, .cat-promo__main:active:active, .cat-promo__main:active:focus, .cat-promo__main:active:hover, .cat-promo__main:hover, .cat-promo__main:hover:active, .cat-promo__main:hover:focus, .cat-promo__main:hover:hover {
     text-decoration: none;
     color: #333333; }
   .cat-promo__title {
@@ -5890,7 +5891,7 @@ body {
   margin-top: 15px;
   position: relative;
   background-color: white; }
-  .card, .intro__promo-copy, .card:hover, .intro__promo-copy:hover, .card:active, .intro__promo-copy:active, .card:focus, .intro__promo-copy:focus {
+  .card, .intro__promo-copy, .card:active, .intro__promo-copy:active, .card:focus, .intro__promo-copy:focus, .card:hover, .intro__promo-copy:hover {
     text-decoration: none;
     color: #333333; }
   .card--single {
@@ -5901,7 +5902,9 @@ body {
     border: 1px solid white; }
     .card--link:hover {
       border-color: #ff3b30; }
-  .card h1, .intro__promo-copy h1, .card h2, .intro__promo-copy h2, .card h3, .intro__promo-copy h3 {
+  .card h1, .intro__promo-copy h1,
+  .card h2, .intro__promo-copy h2,
+  .card h3, .intro__promo-copy h3 {
     margin-top: 0; }
   .card__thumb {
     position: absolute;
@@ -5928,8 +5931,7 @@ body {
       bottom: 15px;
       right: 20px;
       left: 20px;
-      margin: 0;
-      margin-top: 10%;
+      margin: 10% 0 0;
       height: 40%;
       text-align: center; }
   .card__title {
@@ -5990,10 +5992,10 @@ body {
 
 .intro__map {
   height: 400px; }
-  @media (max-height: 540px) and (max-width: 768px) {
+  @media (max-height: 600px) and (max-width: 768px) {
     .intro__map {
       display: none; } }
-  @media (max-height: 650px) {
+  @media (max-height: 650px) and (max-width: 768px) {
     .intro__map {
       height: 300px; } }
   .intro__map--mobile {
@@ -6001,7 +6003,7 @@ body {
     color: #ff3b30;
     text-decoration: none;
     display: none; }
-    @media (max-height: 540px) and (max-width: 768px) {
+    @media (max-height: 600px) and (max-width: 768px) {
       .intro__map--mobile {
         display: block; } }
 
@@ -6024,7 +6026,8 @@ body {
   top: 0;
   left: 0; }
 
-.navbar-collapse.in, .navbar-collapse.collapsing {
+.navbar-collapse.collapsing,
+.navbar-collapse.in {
   background-color: white;
   width: 150px;
   text-align: right;

@@ -36,7 +36,12 @@ exports = module.exports = (req, res) => {
 				phone: req.body.phone,
 				password: req.body.password,
 			}))
-			.then(() => auth.signin(req, res, () => res.redirect('/')))
+			.then(() => {
+        auth.signin(req, res, () => {
+          req.flash('success', 'Вы зарегистрировались в магазине!')
+          res.redirect('/');
+        });
+      })
 			.then(
 				() => {},
 				(err) => {

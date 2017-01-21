@@ -341,27 +341,27 @@ module.exports = function () {
 		return obj._[underscoreMethod].format();
 	};
 
-    _helpers.pricelistBlocks = (items) => {
-        let i = 0;
-        let res = '';
+  _helpers.pricelistBlocks = (items) => {
+    let i = 0;
+    let res = '';
 
-        while (i < items.length) {
-            const type = Math.floor(Math.random() * 3);
-            let chunk = [];
-            if (type === 0) {
-                chunk = items.slice(i, i+3);
-                res += blockPartials[0](chunk);
-            } else if (type === 1) {
-                chunk = items.slice(i, i+3);
-                res += blockPartials[1](chunk);
-            } else {
-                chunk = items.slice(i, i+4);
-                res += blockPartials[2](chunk);
-            }
-            i += chunk.length;
-        }
-        return res;
-    };
+    while (i < items.length) {
+      const type = Math.floor(Math.random() * 3);
+      let chunk = [];
+      if (type === 0) {
+        chunk = items.slice(i, i + 3);
+        res += blockPartials[0](chunk);
+      } else if (type === 1) {
+        chunk = items.slice(i, i + 3);
+        res += blockPartials[1](chunk);
+      } else {
+        chunk = items.slice(i, i + 4);
+        res += blockPartials[2](chunk);
+      }
+      i += chunk.length;
+    }
+    return res;
+  };
 
 	return _helpers;
 };

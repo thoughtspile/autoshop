@@ -43,7 +43,7 @@ Cart.schema.static('setQty', (user, good_id, qty) => {
   ).exec();
 });
 
-Cart.schema.static('removeFromCart', (user, good_id, qty) => {
+Cart.schema.static('removeFromCart', (user, good_id) => {
   return Cart.model.find({ uid: user._id, good: good_id }).remove().exec();
 });
 

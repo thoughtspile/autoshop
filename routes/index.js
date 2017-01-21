@@ -29,6 +29,7 @@ keystone.pre('render', middleware.flashMessages);
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
+  api: importRoutes('./api'),
 };
 
 // Setup Route Bindings
@@ -45,6 +46,10 @@ exports = module.exports = function (app) {
 	app.all('/signin', routes.views.signin);
 	app.all('/signup', routes.views.signup);
 	app.all('/signout', routes.views.signout);
+
+	app.get('/api/cart', routes.api.cart.list);
+	app.post('/api/cart', routes.api.cart.set);
+	app.del('/api/cart', routes.api.cart.remove);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -16,22 +16,18 @@ var adapter = {
   var data = {
     goods: [],
     shops: [],
-    total: null,
     options: {
       deliv: null,
       comment: '',
     },
   };
-  var handleContent = res => {
-    data.goods = res.goods;
-    data.total = data.goods.reduce((sum, g) => sum + g.goodData.price * g.qty, 0);
-  };
+  var handleContent = res => { data.goods = res.goods; };
   var handleShops = res => {
     data.shops = res.shops;
     data.options.deliv = data.options.deliv || data.shops[0]._id;
   };
   var changeQty = (item, e) => {
-    adapter.post('api/cart', { good_id: item.good, qty: e.target.value })
+    adapter.post('/api/cart', { good_id: item.good, qty: e.target.value })
       .then(handleContent);
   };
   var removeItem = (item) => {
@@ -46,6 +42,9 @@ var adapter = {
       changeQty,
       removeItem,
     },
+    computed: {
+      total: () => data.goods.reduce((sum, g) => sum + g.goodData.price * g.qty, 0),
+    }
   });
 
   adapter.get('/api/cart/').then(handleContent);

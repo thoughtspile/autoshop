@@ -1,77 +1,62 @@
 {{!< default}}
-<div class='snipcart-categories container' style='padding-left: 20px; padding-right: 20px;'>
-    <div class='row'>
-        <div class='col-xs-12'>
-            <div class='good card'>
-                <div class='row'>
-                    <div class='col-sm-6 good__thumb'>
-                        <img src='{{ good.img.[0] }}' />
-                    </div>
-                    <div class='col-sm-6 good__desc'>
-                        <div class='row good__desc__body'>
-                            <div class='col-xs-12 good__desc'>
-                                <h2 class='good__desc__title'>{{ good.name }}</h2>
-                                <div class='good__desc__text'>{{{ good.desc }}}</div>
-                                <table class='good__desc__props table'>
-                                  {{#each good.meta}}
-                                    <tr>
-                                      <td class='good__desc__props__key'>{{key}}</td>
-                                      <td class='good__desc__props__value'>{{value}}</td>
-                                    </tr>
-                                  {{/each}}
-                                </table>
-                                {{#if user}}
-                                    {{#if inCart}}
-                                        <div>
-                                            Товар уже <a href='/cart'>в корзине.</a>
-                                        </div>
-                                    {{else}}
-                                        <form class='order input-group' method='post'>
-                                            <input name='qty' type='number' value='1' class="form-control"></input>
-                                            <div class='input-group-btn'>
-                                                <input type='hidden' name='action' value='add-to-cart'>
-                                                <button type="submit" class='btn btn-default order__btn'>
-                                                    Добавить к заказу
-                                                </button>
-                                            </div>
-                                        </form>
-                                    {{/if}}
-                                {{else}}
-                                    <div calss='login-invite'>
-                                        <span class='popup-holder'>
-                                            <a class='popup-control' href='#signin'>Войдите</a>
-                                            <div class='popup popup--signin hide' style='left: 0'>
-                                                {{>signin }}
-                                            </div>
-                                        </span>
-                                        или
-                                        <a href='/signup'>зарегистрируйтесь</a>,
-                                        чтобы оформить заказ.
-                                    </div>
-                                {{/if}}
-                            </div>
-                        </div>
-                        <div class='row good-avail'>
-                            <div class='col-xs-12'>
-                                <h3 class='good-avail__title'>Товар в наличии в магазинах</h3>
-                                <table class='good-avail__list'>
-                            		{{#each present }}
-                                        <tr class='good-avail__list__item'>
-                                            <td>
-                                                <a href='/shops/{{ shopData._id }}'>{{ shopData.address }}</a>
-                                            </td>
-                                            <td class='good-avail__list__qty'>
-                                                {{ qty }} ед.
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{> category parentCategory}}
+<div id="goods" class='snipcart-categories container' style='padding-left: 20px; padding-right: 20px;'>
+	<div class='row'>
+		<div class='col-xs-12'>
+			<div class='good card'>
+				<div class='row'>
+					<div class='col-sm-6 good__thumb'>
+						<img src='{{ good.img.[0] }}' />
+					</div>
+					<div class='col-sm-6 good__desc'>
+						<div class='row good__desc__body'>
+							<div class='col-xs-12 good__desc'>
+								<h2 class='good__desc__title'>{{ good.name }}</h2>
+								<div class='good__desc__text'>{{{ good.desc }}}</div>
+								<table class='good__desc__props table'>
+									{{#each good.meta}}
+										<tr>
+											<td class='good__desc__props__key'>{{key}}</td>
+											<td class='good__desc__props__value'>{{value}}</td>
+										</tr>
+									{{/each}}
+								</table>
+								{{#if user}}
+									<addtocart good-id="{{good._id}}" value="{{count}}"></addtocart>
+								{{else}}
+									<div calss='login-invite'>
+										<span class='popup-holder'>
+                      <a class='popup-control' href='#signin'>Войдите</a>
+                      <div class='popup popup--signin hide' style='left: 0'>
+                        {{>signin }}
+                      </div>
+                    </span> или
+										<a href='/signup'>зарегистрируйтесь</a>, чтобы оформить заказ.
+									</div>
+								{{/if}}
+							</div>
+						</div>
+						<div class='row good-avail'>
+							<div class='col-xs-12'>
+								<h3 class='good-avail__title'>Товар в наличии в магазинах</h3>
+								<table class='good-avail__list'>
+									{{#each present }}
+										<tr class='good-avail__list__item'>
+											<td>
+												<a href='/shops/{{ shopData._id }}'>{{ shopData.address }}</a>
+											</td>
+											<td class='good-avail__list__qty'>
+												{{ qty }} ед.
+											</td>
+										</tr>
+									{{/each}}
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{> category parentCategory}}
+  <script src="/js/addtocart.js"></script>
 </div>

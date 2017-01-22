@@ -1,10 +1,10 @@
 {{#if product}}
-    <a href='/goods/{{ product._id }}' class='card card--single card--link card--{{extend}}'>
-        <img class='card__thumb card__thumb--{{extend}}' src='{{ product.img }}'>
-        <div class='card__content card__content--{{extend}}'>
-            <h1 class='card__title'>{{ product.name }}</h1>
-            <span class='card__price'>{{ product.price }} руб.</span>
-            <span class='btn card__btn'>Купить</span>
-        </div>
-    </a>
+  <a href='/goods/{{ product._id }}' class='card card--single card--link card--{{extend}}'>
+    <img class='card__thumb card__thumb--{{extend}}' src='{{ product.img }}'>
+    <div class='card__content card__content--{{extend}}'>
+      <h1 class='card__title'>{{ product.name }}</h1>
+      <span class='card__price'>{{ product.price }} руб.</span>
+      <addtocart good-id="{{product._id}}"></addtocart>
+    </div>
+  </a>
 {{/if}}

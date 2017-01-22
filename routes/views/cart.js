@@ -73,8 +73,6 @@ exports = module.exports = function(req, res) {
 
     Cart.model.byUser(user)
       .then(items => { locals.items = items; })
-      .then(() => Shop.model.find({}).exec())
-      .then(shops => { locals.shops = shops; })
     	.then(
     		() => view.render('cart'),
     		err => console.log('err', err)

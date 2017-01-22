@@ -1,11 +1,7 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
 const _ = require('lodash');
 
-/**
- * User Model
- * ==========
- */
 var Good = new keystone.List('Good');
 
 Good.add({

@@ -44,21 +44,19 @@
 							<label>Куда доставить:</label>
 							<div class='row'>
                 <div class="col-sm-6">
-                  <select class='form-control' name='deliv-shop'>
-                    {{#each shops}}
-                      <option value="{{_id}}">{{address}} ({{name}})</option>
-                    {{/each}}
+                  <select class='form-control' name='deliv-shop' v-model="options.deliv">
+                    <option v-for="shop in shops" :value="shop._id">${shop.address} (${shop.name})</option>
                     <option value="delivery">Доставить по адресу</option>
                   </select>
                 </div>
-                <div class='col-sm-6'>
-                  <input placeholder="Адрес" type='text' class='form-control' id="addr-input" name='deliv-address'></input>
+                <div v-if="options.deliv === 'delivery'" class='col-sm-6'>
+                  <input placeholder="Адрес" type='text' class='form-control' name='deliv-address'></input>
                 </div>
               </div>
 						</div>
 						<div class='input-group-btn'>
 							<input type='hidden' name='action' value='checkout'>
-							<button type="submit" class='btn btn-default order__btn checkout__btn'>
+							<button type="submit" :disabled="total <= 0" class='btn btn-default order__btn checkout__btn'>
                 Оформить заказ
               </button>
 						</div>
@@ -69,17 +67,4 @@
 	</div>
 </div>
 
-<script>
-  $('[name=deliv-shop]').change(function() {
-    const addr = $('[name=deliv-address]');
-    if ($(this).val() === 'delivery') {
-      addr.show()
-    } else {
-      addr.hide();
-    }
-  });
-  if ($('[name=deliv-shop]').val() !== 'delivery') {
-    $('[name=deliv-address]').hide();
-  }
-</script>
 <script src="/js/cart.js"></script>

@@ -20,29 +20,6 @@ exports = module.exports = function(req, res) {
 			return res.redirect('/');
 		}
 
-		const loadCart = () => {
-			var items = [];
-			return Cart.model.find({ uid: user._id }).exec()
-				.then(_items => {
-					items = _items;
-					var good_ids = _items.map(item => item.good);
-					return Good.model.find({
-						_id: {
-							$in: good_ids
-						}
-					}).exec();
-				})
-				.then(goods => {
-					goods.forEach(good => {
-						good.price = good.priceForUser(req.user);
-					})
-					items.forEach(item => {
-						item.goodData = _.find(goods, good => '' + good._id === '' + item.good);
-					});
-					return items;
-				});
-		};
-
 		view.on('post', { action: 'checkout' }, function(next) {
 			if (!user) {
 				next();
@@ -50,10 +27,9 @@ exports = module.exports = function(req, res) {
       const needDelivery = req.body['deliv-shop'] === 'delivery';
       let items = [];
       let delivStr = `${needDelivery ? 'Доставка по адресу ' : 'Самовывоз из магазина '}`;
-      loadCart()
+      Cat.model.byUser(user)
         .then(_items => { items = _items; })
         .then(() => {
-          console.log(needDelivery);
           if (needDelivery) {
             delivStr += req.body['deliv-address'];
             return;
@@ -95,12 +71,8 @@ exports = module.exports = function(req, res) {
         });
     });
 
-    loadCart()
-      .then(items => {
-    		locals.isEmpty = !items || items.length === 0;
-        locals.total = items.reduce((acc, item) => acc + item.goodData.price * item.qty, 0);
-    		locals.items = items;
-    	})
+    Cart.model.byUser(user)
+      .then(items => { locals.items = items; })
       .then(() => Shop.model.find({}).exec())
       .then(shops => { locals.shops = shops; })
     	.then(

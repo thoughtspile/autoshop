@@ -11,8 +11,14 @@ var adapter = {
 };
 
 (function() {
-  var data = { goods: [] };
-  var handleContent = res => { data.goods = res.goods; };
+  var data = {
+    goods: [],
+    total: null,
+  };
+  var handleContent = res => {
+    data.goods = res.goods;
+    data.total = data.goods.reduce((sum, g) => sum + g.goodData.price * g.qty, 0);
+  };
   var changeQty = (item, e) => {
     adapter.post('api/cart', { good_id: item.good, qty: e.target.value })
       .then(handleContent);

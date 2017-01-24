@@ -39,7 +39,6 @@ exports = module.exports = function(req, res) {
         })
         .then(() => {
   				const text = items.map(item => {
-            console.log(item, item.goodData, Object.keys(item.goodData));
   					return `<li>
               название: ${item.goodData.name}<br/>
               цена: ${item.goodData.price}<br/>
@@ -58,7 +57,6 @@ exports = module.exports = function(req, res) {
             )
             заказал:`;
           const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
-          console.log('send mail')
           mailer.send(`${userDesc} <ul>${text}</ul> ${comment} <br/> ${delivStr}`, (err) => {
             if (!err) {
               req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');

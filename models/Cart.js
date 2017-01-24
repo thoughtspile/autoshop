@@ -30,7 +30,7 @@ Cart.schema.static('byUser', (user) => {
           { goodData: _.find(goods, good => '' + good._id === '' + item.good) }
         ))
         .filter(i => i.goodData);
-    })
+    });
 });
 
 Cart.schema.static('setQty', (user, good_id, qty) => {

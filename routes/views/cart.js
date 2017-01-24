@@ -27,7 +27,7 @@ exports = module.exports = function(req, res) {
       const needDelivery = req.body['deliv-shop'] === 'delivery';
       let items = [];
       let delivStr = `${needDelivery ? 'Доставка по адресу ' : 'Самовывоз из магазина '}`;
-      Cat.model.byUser(user)
+      Cart.model.byUser(user)
         .then(_items => { items = _items; })
         .then(() => {
           if (needDelivery) {
@@ -39,13 +39,14 @@ exports = module.exports = function(req, res) {
         })
         .then(() => {
   				const text = items.map(item => {
+            console.log(item, item.goodData, Object.keys(item.goodData));
   					return `<li>
               название: ${item.goodData.name}<br/>
-              цена: ${item.goodData.priceForUser(req.user)}<br/>
+              цена: ${item.goodData.price}<br/>
               количество: ${item.qty}<br/>
-              ${Object.keys(item.goodData._doc)
+              ${Object.keys(item.goodData)
                 .filter(key => SPECIAL_FIELDS.indexOf(key) === -1)
-                .map(key => `${key}: ${item.goodData._doc[key]}`)
+                .map(key => `${key}: ${item.goodData[key]}`)
                 .join('<br/>')
               }
             `;
@@ -57,6 +58,7 @@ exports = module.exports = function(req, res) {
             )
             заказал:`;
           const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
+          console.log('send mail')
           mailer.send(`${userDesc} <ul>${text}</ul> ${comment} <br/> ${delivStr}`, (err) => {
             if (!err) {
               req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');

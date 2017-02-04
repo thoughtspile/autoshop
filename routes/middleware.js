@@ -26,7 +26,8 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Все товары', key: 'pricelist', href: '/pricelist' },
     { label: 'Контакты', key: 'contact', href: '/contact' },
 	];
-	res.locals.user = req.user;
+	res.locals.user = req.user.toObject({ virtuals: true });
+	res.locals.loggedIn = req.user && !req.user.isAnonymous;
 	next();
 };
 

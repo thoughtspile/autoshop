@@ -50,6 +50,8 @@
 							<ul class="nav navbar-nav navbar-right">
 								{{#if user}}
                   <li><a href='/cart'>Корзина</a></li>
+                {{/if}}
+                {{#if loggedIn}}
                   <li><a href="/signout">Выйти</a></li>
 								{{else}}
                   <li class='popup-holder'>

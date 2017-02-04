@@ -38,7 +38,7 @@ User.schema.virtual('canAccessKeystone').get(function () {
 });
 
 User.schema.virtual('isAnonymous').get(function () {
-	return this.email || this.name;
+	return !this.email || !this.password;
 });
 
 User.schema.virtual('categoryKey').get(function () {

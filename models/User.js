@@ -8,8 +8,9 @@ var Types = keystone.Field.Types;
 var User = new keystone.List('User');
 
 User.add({
-	name: { type: Types.Name, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
+	name: { type: Types.Name, initial: false, required: false, index: true },
+	email: { type: Types.Email, initial: false, required: false, index: true },
+	isVerified: { type: Boolean, default: false, required: true },
 	phone: { type: String, initial: false, required: false },
 	password: { type: Types.Password, label: 'Пароль', initial: true, required: true },
   category: {
@@ -35,6 +36,10 @@ User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
+User.schema.virtual('isAnonymous').get(function () {
+	return this.email || this.name;
+});
+
 User.schema.virtual('categoryKey').get(function () {
 	switch (this.category) {
     case 1: return 'prices.retail';
@@ -53,6 +58,23 @@ User.schema.virtual('categoryName').get(function () {
     case 4: return 'крупный опт';
   };
   return 'prices.retail';
+});
+
+// Expects { email, password, ?name, ?phone  }
+User.schema.static('register', (payload) => {
+  return User.model.findOne({ email: payload.email }).exec()
+    .then((user) => {
+      if (user) {
+        throw new Error('Пользователь с таким адресом уже зарегистрирован');
+      }
+    })
+    .then(() => User.model.create({
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      password: payload.password,
+    }));
+  // FIXME hangs on save error
 });
 
 

@@ -1,5 +1,5 @@
 const keystone = require('keystone');
-const User = keystone.list('User').model;
+const User = keystone.list('User');
 const auth = require('../auth');
 
 exports = module.exports = (req, res) => {
@@ -22,20 +22,12 @@ exports = module.exports = (req, res) => {
 			return next();
 		}
 
-		User.findOne({
-				email: req.body.email
-			}).exec()
-			.then((user) => {
-				if (user) {
-					throw new Error('Пользователь с таким адресом уже зарегистрирован');
-				}
-			})
-			.then(() => User.create({
-				name: req.body.name,
-				email: req.body.email,
-				phone: req.body.phone,
-				password: req.body.password,
-			}))
+		User.model.register({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.password,
+      })
 			.then(() => {
         auth.signin(req, res, () => {
           req.flash('success', 'Вы зарегистрировались в магазине!')

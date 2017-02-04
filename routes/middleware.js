@@ -28,6 +28,11 @@ exports.initLocals = function (req, res, next) {
 	next();
 };
 
+exports.anonUser = (req, res, next) => {
+  console.log(req.signedCookies['keystone.sid'], req.user);
+  next();
+};
+
 
 /**
 	Fetches and clears the flashMessages before a view is rendered

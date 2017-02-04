@@ -8,6 +8,8 @@
  * modules in your project's /lib directory.
  */
 var _ = require('lodash');
+var keystone = require('keystone');
+var User = keystone.list('User');
 
 
 /**
@@ -29,8 +31,22 @@ exports.initLocals = function (req, res, next) {
 };
 
 exports.anonUser = (req, res, next) => {
-  console.log(req.signedCookies['keystone.sid'], req.user);
-  next();
+  if (req.user) {
+    return next();
+  }
+
+  const sid = req.signedCookies['keystone.sid'];
+  const ok = () => {
+    console.log('ANON user created', req.user);
+    return next();
+  };
+  const onErr = (err) => {
+    console.log('ERROR creating anon user');
+    return next();
+  };
+
+  User.model.registerAnon(sid)
+    .then(user => keystone.session.signin(user._id, req, res, ok, onErr));
 };
 
 

@@ -12,7 +12,8 @@ User.add({
 	email: { type: Types.Email, initial: false, required: false, index: true },
 	isVerified: { type: Boolean, default: false, required: true },
 	phone: { type: String, initial: false, required: false },
-	password: { type: Types.Password, label: 'Пароль', initial: true, required: true },
+	sid: { type: String, initial: false, required: false, index: true },
+	password: { type: Types.Password, label: 'Пароль', initial: true, required: false },
   category: {
     type: Types.Select,
     label: 'Категория',
@@ -75,6 +76,11 @@ User.schema.static('register', (payload) => {
       password: payload.password,
     }));
   // FIXME hangs on save error
+});
+
+User.schema.static('registerAnon', (sid) => {
+  return User.model.findOne({ sid }).exec()
+    .then((user) => user && user.sid ? user : User.model.create({ sid }));
 });
 
 

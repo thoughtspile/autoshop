@@ -14,9 +14,11 @@ Vue.component('addtocart', {
   template: `
     <form class='order input-group' method='post'>
       <input name='qty' type='number' min="0" v-model="qty" class="form-control"></input>
-      <button type="submit" class='btn btn-default order__btn' v-on:click.stop.prevent="setQty">
-        Добавить к заказу
-      </button>
+      <span class="input-group-btn">
+        <button type="submit" class='btn btn-default order__btn' v-on:click.stop.prevent="setQty">
+          Купить
+        </button>
+      </span>
     </form>
   `,
   props: ['goodId', 'value'],

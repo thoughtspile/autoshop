@@ -17,7 +17,7 @@ var adapter = {
   var handleUser = ({ user }) => { cart.user = user; };
   var handleShops = ({ shops }) => {
     cart.shops = shops;
-    cart.options.deliv = cart.options.deliv || cart.shops[0]._id;
+    cart.options.shop = cart.options.shop || cart.shops[0]._id;
   };
   var register = () => {
     if (cart.user.isAnonymous && cart.user.email && cart.user.password) {
@@ -38,7 +38,9 @@ var adapter = {
       goods: [],
       shops: [],
       options: {
-        deliv: null,
+        deliv: 'shop',
+        shop: null,
+        addr: '',
         comment: '',
       },
       user: {

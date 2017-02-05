@@ -5,7 +5,7 @@
 			<div id="vue--cart" class='good card'>
 				<div v-if="!goods || goods.length === 0" class='lead'>Ваша корзина пуста.</div>
 				<template v-else>
-					<h2>Ваш заказ</h2>
+					<h2>Корзина</h2>
 					<table class='cart-list table table-hover'>
 						<thead>
 							<tr>
@@ -35,24 +35,41 @@
               <td>${ total }</td>
             </tr>
 					</table>
-					<form method='post'>
-						<div class='form-group' style='margin-top: 20px;'>
-							<label>Комментарий к заказу:</label>
+
+					<form method='post' >
+						<div class='form-group col-sm-5' style='margin-top: 20px;'>
+							<legend>Комментарий к заказу</legend>
 							<textarea class='form-control' name='comment'></textarea>
 						</div>
-						<div class='form-group' style='margin-top: 20px;'>
-							<label>Куда доставить:</label>
-							<div class='row'>
-                <div class="col-sm-6">
-                  <select class='form-control' name='deliv-shop' v-model="options.deliv">
-                    <option v-for="shop in shops" :value="shop._id">${shop.address} (${shop.name})</option>
-                    <option value="delivery">Доставить по адресу</option>
-                  </select>
+
+						<div class='col-sm-6 col-sm-offset-1' style='margin-top: 20px;'>
+							<legend>Доставка</legend>
+
+              <fieldset class="form-group">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="shop" v-model="options.deliv">
+                    Самовывоз из магазина
+                  </label>
                 </div>
-                <div v-if="options.deliv === 'delivery'" class='col-sm-6'>
-                  <input placeholder="Адрес" type='text' class='form-control' name='deliv-address'></input>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="deliver" v-model="options.deliv">
+                    Доставка
+                  </label>
                 </div>
-              </div>
+              </fieldset>
+
+              <input
+                v-if="options.deliv === 'deliver'"
+                placeholder="Адрес"
+                type='text'
+                class='form-control'
+                name='deliv-address'
+              ></input>
+              <select v-else class='form-control' name='deliv-shop' v-model="options.shop">
+                <option v-for="shop in shops" :value="shop._id">${shop.address} (${shop.name})</option>
+              </select>
 						</div>
 
             <div v-if="user.isAnonymous">

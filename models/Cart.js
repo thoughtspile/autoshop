@@ -43,6 +43,27 @@ Cart.schema.static('setQty', (user, good_id, qty) => {
   ).exec();
 });
 
+// if sourceUser has a non-empty cart: replace targetUser's cart with sourceUser's
+Cart.schema.static('merge', (srcUser, targetUser) => {
+  if (!srcUser || !targetUser || srcUser._id === targetUser._id) {
+    return new Promise();
+  }
+
+  return Cart.model.count({ uid: srcUser._id }).exec()
+    .then((srcCount) => {
+      if (!srcCount) {
+        return;
+      }
+
+      return Cart.model.remove({ uid: targetUser._id }).exec().then(() => {
+        return Cart.model.update(
+          { uid: srcUser._id },
+          { $set: { uid: targetUser._id } }
+        ).exec();
+      });
+    });
+});
+
 Cart.schema.static('removeFromCart', (user, good_id) => {
   return Cart.model.find({ uid: user._id, good: good_id }).remove().exec();
 });

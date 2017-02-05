@@ -54,12 +54,27 @@
                 </div>
               </div>
 						</div>
-						<div class='input-group-btn'>
+
+            <div v-if="user.isAnonymous">
+              <label>e-mail для связи:</label>
+              <input required class='form-control' type='e-mail' v-model="user.email"></input>
+            </div>
+            <div v-if="user.isAnonymous">
+              <label>Придумайте пароль, и мы создадим вам аккаунт с историей заказов и персональными ценовыми предложениями:</label>
+              <input class='form-control' type='text' v-model="user.password"></input>
+            </div>
+
+						<div v-if="!user.isAnonymous" class='input-group-btn'>
 							<input type='hidden' name='action' value='checkout'>
 							<button type="submit" :disabled="total <= 0" class='btn btn-default order__btn checkout__btn'>
                 Оформить заказ
               </button>
 						</div>
+            <div v-else class='input-group-btn'>
+              <button v-on:click.stop.prevent="register" :disabled="!user.email || !user.password" class='btn btn-default order__btn checkout__btn'>
+                Зарегистрироваться
+              </button>
+            </div>
 					</form>
 				</template>
 			</div>

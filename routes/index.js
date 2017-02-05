@@ -54,6 +54,9 @@ exports = module.exports = function (app) {
 
 	app.get('/api/shops', routes.api.shops.list);
 
+	app.get('/api/user/me', routes.api.user.me);
+	app.post('/api/user/me', routes.api.user.edit);
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 

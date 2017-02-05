@@ -10,6 +10,7 @@
 var _ = require('lodash');
 var keystone = require('keystone');
 var User = keystone.list('User');
+var Cart = keystone.list('Cart');
 
 
 /**
@@ -26,9 +27,12 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Все товары', key: 'pricelist', href: '/pricelist' },
     { label: 'Контакты', key: 'contact', href: '/contact' },
 	];
+
 	res.locals.user = req.user.toObject({ virtuals: true });
 	res.locals.loggedIn = req.user && !req.user.isAnonymous;
-	next();
+  Cart.model.byUser(req.user)
+    .then(cart => { res.locals.cart = cart || []; })
+    .then(next, next);
 };
 
 exports.anonUser = (req, res, next) => {

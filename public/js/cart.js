@@ -13,18 +13,16 @@ var adapter = {
 
 
 (function() {
-  var data = {
-    goods: [],
-    shops: [],
-    options: {
-      deliv: null,
-      comment: '',
-    },
+  var handleContent = ({ goods }) => { cart.goods = goods; };
+  var handleUser = ({ user }) => { cart.user = user; };
+  var handleShops = ({ shops }) => {
+    cart.shops = shops;
+    cart.options.deliv = cart.options.deliv || cart.shops[0]._id;
   };
-  var handleContent = res => { data.goods = res.goods; };
-  var handleShops = res => {
-    data.shops = res.shops;
-    data.options.deliv = data.options.deliv || data.shops[0]._id;
+  var register = () => {
+    if (cart.user.isAnonymous && cart.user.email && cart.user.password) {
+      adapter.post('/api/user/me', cart.user).then(handleUser);
+    }
   };
   var changeQty = (item, e) => {
     adapter.post('/api/cart', { good_id: item.good, qty: e.target.value })
@@ -36,17 +34,36 @@ var adapter = {
 
   var cart = new Vue({
     el: '#vue--cart',
-    data: data,
+    data: {
+      goods: [],
+      shops: [],
+      options: {
+        deliv: null,
+        comment: '',
+      },
+      user: {
+        email: '',
+        password: '',
+        isAnonymous: false,
+      },
+      password: '',
+    },
     delimiters: ['${', '}'],
     methods: {
       changeQty,
       removeItem,
+      register,
     },
     computed: {
-      total: () => data.goods.reduce((sum, g) => sum + g.goodData.price * g.qty, 0),
+      total() {
+        return this.goods.reduce((sum, g) => sum + g.goodData.price * g.qty, 0);
+      },
     }
   });
 
   adapter.get('/api/cart/').then(handleContent);
   adapter.get('/api/shops/').then(handleShops);
+  adapter.get('/api/user/me').then(handleUser);
+
+  window.cart = cart;
 })();

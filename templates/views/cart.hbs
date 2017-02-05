@@ -48,13 +48,13 @@
               <fieldset class="form-group">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="shop" v-model="options.deliv">
+                    <input name="deliv-type" class="form-check-input" type="radio" value="shop" v-model="options.deliv">
                     Самовывоз из магазина
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="deliver" v-model="options.deliv">
+                    <input name="deliv-type" class="form-check-input" type="radio" value="deliver" v-model="options.deliv">
                     Доставка
                   </label>
                 </div>
@@ -64,6 +64,7 @@
                 v-if="options.deliv === 'deliver'"
                 placeholder="Адрес"
                 type='text'
+                name="deliv-addr"
                 class='form-control'
                 name='deliv-address'
               ></input>

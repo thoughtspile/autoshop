@@ -21,25 +21,26 @@ exports = module.exports = function(req, res) {
 		}
 
 		view.on('post', { action: 'checkout' }, function(next) {
+      console.log(req.body);
 			if (!user) {
 				next();
 			}
-      const needDelivery = req.body['deliv-shop'] === 'delivery';
+      const needDelivery = req.body['deliv-type'] === 'deliver';
       let items = [];
       let delivStr = `${needDelivery ? 'Доставка по адресу ' : 'Самовывоз из магазина '}`;
       Cart.model.byUser(user)
         .then(_items => { items = _items; })
         .then(() => {
           if (needDelivery) {
-            delivStr += req.body['deliv-address'];
+            delivStr += req.body['deliv-addr'];
             return;
           }
           return Shop.model.findById(req.body['deliv-shop']).exec()
             .then(shop => delivStr += `${shop.name} (${shop.address})`);
         })
         .then(() => {
-  				const text = items.map(item => {
-  					return `<li>
+  				const text = items.map(item => (
+            `<li>
               название: ${item.goodData.name}<br/>
               цена: ${item.goodData.price}<br/>
               количество: ${item.qty}<br/>
@@ -48,27 +49,31 @@ exports = module.exports = function(req, res) {
                 .map(key => `${key}: ${item.goodData[key]}`)
                 .join('<br/>')
               }
-            `;
-          }).join('\n');
+            `
+          )).join('\n');
           const userDesc = `Пользователь
-            (e-mail ${req.user.email},
+            (
+              e-mail ${req.user.email},
               тел. ${req.user.phone},
               категория «${req.user.categoryName}»
             )
             заказал:`;
           const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
-          mailer.send(`${userDesc} <ul>${text}</ul> ${comment} <br/> ${delivStr}`, (err) => {
-            if (!err) {
-              req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');
-              Cart.model.remove({ uid: user._id }).exec()
-                .then(() => res.redirect('/cart'));
-            } else {
-              console.log('error sending mail:', err);
-              req.flash('error', 'Возникла проблема при оформлении заказа. Попробуйте позже.');
-              res.redirect('/cart');
-            }
-          });
-        });
+          const message = `${userDesc} <ul>${text}</ul> ${comment} <br/> ${delivStr}`;
+
+          return mailer.send(message);
+        })
+        .then(() => Cart.model.remove({ uid: user._id }).exec())
+        .then(
+          () => {
+            req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');
+          },
+          () => {
+            console.log('error sending mail:', err);
+            req.flash('error', 'Возникла проблема при оформлении заказа. Попробуйте позже.');
+          }
+        )
+        .then(() => next());
     });
 
     Cart.model.byUser(user)

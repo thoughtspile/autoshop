@@ -21,12 +21,16 @@ transporter.verify(function(error, success) {
 });
 
 module.exports = {
-  send: (html, cb) => {
+  send: (html) => {
+    const p = new Promise();
     transporter.sendMail({
       from: process.env.mailsender,
       to: [process.env.mailreceiver],
       subject: 'Заказ в магазине автосмазок',
       html,
-    }, cb);
+    }, (err, res) => {
+      err ? p.reject(err) : p.resolve(res);
+    });
+    return p;
   },
 };

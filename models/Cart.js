@@ -11,6 +11,10 @@ Cart.add({
 });
 
 Cart.schema.static('byUser', (user) => {
+  if (!user) {
+    return Promise.resolve([]);
+  }
+
   const Good = keystone.list('Good');
   let items = [];
 

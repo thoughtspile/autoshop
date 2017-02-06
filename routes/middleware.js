@@ -28,7 +28,7 @@ exports.initLocals = function (req, res, next) {
     { label: 'Контакты', key: 'contact', href: '/contact' },
 	];
 
-	res.locals.user = req.user.toObject({ virtuals: true });
+	res.locals.user = req.user ? req.user.toObject({ virtuals: true }) : req.user;
 	res.locals.loggedIn = req.user && !req.user.isAnonymous;
   Cart.model.byUser(req.user)
     .then(cart => { res.locals.cart = cart || []; })

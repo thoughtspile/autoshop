@@ -23,7 +23,6 @@ var middleware = require('./middleware');
 var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
-keystone.pre('routes', middleware.anonUser);
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
@@ -41,7 +40,7 @@ exports = module.exports = function (app) {
 	app.all('/contact', routes.views.contact);
 	app.all('/shops/:id', routes.views.shop);
 	app.all('/goods/:id', routes.views.good);
-	app.all('/cart', routes.views.cart);
+	app.all('/cart', middleware.anonUser, middleware.initLocals, routes.views.cart);
 	app.all('/pricelist', routes.views.pricelist);
 
 	app.all('/signin', routes.views.signin);
@@ -49,11 +48,12 @@ exports = module.exports = function (app) {
 	app.all('/signout', routes.views.signout);
 
 	app.get('/api/cart', routes.api.cart.list);
-	app.post('/api/cart', routes.api.cart.set);
-	app.del('/api/cart', routes.api.cart.remove);
+	app.post('/api/cart', middleware.anonUser, routes.api.cart.set);
+	app.del('/api/cart', middleware.anonUser, routes.api.cart.remove);
 
 	app.get('/api/shops', routes.api.shops.list);
 
+  app.all('/api/user/me', middleware.anonUser);
 	app.get('/api/user/me', routes.api.user.me);
 	app.post('/api/user/me', routes.api.user.edit);
 

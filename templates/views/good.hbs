@@ -20,19 +20,7 @@
 										</tr>
 									{{/each}}
 								</table>
-								{{#if user}}
-									<addtocart good-id="{{good._id}}" value="{{count}}"></addtocart>
-								{{else}}
-									<div calss='login-invite'>
-										<span class='popup-holder'>
-                      <a class='popup-control' href='#signin'>Войдите</a>
-                      <div class='popup popup--signin hide' style='left: 0'>
-                        {{>signin }}
-                      </div>
-                    </span> или
-										<a href='/signup'>зарегистрируйтесь</a>, чтобы оформить заказ.
-									</div>
-								{{/if}}
+								<addtocart good-id="{{good._id}}" value="{{count}}"></addtocart>
 							</div>
 						</div>
 						<div class='row good-avail'>

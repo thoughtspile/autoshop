@@ -5,10 +5,10 @@ var Good = keystone.list('Good');
 var GoodsByShops = keystone.list('GoodsByShops');
 
 exports = module.exports = function (req, res) {
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
+  var view = new keystone.View(req, res);
+  var locals = res.locals;
 
-	locals.section = 'home';
+  locals.section = 'home';
 
     Shop.model.findById(req.params['id']).exec()
         .then(shop => {

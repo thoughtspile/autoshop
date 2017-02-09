@@ -9,10 +9,10 @@ var GoodsByShops = keystone.list('GoodsByShops');
 const SPECIAL_FIELDS = ["_id", "img", "prices", "brand", "good_id", "name", "category", "desc_short", "desc"];
 
 exports = module.exports = function (req, res) {
-	const view = new keystone.View(req, res);
-	const locals = res.locals;
+  const view = new keystone.View(req, res);
+  const locals = res.locals;
 
-	locals.section = 'home';
+  locals.section = 'home';
 
     const user = req.user;
     const uid = user ? user._id : null;

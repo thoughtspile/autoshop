@@ -3,12 +3,12 @@ var keystone = require('keystone');
 var Good = keystone.list('Good');
 
 exports = module.exports = function (req, res) {
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
+  var view = new keystone.View(req, res);
+  var locals = res.locals;
 
-	// locals.section is used to set the currently selected
-	// item in the header navigation.
-	locals.section = 'pricelist';
+  // locals.section is used to set the currently selected
+  // item in the header navigation.
+  locals.section = 'pricelist';
 
     var filter = {};
     if (req.query['category']) {

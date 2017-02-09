@@ -1,50 +1,50 @@
 {{!< default}}
 <div class="container">
-	<div class='row'>
-		<div class='col-xs-12'>
-			<div id="vue--cart" class='good card'>
-				<div v-if="!goods || goods.length === 0" class='lead'>Ваша корзина пуста.</div>
-				<template v-else>
-					<h2>Корзина</h2>
-					<table class='cart-list table table-hover'>
-						<thead>
-							<tr>
-								<th>Наименование</th>
-								<th>Количество</th>
-								<th>Цена, руб.</th>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <div id="vue--cart" class='good card'>
+        <div v-if="!goods || goods.length === 0" class='lead'>Ваша корзина пуста.</div>
+        <template v-else>
+          <h2>Корзина</h2>
+          <table class='cart-list table table-hover'>
+            <thead>
+              <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Цена, руб.</th>
                 <th></th>
-							</tr>
-						</thead>
-						<tr v-for="item in goods">
-							<td>
+              </tr>
+            </thead>
+            <tr v-for="item in goods">
+              <td>
                 <a :href="'/goods/' + item.goodData._id">${ item.goodData.name }</a>
               </td>
-							<td>
+              <td>
                 <input type="number" :value="item.qty" min="0" v-on:change="changeQty(item, $event)"></input>
               </td>
-							<td>
+              <td>
                 ${ item.goodData.price }
               </td>
-							<td v-on:click="removeItem(item)">
+              <td v-on:click="removeItem(item)">
                 x
               </td>
-						</tr>
+            </tr>
             <tr v-if="total" style="font-weight: 600;">
               <td>Всего:</td>
               <td></td>
               <td>${ total }</td>
             </tr>
-					</table>
+          </table>
 
-					<form method='post'>
+          <form method='post'>
             <div class="row">
-  						<div class='form-group col-sm-5' style='margin-top: 20px;'>
-  							<legend>Комментарий к заказу</legend>
-  							<textarea class='form-control' name='comment'></textarea>
-  						</div>
+              <div class='form-group col-sm-5' style='margin-top: 20px;'>
+                <legend>Комментарий к заказу</legend>
+                <textarea class='form-control' name='comment'></textarea>
+              </div>
 
-  						<div class='col-sm-6 col-sm-offset-1' style='margin-top: 20px;'>
-  							<legend>Доставка</legend>
+              <div class='col-sm-6 col-sm-offset-1' style='margin-top: 20px;'>
+                <legend>Доставка</legend>
 
                 <fieldset class="form-group">
                   <div class="form-check">
@@ -72,7 +72,7 @@
                 <select v-else class='form-control' name='deliv-shop' v-model="options.shop">
                   <option v-for="shop in shops" :value="shop._id">${shop.address} (${shop.name})</option>
                 </select>
-  						</div>
+              </div>
             </div>
 
             <fieldset v-if="user.isAnonymous" class="form-group">
@@ -91,22 +91,22 @@
               </div>
             </fieldset>
 
-						<div v-if="!user.isAnonymous" class='input-group-btn'>
-							<input type='hidden' name='action' value='checkout'>
-							<button type="submit" :disabled="total <= 0" class='btn btn-default order__btn checkout__btn'>
+            <div v-if="!user.isAnonymous" class='input-group-btn'>
+              <input type='hidden' name='action' value='checkout'>
+              <button type="submit" :disabled="total <= 0" class='btn btn-default order__btn checkout__btn'>
                 Оформить заказ
               </button>
-						</div>
+            </div>
             <div v-else class='input-group-btn'>
               <button v-on:click.stop.prevent="register" :disabled="!user.email || !user.password" class='btn btn-default order__btn checkout__btn'>
                 Зарегистрироваться
               </button>
             </div>
-					</form>
-				</template>
-			</div>
-		</div>
-	</div>
+          </form>
+        </template>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="/js/cart.js"></script>

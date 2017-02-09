@@ -1,26 +1,26 @@
 {{!< default}}
 <div class="container">
-    <div class='snipcart-categories' style='padding-left: 20px; padding-right: 20px;'>
-        <div class='row'>
-            <h2 class='col-sm-6' style='margin-top: 0;'>Товары</h2>
-            <div class="col-sm-6">
-                <div class='dropdown' style='float: right'>
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{ activeCategory }}
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href='pricelist' value=''>Любая категория</a></li>
-                        {{#each categories}}
-                            <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
+  <div class='snipcart-categories' style='padding-left: 20px; padding-right: 20px;'>
+    <div class='row'>
+      <h2 class='col-sm-6' style='margin-top: 0;'>Товары</h2>
+      <div class="col-sm-6">
+        <div class='dropdown' style='float: right'>
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{ activeCategory }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href='pricelist' value=''>Любая категория</a></li>
+            {{#each categories}}
+              <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
+            {{/each}}
+          </ul>
         </div>
-        <div class='row'>
-            {{#pricelistBlocks goods}}
-            {{/pricelistBlocks}}
-        </div>
+      </div>
     </div>
+    <div id="goods" class='row'>
+      {{#pricelistBlocks goods}}
+      {{/pricelistBlocks}}
+    </div>
+  </div>
 </div>

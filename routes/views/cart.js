@@ -9,22 +9,22 @@ var Good = keystone.list('Good');
 var Shop = keystone.list('Shop');
 
 exports = module.exports = function(req, res) {
-		var view = new keystone.View(req, res);
-		var locals = res.locals;
+    var view = new keystone.View(req, res);
+    var locals = res.locals;
 
-		locals.section = 'home';
+    locals.section = 'home';
 
-		var user = req.user;
+    var user = req.user;
 
-		if (!user) {
-			return res.redirect('/');
-		}
+    if (!user) {
+      return res.redirect('/');
+    }
 
-		view.on('post', { action: 'checkout' }, function(next) {
+    view.on('post', { action: 'checkout' }, function(next) {
       console.log(req.body);
-			if (!user) {
-				next();
-			}
+      if (!user) {
+        next();
+      }
       const needDelivery = req.body['deliv-type'] === 'deliver';
       let items = [];
       let delivStr = `${needDelivery ? 'Доставка по адресу ' : 'Самовывоз из магазина '}`;
@@ -39,7 +39,7 @@ exports = module.exports = function(req, res) {
             .then(shop => delivStr += `${shop.name} (${shop.address})`);
         })
         .then(() => {
-  				const text = items.map(item => (
+          const text = items.map(item => (
             `<li>
               название: ${item.goodData.name}<br/>
               цена: ${item.goodData.price}<br/>
@@ -78,8 +78,8 @@ exports = module.exports = function(req, res) {
 
     Cart.model.byUser(user)
       .then(items => { locals.items = items; })
-    	.then(
-    		() => view.render('cart'),
-    		err => console.log('err', err)
+      .then(
+        () => view.render('cart'),
+        err => console.log('err', err)
       );
 };

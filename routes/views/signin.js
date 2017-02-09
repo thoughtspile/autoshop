@@ -10,9 +10,9 @@ exports = module.exports = (req, res) => {
   const mergeCarts = () => Cart.model.merge(user, req.user).then(done);
 
   // do nothing if already logged in
-	if (user && !user.isAnonymous) {
-		return done();
-	}
+  if (user && !user.isAnonymous) {
+    return done();
+  }
 
-	return auth.signin(req, res, mergeCarts, done);
+  return auth.signin(req, res, mergeCarts, done);
 };

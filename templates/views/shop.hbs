@@ -1,9 +1,9 @@
 {{!< default}}
 <div class="container">
-	<div class='good card'>
+  <div class='good card'>
     <div class='row'>
       <div class='col-sm-6'>
-    		<h1 style="margin-bottom: 0">{{ shop.type }} {{ shop.name }}</h1>
+        <h1 style="margin-bottom: 0">{{ shop.type }} {{ shop.name }}</h1>
         {{#if shop.website}}
           <a target="_blank" href="{{shop.website}}">{{ shop.website }}</a>
         {{/if}}
@@ -24,7 +24,7 @@
     </div>
   </div>
   <h2>Товары в этом магазине</h2>
-  <div class='snipcart-categories row'>
+  <div id="goods" class='snipcart-categories row'>
     {{#pricelistBlocks goods}}
     {{/pricelistBlocks}}
   </div>

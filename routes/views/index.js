@@ -6,10 +6,10 @@ const Good = keystone.list('Good');
 test();
 
 exports = module.exports = function (req, res) {
-	const view = new keystone.View(req, res);
-	const locals = res.locals;
+  const view = new keystone.View(req, res);
+  const locals = res.locals;
 
-	locals.section = 'home';
+  locals.section = 'home';
 
   Good.model.byCategory(req.user)
     .then(goodsByCategory => { locals.goodsByCategory = goodsByCategory; })

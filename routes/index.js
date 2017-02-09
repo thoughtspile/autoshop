@@ -28,36 +28,36 @@ keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views'),
+  views: importRoutes('./views'),
   api: importRoutes('./api'),
 };
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
   // Views
-	app.get('/', routes.views.index);
-	app.get('/shopmap', routes.views.shopmap);
-	app.all('/contact', routes.views.contact);
-	app.all('/shops/:id', routes.views.shop);
-	app.all('/goods/:id', routes.views.good);
-	app.all('/cart', middleware.anonUser, middleware.initLocals, routes.views.cart);
-	app.all('/pricelist', routes.views.pricelist);
+  app.get('/', routes.views.index);
+  app.get('/shopmap', routes.views.shopmap);
+  app.all('/contact', routes.views.contact);
+  app.all('/shops/:id', routes.views.shop);
+  app.all('/goods/:id', routes.views.good);
+  app.all('/cart', middleware.anonUser, middleware.initLocals, routes.views.cart);
+  app.all('/pricelist', routes.views.pricelist);
 
-	app.all('/signin', routes.views.signin);
-	app.all('/signup', routes.views.signup);
-	app.all('/signout', routes.views.signout);
+  app.all('/signin', routes.views.signin);
+  app.all('/signup', routes.views.signup);
+  app.all('/signout', routes.views.signout);
 
-	app.get('/api/cart', routes.api.cart.list);
-	app.post('/api/cart', middleware.anonUser, routes.api.cart.set);
-	app.del('/api/cart', middleware.anonUser, routes.api.cart.remove);
+  app.get('/api/cart', routes.api.cart.list);
+  app.post('/api/cart', middleware.anonUser, routes.api.cart.set);
+  app.del('/api/cart', middleware.anonUser, routes.api.cart.remove);
 
-	app.get('/api/shops', routes.api.shops.list);
+  app.get('/api/shops', routes.api.shops.list);
 
   app.all('/api/user/me', middleware.anonUser);
-	app.get('/api/user/me', routes.api.user.me);
-	app.post('/api/user/me', routes.api.user.edit);
+  app.get('/api/user/me', routes.api.user.me);
+  app.post('/api/user/me', routes.api.user.edit);
 
-	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
+  // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+  // app.get('/protected', middleware.requireUser, routes.views.protected);
 
 };

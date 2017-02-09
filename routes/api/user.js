@@ -6,22 +6,22 @@ const serialize = user => _.defaults(
 );
 
 module.exports.me = (req, res) => {
-	const user = req.user;
+  const user = req.user;
 
-	if (!user) {
-		return res.status(404).json({ error: true });
-	}
+  if (!user) {
+    return res.status(404).json({ error: true });
+  }
 
   res.json({ user: serialize(user) });
 };
 
 const EDITABLE = ['name', 'email', 'phone', 'password'];
 module.exports.edit = (req, res) => {
-	const user = req.user;
+  const user = req.user;
 
   if (!user) {
-		return res.status(404).json({ error: true });
-	}
+    return res.status(404).json({ error: true });
+  }
 
   _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => err
     ? res.status(500).json({ error: true })

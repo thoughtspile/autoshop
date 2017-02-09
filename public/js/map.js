@@ -8,15 +8,29 @@
   }).addTo(mymap);
   adapter.get('/api/shops').then((res) => {
     res.shops.forEach(function(shop) {
-      var marker = L.marker([shop.lat, shop.lon]).addTo(mymap);
-      marker.bindPopup(`
-        <a class="shop-map-popup" href="/shops/${shop._id}">
-          <h2>${shop.name}</h2>
+      var template = `
+        <div class="shop-map-popup">
+          <h2>${shop.type} «${shop.name}»</h2>
           <ul>
             <li>${shop.address}
             <li>${shop.phone}
           </ul>
-        </a>`);
+          <ul>
+            ${shop.features.map(f => `<li>${f}</li>`).join('')}
+          </ul>
+          <a href="/shops/${shop._id}">Подробнее</a>
+        </div>`;
+      var marker = L.marker([shop.lat, shop.lon]).addTo(mymap);
+      var needPopup = document.getElementsByClassName('intro__promo-copy').length !== 0;
+      if (needPopup) {
+        marker.on('click', function() {
+          $('.leaflet-marker-icon').css({ filter: 'none' });
+          $(this.getElement()).css({ filter: 'brightness(150%)' })
+          $('.intro__promo-copy').html(template);
+        });
+      } else {
+        marker.bindPopup(template);
+      }
     });
   });
 }());

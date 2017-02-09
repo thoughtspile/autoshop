@@ -5842,13 +5842,9 @@ legend {
     color: #333; }
   .shop-map-popup:hover, .shop-map-popup:active {
     text-decoration: none; }
-  .shop-map-popup h2 {
-    font-size: 12px; }
   .shop-map-popup ul {
     list-style: none;
     padding-left: 0; }
-  .shop-map-popup li {
-    margin-top: 5px; }
 
 body {
   background-color: #e0e0e0; }

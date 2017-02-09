@@ -10,7 +10,13 @@ exports = module.exports = function (req, res) {
 	// item in the header navigation.
 	locals.section = 'pricelist';
 
-    var filter = req.query['category']? { category: req.query['category'] }: {};
+    var filter = {};
+    if (req.query['category']) {
+      filter.category = req.query['category'];
+    }
+    if (req.query['search']) {
+      filter.name = new RegExp(req.query['search'], 'i');
+    }
     locals.activeCategory = req.query['category'] || 'Любая категория';
 
     Good.model.find(filter).exec()

@@ -6,8 +6,17 @@
     sleepNote: true,
     sleepOpacity: 0.9,
   }).addTo(mymap);
-  window.shops.forEach(function(shop) {
-    var marker = L.marker(shop.coords).addTo(mymap);
-    marker.bindPopup("<a href='" + shop.href + "'>" + shop.address + "</a>");
+  adapter.get('/api/shops').then((res) => {
+    res.shops.forEach(function(shop) {
+      var marker = L.marker([shop.lat, shop.lon]).addTo(mymap);
+      marker.bindPopup(`
+        <a class="shop-map-popup" href="/shops/${shop._id}">
+          <h2>${shop.name}</h2>
+          <ul>
+            <li>${shop.address}
+            <li>${shop.phone}
+          </ul>
+        </a>`);
+    });
   });
 }());

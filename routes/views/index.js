@@ -1,24 +1,17 @@
-var keystone = require('keystone');
+const keystone = require('keystone');
+const test = require('../test');
 
-var test = require('../test');
-
-var Shop = keystone.list('Shop');
-var Good = keystone.list('Good');
-var GoodsByShops = keystone.list('GoodsByShops');
+const Good = keystone.list('Good');
 
 test();
 
 exports = module.exports = function (req, res) {
-	var view = new keystone.View(req, res);
-	var locals = res.locals;
+	const view = new keystone.View(req, res);
+	const locals = res.locals;
 
-	// locals.section is used to set the currently selected
-	// item in the header navigation.
 	locals.section = 'home';
 
-  Shop.model.find({}).exec()
-    .then(shops => { locals.shops = shops; })
-    .then(() => Good.model.byCategory(req.user))
+  Good.model.byCategory(req.user)
     .then(goodsByCategory => { locals.goodsByCategory = goodsByCategory; })
     .then(
       () => view.render('index'),

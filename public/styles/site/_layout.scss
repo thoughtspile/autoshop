@@ -20,6 +20,26 @@ legend {
 	height: auto;
 }
 
+.shop-map-popup {
+  h2, ul, li {
+    color: #333;
+  }
+  text-decoration: none;
+  &:hover, &:active {
+    text-decoration: none;
+  }
+  h2 {
+    font-size: 12px;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-top: 5px;
+  }
+}
+
 body {
 	background-color: $bg;
 }

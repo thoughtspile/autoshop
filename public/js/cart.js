@@ -1,17 +1,3 @@
-var json = (url, method, obj) => $.ajax({
-  url,
-  type: method,
-  data: obj || {},
-  dataType: 'json',
-});
-var adapter = {
-  get: (url) => $.ajax(url),
-  post: (url, obj) => json(url, 'POST', obj),
-  del: (url, obj) => json(url, 'DELETE', obj),
-};
-
-
-
 (function() {
   var handleContent = ({ goods }) => { cart.goods = goods; };
   var handleUser = ({ user }) => { cart.user = user; };

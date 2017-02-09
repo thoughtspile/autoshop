@@ -3,16 +3,4 @@
 
 <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 <script src="/js/Leaflet.Sleep.js"></script>
-<script>
-  var shops = [
-    {{#each shops}}
-      {
-        coords: [{{lat}}, {{lon}}],
-        address: "{{ address }}",
-        href: "/shops/{{ _id }}",
-        desc: "{{ name }} ({{ type }})"
-      },
-    {{/each }}
-  ];
-</script>
 <script src="/js/map.js"></script>

@@ -1,41 +1,31 @@
 {{!< default}}
 <div class="container">
-    <div>
-        <div class='row intro'>
-            <div class='col-sm-6 col-xs-12'>
-                <div class='intro__map' id="mapid"></div>
-                <a href='/shopmap' class='intro__map--mobile card card--link'>
-                  Магазины на карте
-                </a>
-            </div>
-            <div class='col-sm-6 col-xs-12 hidden-xs'>
-                <div class='intro__promo-copy'>
-                    <h1>Новости</h1>
-                    <div class='intro__promo-copy__body'>
-                        Самое первое в мире моторное масло было запатентовано в 1873 году американским доктором Джоном Эллисом. В 1866 году Эллис изучал свойства сырой нефти в медицинских целях, но обнаружил, что сырая нефть обладает хорошими смазочными свойствами. Эллис залил экспериментальную жидкость в заклинившие клапаны большого V-образного парового двигателя. В результате клапаны освободились и стали двигаться свободнее, а Джон Эллис зарегистрировал Valvoline (от Valve — «клапан» и Oil — «масло», то есть «клапанное масло») — первый в мире бренд моторного масла.
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{#each goodsByCategory }}
-            {{> category this}}
-        {{/each}}
-    </div>
+	<div>
+		<div class='row intro'>
+			<div class='col-sm-6 col-xs-12'>
+				<div class='intro__map' id="mapid"></div>
+				<a href='/shopmap' class='intro__map--mobile card card--link'>
+          Магазины на карте
+        </a>
+			</div>
+			<div class='col-sm-6 col-xs-12 hidden-xs'>
+				<div class='intro__promo-copy'>
+					<h1>Новости</h1>
+					<div class='intro__promo-copy__body'>
+						Самое первое в мире моторное масло было запатентовано в 1873 году американским доктором Джоном Эллисом. В 1866 году Эллис изучал свойства сырой нефти в медицинских целях, но обнаружил, что сырая нефть обладает хорошими смазочными свойствами. Эллис залил
+						экспериментальную жидкость в заклинившие клапаны большого V-образного парового двигателя. В результате клапаны освободились и стали двигаться свободнее, а Джон Эллис зарегистрировал Valvoline (от Valve — «клапан» и Oil — «масло», то есть «клапанное
+						масло») — первый в мире бренд моторного масла.
+					</div>
+				</div>
+			</div>
+		</div>
+		{{#each goodsByCategory }}
+			{{> category this}}
+		{{/each}}
+	</div>
 
-  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-  <script src="/js/Leaflet.Sleep.js"></script>
-  <script>
-    var shops = [
-      {{#each shops}}
-        {
-          coords: [{{lat}}, {{lon}}],
-          address: "{{ address }}",
-          href: "/shops/{{ _id }}",
-          desc: "{{ name }} ({{ type }})"
-        },
-      {{/each }}
-    ];
-  </script>
-  <script src="/js/map.js"></script>
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+	<script src="/js/Leaflet.Sleep.js"></script>
+	<script src="/js/map.js"></script>
 
 </div>

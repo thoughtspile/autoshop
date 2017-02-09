@@ -1,15 +1,3 @@
-var json = (url, method, obj) => $.ajax({
-  url,
-  type: method,
-  data: obj || {},
-  dataType: 'json',
-});
-var adapter = {
-  get: (url) => $.ajax(url),
-  post: (url, obj) => json(url, 'POST', obj),
-  del: (url, obj) => json(url, 'DELETE', obj),
-};
-
 Vue.component('addtocart', {
   template: `
     <form class='order input-group' method='post'>

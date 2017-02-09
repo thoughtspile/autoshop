@@ -11,10 +11,9 @@
       var template = `
         <div class="shop-map-popup">
           <h2>${shop.type} «${shop.name}»</h2>
-          <ul>
-            <li>${shop.address}
-            <li>${shop.phone}
-          </ul>
+          <div>Адрес: ${shop.address}</div>
+          <div style="margin-top: 4px; margin-bottom: 4px">Телефон: ${shop.phone}</div>
+          Услуги:
           <ul>
             ${shop.features.map(f => `<li>${f}</li>`).join('')}
           </ul>

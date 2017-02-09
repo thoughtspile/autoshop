@@ -5850,16 +5850,30 @@ legend {
   .shop-map-popup:hover, .shop-map-popup:active {
     text-decoration: none; }
   .shop-map-popup ul {
-    list-style: none;
-    padding-left: 0; }
+    padding-left: 15px; }
 
 body {
   background-color: #e0e0e0; }
 
+@media (max-width: 990px) and (min-width: 768px) {
+  .navbar-brand {
+    width: 40px;
+    overflow: hidden; } }
+
 .logo--img {
-  max-width: 200px;
-  margin-top: -13px;
-  width: 100%; }
+  width: 200px;
+  margin-top: -13px; }
+  @media (max-width: 990px) and (min-width: 768px) {
+    .logo--img {
+      margin-left: -20px; } }
+
+.search-bar {
+  max-width: 300px;
+  margin-left: 10px;
+  margin-top: 7px; }
+  @media (max-width: 990px) and (min-width: 768px) {
+    .search-bar {
+      width: 250px; } }
 
 .pricelist__item {
   display: block;

@@ -10,6 +10,8 @@ Shop.add({
   address: { type: Types.Text, initial: false, required: true },
   lat: { type: Types.Number, initial: false, required: true },
   lon: { type: Types.Number, initial: false, required: true },
+  features: { type: Types.TextArray, default: [], required: false },
+  website: { type: Types.Text, initial: false, required: false },
 });
 
 Shop.register();

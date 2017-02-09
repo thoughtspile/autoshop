@@ -1,18 +1,31 @@
 {{!< default}}
 <div class="container">
-    <div class='snipcart-categories row'>
-        <div class='col-xs-12'>
-            <h1>Магазин по адресу {{ shop.address }}</h2>
-            <div>
-                {{ shop.desc }}
-            </div>
-        </div>
+	<div class='good card'>
+    <div class='row'>
+      <div class='col-sm-6'>
+    		<h1 style="margin-bottom: 0">{{ shop.type }} {{ shop.name }}</h1>
+        {{#if shop.website}}
+          <a target="_blank" href="{{shop.website}}">{{ shop.website }}</a>
+        {{/if}}
+        <div style="margin-top: 10px; margin-bottom: 10px;" class='lead'>Адрес: {{ shop.address }}</div>
+        <div style="margin-top: 10px" class='lead'>Телефон: {{ shop.phone }}</div>
+      </div>
+      <div class='col-sm-6'>
+        {{#if shop.desc}}
+          <p>{{ shop.desc }}<p>
+        {{/if}}
+        <h2>{{ shop.type }} предлагает</h2>
+        <ul>
+          {{#each shop.features}}
+            <li>{{.}}</li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
-    <div class='snipcart-categories row'>
-        <h2 class='col-xs-12'>Товары в этом магазине</h2>
-    </div>
-    <div class='snipcart-categories row'>
-        {{#pricelistBlocks goods}}
-        {{/pricelistBlocks}}
-    </div>
+  </div>
+  <h2>Товары в этом магазине</h2>
+  <div class='snipcart-categories row'>
+    {{#pricelistBlocks goods}}
+    {{/pricelistBlocks}}
+  </div>
 </div>

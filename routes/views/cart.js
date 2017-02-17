@@ -38,7 +38,8 @@ exports = module.exports = function(req, res) {
           return Shop.model.findById(req.body['deliv-shop']).exec()
             .then(shop => delivStr += `${shop.name} (${shop.address})`);
         })
-        .then(() => {
+        .then(() => Cart.model.checkout(user))
+        .then((invoice) => {
           const text = items.map(item => (
             `<li>
               название: ${item.goodData.name}<br/>
@@ -59,14 +60,21 @@ exports = module.exports = function(req, res) {
             )
             заказал:`;
           const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
-          const message = `${userDesc} <ul>${text}</ul> ${comment} <br/> ${delivStr}`;
+          const invoiceUrl = `http://turboil.ru/invoice/${invoice._id}`;
+          const invoiceMsg = `Сформирована накладная: ${invoiceUrl}`;
+
+          const message = `${userDesc}
+            <ul>${text}</ul>
+            ${comment} <br/>
+            ${delivStr} <br/>
+            ${invoiceMsg}
+          `;
 
           return mailer.send(message);
         })
-        .then(() => Cart.model.checkout(user))
         .then(
           () => {
-            req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');
+            req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.<br/>');
           },
           () => {
             console.log('error sending mail:', err);

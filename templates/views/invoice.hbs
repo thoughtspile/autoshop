@@ -1,24 +1,107 @@
-<div style="width: 600px; margin: 10px auto;">
-  <table style="min-width: 100%">
-    <thead>
-      <tr>
-        <th>№</th>
-        <th>Наименование товара</th>
-        <th>Ед. изм.</th>
-        <th>Количество</th>
-        <th>Примечание</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each cart}}
-        <tr>
-          <th>0</th>
-          <th>{{goodData.name}}</th>
-          <th>шт</th>
-          <th>{{qty}}</th>
-          <th></th>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-<div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .field {
+        display: inline-block;
+        width: 8em;
+        border-bottom: 1px solid black;
+      }
+      .flush-right {
+        margin-left: auto;
+        margin-right: 0;
+      }
+      div {
+        margin: 20px;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      .bordered td, .bordered th, td.bordered {
+        vertical-align: top;
+        border: 1px solid #bbb;
+      }
+      .numeric {
+        text-align: right;
+      }
+      .stamp {
+        position: absolute;
+        right: 4em;
+        bottom: 2em;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 800px; margin: 10px auto; position: relative;">
+      <div>
+        Накладная №
+        <span class="field"></span>
+        от
+        <span class="field"></span>
+        201<span class="field" style="width: .5em;"></span>
+        г.
+      </div>
+      <div>
+        Получатель:
+        <span class="field"></span>
+      </div>
+      <div>
+        <table style="min-width: 100%">
+          <thead>
+            <tr class="bordered">
+              <th>№</th>
+              <th>Наименование товара</th>
+              <th>Ед. изм.</th>
+              <th>Количество</th>
+              <th>Цена, руб. коп.</th>
+              <th>Сумма, руб. коп.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each cart}}
+              <tr class="bordered">
+                <td>{{index}}</td>
+                <td>{{goodData.name}}</td>
+                <td>шт</td>
+                <td>{{qty}}</td>
+                <td class="numeric">{{goodData.price}}.00</td>
+                <td class="numeric">{{subtotal}}.00</td>
+              </tr>
+            {{/each}}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="bordered">Итого</td>
+              <td class="bordered numeric">{{total}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        Всего отпущено {{ cart.length }} наименований
+      </div>
+      <div>
+        На сумму {{ total }} руб.
+      </div>
+      <div>
+        <div class="flush-right">
+          Сдал
+          <span class="field"></span>
+        </div>
+      </div>
+      <div>
+        <div class="flush-right">
+          Принял
+          <span class="field"></span>
+        </div>
+      </div>
+      <div class="stamp">
+        М. П.
+      </div>
+    <div>
+  </body>
+</html>

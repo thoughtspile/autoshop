@@ -12,19 +12,9 @@ Cart.add({
     order: { type: Types.Relationship, ref: 'Order' },
 });
 
-Cart.schema.static('byUser', (user) => {
-  if (!user) {
-    return Promise.resolve([]);
-  }
-
+const assembleCartItems = (items = [], user) => {
   const Good = keystone.list('Good');
-  let items = [];
-
-  return Cart.model.find({ uid: user._id, order: null }).exec()
-    .then((_items) => { items = _items; })
-    .then(() => {
-      return Good.model.find({ _id: { $in: items.map(item => item.good) } }).exec();
-    })
+  return Good.model.find({ _id: { $in: items.map(item => item.good) } }).exec()
     .then((_goods) => {
       const goods = _goods.map(good => _.assign(
         good.toObject(),
@@ -37,6 +27,15 @@ Cart.schema.static('byUser', (user) => {
         ))
         .filter(i => i.goodData);
     });
+}
+
+Cart.schema.static('byUser', (user) => {
+  if (!user) {
+    return Promise.resolve([]);
+  }
+
+  return Cart.model.find({ uid: user._id, order: null }).exec()
+    .then(items => assembleCartItems(items, user));
 });
 
 Cart.schema.static('setQty', (user, good_id, qty) => {
@@ -70,8 +69,13 @@ Cart.schema.static('merge', (srcUser, targetUser) => {
     });
 });
 
+Cart.schema.static('getOrder', (orderId) => {
+  return keystone.list('Order').model.findById(orderId).exec()
+    .then(order => { console.log(order); return JSON.parse(_.get(order, 'frozenOrder', '[]')) });
+})
+
 Cart.schema.static('removeFromCart', (user, good_id) => {
-  return Cart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
+  return vCart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
 });
 
 Cart.schema.static('inCart', (uid, good) => {
@@ -80,12 +84,12 @@ Cart.schema.static('inCart', (uid, good) => {
 
 Cart.schema.static('checkout', (user) => {
   const Order = keystone.list('Order');
-  console.log('checkout', user, Order);
   let order = null;
-  return Order.model.create({})
+
+  return Cart.model.byUser(user)
+    .then(cart => Order.model.create({ frozenOrder: JSON.stringify(cart) }))
     .then(_order => {
       order = _order;
-      console.log('order created', order, 'issue update');
       return Cart.model.update(
         { uid: user._id, order: null },
         { $set: { order: order._id } },

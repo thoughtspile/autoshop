@@ -5,5 +5,6 @@ const uuid = require('uuid/v4');
 const Order = new keystone.List('Order');
 Order.add({
   uuid: { type: Types.Text, required: true, default: uuid },
+  frozenOrder: { type: Types.Text },
 });
 Order.register();

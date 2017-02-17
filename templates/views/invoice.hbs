@@ -1,0 +1,24 @@
+<div style="width: 600px; margin: 10px auto;">
+  <table style="min-width: 100%">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Наименование товара</th>
+        <th>Ед. изм.</th>
+        <th>Количество</th>
+        <th>Примечание</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each item}}
+        <tr>
+          <th>0</th>
+          <th>{{item.name}}</th>
+          <th>шт</th>
+          <th>{{item.qty}}</th>
+          <th></th>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+<div>

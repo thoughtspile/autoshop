@@ -1,13 +1,15 @@
 const keystone = require('keystone');
 const Types = keystone.Field.Types;
 const _ = require('lodash');
+const uuid = require('uuid/v4');
 
 const Cart = new keystone.List('Cart');
 
 Cart.add({
     uid: { type: Types.Relationship, ref: 'User' },
     good: { type: Types.Relationship, ref: 'Good' },
-    qty: { type: Types.Number, initial: false, required: true }
+    qty: { type: Types.Number, initial: false, required: true },
+    order: { type: Types.Relationship, ref: 'Order' },
 });
 
 Cart.schema.static('byUser', (user) => {
@@ -18,7 +20,7 @@ Cart.schema.static('byUser', (user) => {
   const Good = keystone.list('Good');
   let items = [];
 
-  return Cart.model.find({ uid: user._id }).exec()
+  return Cart.model.find({ uid: user._id, order: null }).exec()
     .then((_items) => { items = _items; })
     .then(() => {
       return Good.model.find({ _id: { $in: items.map(item => item.good) } }).exec();
@@ -69,7 +71,28 @@ Cart.schema.static('merge', (srcUser, targetUser) => {
 });
 
 Cart.schema.static('removeFromCart', (user, good_id) => {
-  return Cart.model.find({ uid: user._id, good: good_id }).remove().exec();
+  return Cart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
+});
+
+Cart.schema.static('inCart', (uid, good) => {
+  return Cart.model.find({ uid, good: goodId, order: null }).exec();
+})
+
+Cart.schema.static('checkout', (user) => {
+  const Order = keystone.list('Order');
+  console.log('checkout', user, Order);
+  let order = null;
+  return Order.model.create({})
+    .then(_order => {
+      order = _order;
+      console.log('order created', order, 'issue update');
+      return Cart.model.update(
+        { uid: user._id, order: null },
+        { $set: { order: order._id } },
+        { multi: true }
+      ).exec();
+    })
+    .then(() => order);
 });
 
 Cart.register();

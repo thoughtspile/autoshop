@@ -63,7 +63,7 @@ exports = module.exports = function(req, res) {
 
           return mailer.send(message);
         })
-        .then(() => Cart.model.remove({ uid: user._id }).exec())
+        .then(() => Cart.model.checkout(user))
         .then(
           () => {
             req.flash('success', 'Заказ оформлен! Вскоре с вами свяжется наш менеджер.');

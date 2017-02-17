@@ -42,6 +42,7 @@ exports = module.exports = function (app) {
   app.all('/goods/:id', routes.views.good);
   app.all('/cart', middleware.anonUser, middleware.initLocals, routes.views.cart);
   app.all('/pricelist', routes.views.pricelist);
+  app.all('/invoice', routes.views.invoice);
 
   app.all('/signin', routes.views.signin);
   app.all('/signup', routes.views.signup);

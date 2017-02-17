@@ -57,7 +57,7 @@ exports = module.exports = function (req, res) {
         .then(() => Good.model.catSummary(locals.good.category, req.user))
         .then(parentCategory => { locals.parentCategory = parentCategory; })
         // есть ли товар в корзине
-        .then(() => Cart.model.find({ uid, good: goodId }).exec())
+        .then(() => Cart.model.inCart(uid, goodId))
         .then((cartItems) => { locals.count = cartItems.reduce((s, q) => s + q.qty, 0); })
         .then(
             () => view.render('good'),

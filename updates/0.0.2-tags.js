@@ -39,9 +39,9 @@ module.exports = (done) => {
       acc.concat(_.values(vals).map(strValue => ({ name, strValue })))
     ), []);
 
-    console.log(filenames, tags, serial);
+    console.log(serial.filter(t => !t.strValue));
 
-    Promise.all(serial.map(tagData => Tag.model.create(tagData)))
+    Promise.all(serial.map(tagData => { return Tag.model.create(tagData); }))
       .then(() => done());
   });
 };

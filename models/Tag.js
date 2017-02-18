@@ -11,7 +11,7 @@ Tag.add({
       required: true,
       default: 'string',
     },
-    strValue: { type: Types.Text, required: true, initial: true },
+    strValue: { type: Types.Text, required: false, initial: false },
     numValue: { type: Types.Number },
     boolValue: { type: Types.Number },
 });

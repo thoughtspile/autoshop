@@ -23,6 +23,8 @@ Good.add({
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
     good_id: { type: Types.Text },
+
+    tags: { type: Types.Relationship, ref: 'Tag', many: true },
 });
 
 // Provide access to Keystone

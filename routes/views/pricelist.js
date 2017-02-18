@@ -14,6 +14,10 @@ exports = module.exports = function (req, res) {
 
     const tagFilters = [].concat(req.query['filter'] || []).filter(id => !!id);
 
+    if (!req.query['category']) {
+      return res.redirect('/pricelist?category=Масла%20IDEMITSU');
+    }
+
     var filter = {};
     if (req.query['category']) {
       filter.category = req.query['category'];
@@ -26,7 +30,6 @@ exports = module.exports = function (req, res) {
     }
     locals.activeCategory = req.query['category'] || 'Любая категория';
     const cat = req.query['category'];
-    console.log(filter);
 
     Good.model.find(filter).exec()
         .then(goods => {

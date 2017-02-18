@@ -19,7 +19,6 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href='pricelist' value=''>Любая категория</a></li>
                     {{#each categories}}
                       <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
                     {{/each}}

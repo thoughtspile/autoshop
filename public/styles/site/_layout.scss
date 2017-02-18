@@ -140,6 +140,16 @@ body {
 		@include no-def-link;
 	}
 
+  @media (max-width: 767px) {
+    .card:not(.cat-promo__main) {
+        display: none;
+    }
+    &, .cat-promo__main {
+      height: auto;
+      margin-top: 0;
+    }
+  }
+
 	&__title {
 		margin-top: 0;
 		color: $red;
@@ -148,7 +158,6 @@ body {
 
 	&__details {
 		font-size: 20px;
-		float: left;
 	}
 }
 

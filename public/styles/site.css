@@ -5910,13 +5910,18 @@ body {
   .cat-promo__main, .cat-promo__main:active, .cat-promo__main:focus, .cat-promo__main:hover, .cat-promo__main:active, .cat-promo__main:active:active, .cat-promo__main:active:focus, .cat-promo__main:active:hover, .cat-promo__main:hover, .cat-promo__main:hover:active, .cat-promo__main:hover:focus, .cat-promo__main:hover:hover {
     text-decoration: none;
     color: #333333; }
+  @media (max-width: 767px) {
+    .cat-promo .card:not(.cat-promo__main), .cat-promo .intro__promo-copy:not(.cat-promo__main) {
+      display: none; }
+    .cat-promo, .cat-promo .cat-promo__main {
+      height: auto;
+      margin-top: 0; } }
   .cat-promo__title {
     margin-top: 0;
     color: #ff3b30;
     font-size: 36px; }
   .cat-promo__details {
-    font-size: 20px;
-    float: left; }
+    font-size: 20px; }
 
 .card, .intro__promo-copy {
   padding: 10px;

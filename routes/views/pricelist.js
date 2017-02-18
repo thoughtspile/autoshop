@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+const _ = require('lodash');
 
 var Good = keystone.list('Good');
 var Tag = keystone.list('Tag');
@@ -11,6 +12,8 @@ exports = module.exports = function (req, res) {
   // item in the header navigation.
   locals.section = 'pricelist';
 
+    const tagFilters = req.query['filter'] || [];
+
     var filter = {};
     if (req.query['category']) {
       filter.category = req.query['category'];
@@ -18,8 +21,12 @@ exports = module.exports = function (req, res) {
     if (req.query['search']) {
       filter.name = new RegExp(req.query['search'], 'i');
     }
+    if (!_.isEmpty(tagFilters)) {
+      filter.tags = { $all: tagFilters };
+    }
     locals.activeCategory = req.query['category'] || 'Любая категория';
     const cat = req.query['category'];
+    console.log(filter);
 
     Good.model.find(filter).exec()
         .then(goods => {
@@ -30,6 +37,11 @@ exports = module.exports = function (req, res) {
         })
         .then(() => Tag.model.byCats(cat ? [cat] : []))
         .then((availFilters) => {
+          availFilters.forEach((tag) => {
+            tag.values.forEach((op) => {
+              op.selected = (tagFilters.indexOf(op.id) !== -1);
+            });
+          });
           locals.filters = availFilters;
         })
         .then(() => Good.model.distinct('category', {}).exec())

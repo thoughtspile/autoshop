@@ -33,7 +33,10 @@ Tag.schema.static('byCats', (cats = []) => {
       const byName = _.groupBy(tags, tag => tag.name);
       return Object.keys(byName)
         .filter(name => byName[name].length > 1)
-        .map(name => ({ name, values: byName[name].map(t => t.strValue) }));
+        .map(name => ({
+          name,
+          values: _.sortBy(byName[name].map(t => ({ id: '' + t._id, label: t.strValue })), o => o.label),
+        }));
     });
 });
 

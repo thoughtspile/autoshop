@@ -28,20 +28,26 @@
               </fieldset>
             </div>
 
-            <div class='row'>
+            <form class="row" action="" method="GET">
+              <input hidden name="category" value="{{activeCategory}}"></input>
               {{#each filters}}
                 <fieldset class="form-group">
                   <label class='col-sm-6'>{{name}}</label>
                   <div class='col-sm-6'>
-                    <select class='form-control'>
+                    <select class='form-control' name="filter">
                       {{#each values}}
-                        <option value="{{.}}">{{.}}</options>
+                        <option value="{{id}}" {{#if selected}}selected{{/if}}>
+                          {{label}}
+                        </option>
                       {{/each}}
                     </select>
                   </div>
                 </fieldset>
               {{/each}}
-            </div>
+              <div class="" style="text-align: right">
+                <button class="btn btn-default">Поиск</button>
+              </div>
+            </form>
           </div>
         </div>
         <div class='col-md-9'>

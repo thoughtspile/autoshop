@@ -1,26 +1,55 @@
 {{!< default}}
 <div class="container">
+  <style>
+    label {
+      margin-top: 6px;
+    }
+  </style>
   <div class='snipcart-categories' style='padding-left: 20px; padding-right: 20px;'>
-    <div class='row'>
-      <h2 class='col-sm-6' style='margin-top: 0;'>Товары</h2>
-      <div class="col-sm-6">
-        <div class='dropdown' style='float: right'>
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            {{ activeCategory }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href='pricelist' value=''>Любая категория</a></li>
-            {{#each categories}}
-              <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
-            {{/each}}
-          </ul>
+      <div class='row'>
+        <div class='col-md-3'>
+          <div class='card'>
+            <div class='row'>
+              <h2 style='margin-top: 0;'>Товары</h2>
+              <fieldset class="form-group form-inline">
+                <label class="col-sm-4">Категория</label>
+                <div class='dropdown col-sm-8'>
+                  <button class="btn btn-default dropdown-toggle" style="width: 100%;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ activeCategory }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href='pricelist' value=''>Любая категория</a></li>
+                    {{#each categories}}
+                      <li><a href='pricelist?category={{.}}' value=''>{{.}}</a></li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class='row'>
+              {{#each filters}}
+                <fieldset class="form-group">
+                  <label class='col-sm-6'>{{name}}</label>
+                  <div class='col-sm-6'>
+                    <select class='form-control'>
+                      {{#each values}}
+                        <option value="{{.}}">{{.}}</options>
+                      {{/each}}
+                    </select>
+                  </div>
+                </fieldset>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class='col-md-9'>
+        <div id="goods" class='row'>
+          {{#pricelistBlocks goods}}
+          {{/pricelistBlocks}}
         </div>
       </div>
-    </div>
-    <div id="goods" class='row'>
-      {{#pricelistBlocks goods}}
-      {{/pricelistBlocks}}
     </div>
   </div>
 </div>

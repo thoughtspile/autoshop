@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 
 var Good = keystone.list('Good');
+var Tag = keystone.list('Tag');
 
 exports = module.exports = function (req, res) {
   var view = new keystone.View(req, res);
@@ -18,6 +19,7 @@ exports = module.exports = function (req, res) {
       filter.name = new RegExp(req.query['search'], 'i');
     }
     locals.activeCategory = req.query['category'] || 'Любая категория';
+    const cat = req.query['category'];
 
     Good.model.find(filter).exec()
         .then(goods => {
@@ -25,6 +27,10 @@ exports = module.exports = function (req, res) {
               good.price = good.priceForUser(req.user);
             });
             locals.goods = goods.filter(good => !!good.price);
+        })
+        .then(() => Tag.model.byCats(cat ? [cat] : []))
+        .then((availFilters) => {
+          locals.filters = availFilters;
         })
         .then(() => Good.model.distinct('category', {}).exec())
         .then(categories => {

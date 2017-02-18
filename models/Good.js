@@ -22,7 +22,7 @@ Good.add({
 
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
-    good_id: { type: Types.Text }
+    good_id: { type: Types.Text },
 });
 
 // Provide access to Keystone

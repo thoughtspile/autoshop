@@ -78,7 +78,7 @@ Cart.schema.static('removeFromCart', (user, good_id) => {
   return vCart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
 });
 
-Cart.schema.static('inCart', (uid, good) => {
+Cart.schema.static('inCart', (uid, goodId) => {
   return Cart.model.find({ uid, good: goodId, order: null }).exec();
 })
 

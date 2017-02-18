@@ -12,7 +12,7 @@ exports = module.exports = function (req, res) {
   // item in the header navigation.
   locals.section = 'pricelist';
 
-    const tagFilters = req.query['filter'] || [];
+    const tagFilters = [].concat(req.query['filter'] || []).filter(id => !!id);
 
     var filter = {};
     if (req.query['category']) {

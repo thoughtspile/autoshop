@@ -35,6 +35,7 @@
                   <label class='col-sm-6'>{{name}}</label>
                   <div class='col-sm-6'>
                     <select class='form-control' name="filter">
+                      <option selected value>не важно</option>
                       {{#each values}}
                         <option value="{{id}}" {{#if selected}}selected{{/if}}>
                           {{label}}

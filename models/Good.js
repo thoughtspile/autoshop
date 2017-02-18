@@ -72,7 +72,7 @@ Good.schema.static('byCategory', (user) => {
   } ]).exec())
     .then(goodsByCategory_ => {
       goodsByCategory_.forEach(cat => { cat.items = []; });
-      goodsByCategory = goodsByCategory_;
+      goodsByCategory = _.sortBy(goodsByCategory_, c => -c.count);
     })
     .then(() => Good.model.find({}).exec())
     .then(goods => {

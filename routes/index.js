@@ -51,6 +51,7 @@ exports = module.exports = function (app) {
   app.get('/api/cart', routes.api.cart.list);
   app.post('/api/cart', middleware.anonUser, routes.api.cart.set);
   app.del('/api/cart', middleware.anonUser, routes.api.cart.remove);
+  app.get('/api/stats', routes.api.cart.stats);
 
   app.get('/api/shops', routes.api.shops.list);
 

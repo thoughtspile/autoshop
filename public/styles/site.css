@@ -6118,3 +6118,27 @@ body {
 .checkout__btn {
   margin-top: 15px;
   float: right; }
+
+.navbar-nav > li > a {
+  padding: 10px;
+  padding-top: 15px; }
+
+.cart-stats {
+  width: 100px;
+  height: 27px;
+  margin-top: -10px;
+  position: relative;
+  padding-left: 30px; }
+  .cart-stats:hover .cart-logo {
+    opacity: .8; }
+
+.cart-logo {
+  margin-top: 4px;
+  margin-left: -5px;
+  opacity: .6;
+  position: absolute;
+  left: 0;
+  width: 25px;
+  height: 27px;
+  background-image: url("/images/cart.png");
+  background-size: fit; }

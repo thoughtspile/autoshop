@@ -1,3 +1,4 @@
+var reloadStats = function() { window.stats && window.stats.reload(); };
 Vue.component('addtocart', {
   template: `
     <form class='order input-group' method='post' v-on:click.stop.prevent="">
@@ -15,7 +16,9 @@ Vue.component('addtocart', {
   },
   methods: {
     setQty() {
-      adapter.post('/api/cart', { good_id: this.goodId, qty: this.qty });
+      adapter.post('/api/cart', { good_id: this.goodId, qty: this.qty })
+        .then(res => res.goods.forEach(function(good) { if (good.good === this.goodId) { this.qty = good.qty; } }))
+        .then(reloadStats);
     },
   }
 });

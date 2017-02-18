@@ -1,5 +1,7 @@
 (function() {
-  var handleContent = ({ goods }) => { cart.goods = goods; };
+  var reloadStats = function() { window.stats && window.stats.reload(); };
+
+  var handleContent = ({ goods }) => { cart.goods = goods; reloadStats(); };
   var handleUser = ({ user }) => { cart.user = user; };
   var handleShops = ({ shops }) => {
     cart.shops = shops;

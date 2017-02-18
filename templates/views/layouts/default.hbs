@@ -59,7 +59,7 @@
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href='/cart'>Корзина</a></li>
+                <li><a href='/cart'><span id="vue--header-cart">Корзина</span></a></li>
                 {{#if loggedIn}}
                   <li><a href="/signout">Выйти</a></li>
                 {{else}}
@@ -130,6 +130,7 @@
 
     <script src="/js/bootstrap/bootstrap-3.3.5.min.js"></script>
     <script src="/js/addtocart.js"></script>
+    <script src="/js/header-cart.js"></script>
     <script>$(window).load(function() { $('#myModal').modal('show'); });</script>
     {{{isAdminEditorJS user}}}
         <script src="/js/signin-popup.js"></script>

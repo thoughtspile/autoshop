@@ -42,7 +42,7 @@ Cart.schema.static('setQty', (user, good_id, qty) => {
   // TODO check if good exists
   // TODO validate qty
   return Cart.model.findOneAndUpdate(
-    { uid: user._id, good: good_id },
+    { uid: user._id, good: good_id, order: null },
     { $set: { qty } },
     { upsert: true }
   ).exec();
@@ -75,7 +75,7 @@ Cart.schema.static('getOrder', (orderId) => {
 })
 
 Cart.schema.static('removeFromCart', (user, good_id) => {
-  return vCart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
+  return Cart.model.find({ uid: user._id, good: good_id, order: null }).remove().exec();
 });
 
 Cart.schema.static('inCart', (uid, goodId) => {

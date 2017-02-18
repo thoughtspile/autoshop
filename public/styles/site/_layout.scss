@@ -394,17 +394,42 @@ body {
 }
 
 .popup {
+  position: absolute;
 	z-index: 10000;
 	background-color: white;
 	padding: 10px;
 	border: 1px solid #dddddd;
 
 	&--signin {
-		position: absolute;
 		top: 40px;
 		right: 0;
 		width: 250px;
 	}
+
+  * {
+    position: relative;
+    z-index: 1000;
+  }
+
+  @media (max-width: 767px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    &:before {
+      display: block;
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: black;
+      z-index: 999;
+      opacity: .2;
+    }
+  }
 }
 
 .signin-form__signup {

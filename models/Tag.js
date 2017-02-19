@@ -24,9 +24,7 @@ Tag.schema.static('byCats', (cats = []) => {
   return Good.model.find({ category: { $in: cats } }).exec()
     .then((goods = []) => {
       const tagsUsed = _.uniq(_.flatten(goods.map(g => g.tags || [])));
-      if (!_.isEmpty(tagsUsed) || !_.isEmpty(cats)) {
-        query._id = { $in: tagsUsed };
-      }
+      query._id = { $in: tagsUsed };
     })
     .then(() => Tag.model.find(query).exec())
     .then((tags) => {

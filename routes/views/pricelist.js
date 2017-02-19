@@ -14,7 +14,7 @@ exports = module.exports = function (req, res) {
 
     const tagFilters = [].concat(req.query['filter'] || []).filter(id => !!id);
 
-    if (!req.query['category']) {
+    if (!req.query['category'] && !req.query['search']) {
       return res.redirect('/pricelist?category=Масла%20IDEMITSU');
     }
 

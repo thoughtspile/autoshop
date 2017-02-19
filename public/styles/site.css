@@ -5895,13 +5895,13 @@ body {
   transform: translateY(-50%); }
 
 #body {
-  padding-top: 8rem; }
+  padding-top: 10rem; }
 
 #header {
   position: fixed;
   z-index: 10;
   width: 100%;
-  height: 5rem;
+  height: 8rem;
   background-color: white !important;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); }
 
@@ -6172,3 +6172,20 @@ body {
   height: 27px;
   background-image: url("/images/cart.png");
   background-size: fit; }
+
+.header-contact {
+  background-color: #3a3a3a;
+  border-radius: 0;
+  height: 2.5rem;
+  padding-top: 3px;
+  text-align: right; }
+  .header-contact__email, .header-contact__phone {
+    color: #ddd;
+    margin-top: 4px;
+    cursor: pointer;
+    text-decoration: none !important;
+    border-bottom: 1px dotted; }
+    .header-contact__email:visited, .header-contact__email:link, .header-contact__phone:visited, .header-contact__phone:link {
+      color: #ddd; }
+    .header-contact__email:hover, .header-contact__email:active, .header-contact__phone:hover, .header-contact__phone:active {
+      color: white; }

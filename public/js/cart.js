@@ -35,6 +35,7 @@
         email: '',
         password: '',
         isAnonymous: false,
+        about: 'private',
       },
       password: '',
     },

@@ -89,6 +89,13 @@
                 <label>Пароль:</label>
                 <input class='form-control' type='text' v-model="user.password"></input>
               </div>
+              <div>
+                  <label>Я...</label>
+                  <select v-model="user.about" class="form-control"required>
+                    <option value="private">Частное лицо</option>
+                    <option value="company">Компания</option>
+                  </select>
+              </div>
             </fieldset>
 
             <div v-if="!user.isAnonymous" class='input-group-btn'>

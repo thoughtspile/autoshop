@@ -28,6 +28,17 @@ User.add({
       { value: 4, label: 'крупный опт' },
     ],
   },
+  about: {
+    type: Types.Select,
+    label: 'О себе',
+    initial: true,
+    required: true,
+    default: 'private',
+    options: [
+      { value: 'private', label: 'Частное лицо' },
+      { value: 'company', label: 'Компания' },
+    ],
+  }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Администратор', index: true },
 });

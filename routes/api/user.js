@@ -15,7 +15,7 @@ module.exports.me = (req, res) => {
   res.json({ user: serialize(user) });
 };
 
-const EDITABLE = ['name', 'email', 'phone', 'password'];
+const EDITABLE = ['name', 'email', 'phone', 'password', 'about'];
 module.exports.edit = (req, res) => {
   const user = req.user;
 

@@ -1,9 +1,12 @@
 const keystone = require('keystone');
 const User = keystone.list('User');
 const auth = require('../auth');
+const _ = require('lodash');
+
+const EDITABLE = ['name', 'email', 'phone', 'password', 'about'];
 
 exports = module.exports = (req, res) => {
-  if (req.user) {
+  if (req.user && !req.user.isAnonymous) {
     return res.redirect(req.cookies.target || '/');
   }
 
@@ -13,35 +16,21 @@ exports = module.exports = (req, res) => {
   locals.section = 'signin';
   locals.form = req.body;
 
-  view.on('post', {
-    action: 'signup'
-  }, (next) => {
-    if (!req.body.email || !req.body.password) {
-      console.log('flash error');
-      req.flash('error', 'Заполните обязательные поля');
-      return next();
+  view.on('post', { action: 'signup' }, (next) => {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(404).send();
     }
 
-    User.model.register({
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: req.body.password,
-      })
-      .then(() => {
-        auth.signin(req, res, () => {
-          req.flash('success', 'Вы зарегистрировались в магазине!')
-          res.redirect('/');
-        });
-      })
-      .then(
-        () => {},
-        (err) => {
-          req.flash('error', err || 'Произошла ошибка! Попробуйте войти или зарегистрироваться еще раз.');
-          return next();
-        }
-      );
-    // FIXME hangs on save error
+    _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => {
+      if (!err) {
+        req.flash('success', 'Вы зарегистрировались в магазине!')
+        return res.redirect('/');
+      }
+      req.flash('error', err || 'Произошла ошибка! Попробуйте войти или зарегистрироваться еще раз.');
+      return view.render('signup');
+    });
   });
 
   view.render('signup');

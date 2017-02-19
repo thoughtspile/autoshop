@@ -45,7 +45,7 @@ exports = module.exports = function (app) {
   app.all('/invoice/:order_id', routes.views.invoice);
 
   app.all('/signin', routes.views.signin);
-  app.all('/signup', routes.views.signup);
+  app.all('/signup', middleware.anonUser, routes.views.signup);
   app.all('/signout', routes.views.signout);
 
   app.get('/api/cart', routes.api.cart.list);

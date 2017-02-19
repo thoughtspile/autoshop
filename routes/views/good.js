@@ -48,6 +48,7 @@ exports = module.exports = function (req, res) {
 
   Good.model.findById(goodId).exec()
     .then((good) => {
+      good.price = good.priceForUser(req.user);
       good.meta = Object.keys(good._doc)
         .filter(key => SPECIAL_FIELDS.indexOf(key) === -1)
         .map(key => ({ key, value: good._doc[key] }));

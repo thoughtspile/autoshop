@@ -6095,6 +6095,10 @@ body {
     margin-bottom: 10px; }
     .good__desc__text {
       margin-bottom: 12px; }
+    .good__desc__price {
+      color: #ff3b30;
+      font-size: 24px;
+      padding-top: 2px; }
     .good__desc__props {
       margin-bottom: 10px; }
       .good__desc__props__key {

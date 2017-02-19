@@ -10,7 +10,12 @@
           <div class='col-sm-6 good__desc'>
             <div class='row good__desc__body'>
               <div class='col-xs-12 good__desc'>
-                <h2 class='good__desc__title'>{{ good.name }}</h2>
+                <div class='row'>
+                  <h2 class='good__desc__title col-sm-9'>{{ good.name }}</h2>
+                  <div class='good__desc__price col-sm-3'>
+                    {{#if good.price}}{{good.price}} Р{{else}}Цена по запросу{{/if}}
+                  </div>
+                </div>
                 <div class='good__desc__text'>{{{ good.desc }}}</div>
                 <table class='good__desc__props table'>
                   {{#each good.meta}}

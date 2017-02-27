@@ -1,8 +1,11 @@
 const _ = require('lodash');
 
-const serialize = user => _.defaults(
-  _.omit(user.toObject({ virtuals: true }), 'list', '_'),
-  { email: '', password: null }
+const serialize = user => _.assign(
+  _.defaults(
+    _.omit(user.toObject({ virtuals: true }), 'list', '_'),
+    { email: '', password: null }
+  ),
+  { name: (user.name instanceof Object) ? user.name.full : user.name }
 );
 
 module.exports.me = (req, res) => {

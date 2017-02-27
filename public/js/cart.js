@@ -36,6 +36,7 @@
         password: '',
         isAnonymous: false,
         about: 'private',
+        name: '',
       },
       password: '',
     },
@@ -51,6 +52,8 @@
       },
     }
   });
+
+  console.log('HELLO', cart.user.name);
 
   adapter.get('/api/cart/').then(handleContent);
   adapter.get('/api/shops/').then(handleShops);

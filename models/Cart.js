@@ -103,7 +103,7 @@ Cart.schema.static('getQty', (user, goods = []) => {
   const uid = user ? user._id : null;
   const goodIds = goods.map(g => g._id);
   console.log(uid);
-  return Cart.model.find({ uid, good: { $in: goodIds } }).exec()
+  return Cart.model.find({ uid, good: { $in: goodIds }, order: null }).exec()
     .then((items = []) => {
       const res = {};
       goodIds.forEach(gid => {

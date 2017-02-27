@@ -95,6 +95,10 @@
                     <option value="company">Компания</option>
                   </select>
               </div>
+              <div>
+                  <label>${user.about === 'private' ? 'Имя' : 'Название'} (для оформления накладной)</label>
+                  <input type="text" v-model="user.name" class="form-control" required></input>
+              </div>
             </fieldset>
 
             <div v-if="!user.isAnonymous" class='input-group-btn'>

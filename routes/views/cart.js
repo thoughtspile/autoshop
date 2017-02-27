@@ -61,7 +61,7 @@ exports = module.exports = function(req, res) {
             заказал:`;
           const comment = req.body.comment ? `Комментарий к заказу: «${req.body.comment}»` : '';
           const invoiceUrl = `http://turboil.ru/invoice/${invoice._id}`;
-          const invoiceMsg = `Сформирована накладная: ${invoiceUrl}`;
+          const invoiceMsg = `Сформирована накладная: <a href="${invoiceUrl}">${invoiceUrl}</a>`;
 
           const message = `${userDesc}
             <ul>${text}</ul>

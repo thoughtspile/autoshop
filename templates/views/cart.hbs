@@ -6,7 +6,7 @@
         <div v-if="!goods || goods.length === 0" class='lead'>Ваша корзина пуста.</div>
         <template v-else>
           <h2>Корзина</h2>
-          <table class='cart-list table table-hover'>
+          <table class='cart-list table'>
             <thead>
               <tr>
                 <th>Наименование</th>
@@ -19,20 +19,19 @@
               <td>
                 <a :href="'/goods/' + item.goodData._id">${ item.goodData.name }</a>
               </td>
-              <td>
+              <td class="cart-list__input">
                 <input type="number" :value="item.qty" min="0" v-on:change="changeQty(item, $event)"></input>
               </td>
               <td>
                 ${ item.goodData.price }
               </td>
-              <td v-on:click="removeItem(item)">
-                x
+              <td class="cart-list__rm" v-on:click="removeItem(item)">
+                ✕
               </td>
             </tr>
             <tr v-if="total" style="font-weight: 600;">
-              <td>Всего:</td>
-              <td></td>
-              <td>${ total }</td>
+              <td colspan="2">Всего:</td>
+              <td colspan="2">${ total }</td>
             </tr>
           </table>
 

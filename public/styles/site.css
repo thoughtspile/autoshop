@@ -6144,6 +6144,13 @@ body {
 
 .cart-list {
   width: 100%; }
+  .cart-list__rm {
+    cursor: pointer;
+    transition: all 300ms ease; }
+    .cart-list__rm:hover {
+      color: #ff3b30; }
+  .cart-list.table td:not(.cart-list__input) {
+    padding-top: 12px; }
 
 .checkout__btn {
   margin-top: 15px;

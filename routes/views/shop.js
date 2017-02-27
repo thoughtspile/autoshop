@@ -16,6 +16,7 @@ exports = module.exports = function (req, res) {
             return GoodsByShops.model.find({ shop: shop._id }).distinct('good').exec();
         })
         .then(good_ids => Good.model.find({ _id: { $in: good_ids } }).exec())
+        .then(goods => Good.model.personalize(req.user, goods))
         .then(goods => { locals.goods = goods; })
         .then(
             () => view.render('shop'),

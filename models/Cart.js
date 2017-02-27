@@ -99,4 +99,19 @@ Cart.schema.static('checkout', (user) => {
     .then(() => order);
 });
 
+Cart.schema.static('getQty', (user, goods = []) => {
+  const uid = user ? user._id : null;
+  const goodIds = goods.map(g => g._id);
+  console.log(uid);
+  return Cart.model.find({ uid, good: { $in: goodIds } }).exec()
+    .then((items = []) => {
+      const res = {};
+      goodIds.forEach(gid => {
+        const inCart = _.find(items, i => '' + i.good == '' + gid);
+        res[gid] = inCart ? inCart.qty : 0;
+      });
+      return res;
+    });
+});
+
 Cart.register();

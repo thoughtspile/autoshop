@@ -3,8 +3,14 @@
     <img class='card__thumb card__thumb--{{extend}}' src='{{ product.img }}'>
     <div class='card__content card__content--{{extend}}'>
       <h1 class='card__title'>{{ product.name }}</h1>
-      <span class='card__price'>{{ product.price }} руб.</span>
-      <addtocart good-id="{{product._id}}"></addtocart>
+      <span class='card__price'>
+        {{#if product.price}}
+          {{ product.price }} руб.
+        {{else}}
+          Цена по запросу
+        {{/if}}
+      </span>
+      <addtocart good-id="{{product._id}}" value="{{product.cartCount}}"></addtocart>
     </div>
   </a>
 {{/if}}

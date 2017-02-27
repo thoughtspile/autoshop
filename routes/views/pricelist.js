@@ -30,14 +30,11 @@ exports = module.exports = function (req, res) {
     }
     locals.activeCategory = req.query['category'] || 'Любая категория';
     const cat = req.query['category'];
+    const user = req.user;
 
     Good.model.find(filter).exec()
-        .then(goods => {
-            goods.forEach(good => {
-              good.price = good.priceForUser(req.user);
-            });
-            locals.goods = goods.filter(good => !!good.price);
-        })
+        .then(goods => Good.model.personalize(user, goods))
+        .then(goods => { locals.goods = goods; })
         .then(() => Tag.model.byCats(cat ? [cat] : []))
         .then((availFilters) => {
           availFilters.forEach((tag) => {

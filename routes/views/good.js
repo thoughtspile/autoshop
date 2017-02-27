@@ -76,7 +76,11 @@ exports = module.exports = function (req, res) {
     })
     // товары в категории
     .then(() => Good.model.catSummary(locals.good.category, req.user))
-    .then(parentCategory => { locals.parentCategory = parentCategory; })
+    .then(parentCategory => {
+      locals.parentCategory = parentCategory;
+      return Good.model.personalize(user, parentCategory.items);
+    })
+    .then(items => { locals.parentCategory.items = items; })
     // есть ли товар в корзине
     .then(() => Cart.model.inCart(uid, goodId))
     .then((cartItems) => { locals.count = cartItems.reduce((s, q) => s + q.qty, 0); })

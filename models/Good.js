@@ -75,17 +75,28 @@ Good.schema.static('byCategory', (user) => {
       goodsByCategory = _.sortBy(goodsByCategory_, c => -c.count);
     })
     .then(() => Good.model.find({}).exec())
+    .then(goods => Good.model.personalize(user, goods))
     .then(goods => {
-      goods.forEach(good => {
-        good.price = good.priceForUser(user);
-        if (!good.price) {
-          return;
-        }
-        const cat = _.find(goodsByCategory, cat => '' + cat._id === '' + good.category);
-        cat.items.push(good);
-      });
+      const findCat = good => (
+        _.find(goodsByCategory, cat => '' + cat._id === '' + good.category)
+      );
+      goods
+        .filter(good => !!good.price && !!findCat(good))
+        .forEach(good => findCat(good).items.push(good));
     })
     .then(() => goodsByCategory);
+});
+
+Good.schema.static('personalize', (user, goods = []) => {
+  const uid = user ? user._id : null;
+  const Cart = keystone.list('Cart');
+  return Cart.model.getQty(user, goods)
+    .then(qtyMap => (
+      goods.map(good => _.assign(
+        good.toObject(),
+        { cartCount: qtyMap[good._id], price: good.priceForUser(user), img: good.img }
+      ))
+    ));
 });
 
 Good.register();

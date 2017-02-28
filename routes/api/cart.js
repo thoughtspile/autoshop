@@ -15,7 +15,6 @@ module.exports.list = (req, res) => {
 };
 
 module.exports.set = (req, res) => {
-  const view = new keystone.View(req, res);
   const user = req.user;
   if (!user) {
     return res.status(403).json({ error: true });
@@ -56,7 +55,6 @@ module.exports.stats = (req, res) => {
 
   Cart.model.byUser(user)
     .then((goods) => {
-      console.log(goods);
       stats.count = goods.reduce((c, i) => c + i.qty, 0);
       stats.total = goods.reduce((c, i) => c + i.goodData.price * i.qty, 0);
     })

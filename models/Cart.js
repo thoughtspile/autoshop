@@ -114,4 +114,6 @@ Cart.schema.static('getQty', (user, goods = []) => {
     });
 });
 
+Cart.schema.index({ user: 1, good: 1 });
+
 Cart.register();

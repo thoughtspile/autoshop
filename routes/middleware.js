@@ -30,9 +30,7 @@ exports.initLocals = function (req, res, next) {
 
   res.locals.user = req.user ? req.user.toObject({ virtuals: true }) : req.user;
   res.locals.loggedIn = req.user && !req.user.isAnonymous;
-  Cart.model.byUser(req.user)
-    .then(cart => { res.locals.cart = cart || []; })
-    .then(next, next);
+  next();
 };
 
 exports.anonUser = (req, res, next) => {

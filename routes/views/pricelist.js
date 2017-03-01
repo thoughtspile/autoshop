@@ -23,7 +23,7 @@ exports = module.exports = function (req, res) {
       filter.category = req.query['category'];
     }
     if (req.query['search']) {
-      filter.name = new RegExp(req.query['search'], 'i');
+      filter.$text = { $search: req.query['search'].split(/\s+/).map(w => `"${w}"`).join(' ') };
     }
     if (!_.isEmpty(tagFilters)) {
       filter.tags = { $all: tagFilters };

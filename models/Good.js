@@ -15,11 +15,6 @@ Good.add({
     },
     category: { type: String, initial: false, required: true },
 
-    category: { type: String, initial: false, required: true },
-    category: { type: String, initial: false, required: true },
-    category: { type: String, initial: false, required: true },
-    category: { type: String, initial: false, required: true },
-
     name: { type: Types.Text, default: '', required: true },
     desc: { type: Types.Text, default: '', required: true },
     good_id: { type: Types.Text },
@@ -98,5 +93,10 @@ Good.schema.static('personalize', (user, goods = []) => {
       ))
     ));
 });
+
+Good.schema.index(
+  { name: "text", desc: "text" },
+  { default_language: "russian" }
+);
 
 Good.register();

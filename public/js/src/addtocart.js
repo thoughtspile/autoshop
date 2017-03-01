@@ -1,4 +1,7 @@
-var reloadStats = function() { window.stats && window.stats.reload(); };
+import adapter from './adapter';
+
+const reloadStats = () => window.stats && window.stats.reload();
+
 Vue.component('addtocart', {
   template: `
     <form class='order input-group' method='post' v-on:click.stop.prevent="">
@@ -43,4 +46,6 @@ Vue.component('addtocart', {
     }
   }
 });
-new Vue({ el: '#goods' });
+if (document.getElementById('goods')) {
+  new Vue({ el: '#goods' });
+}

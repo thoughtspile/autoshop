@@ -27,6 +27,10 @@ Good.schema.virtual('img').get(function () {
 	return ['/images/goods/' + this.good_id + '.jpg'];
 });
 
+Good.schema.virtual('thumb').get(function () {
+	return ['/images/goods/' + this.good_id + '.thumb.jpg'];
+});
+
 Good.schema.method('priceForUser', function (user) {
   if (!user || !user.categoryKey) {
     return this.prices.retail || null;
@@ -89,7 +93,7 @@ Good.schema.static('personalize', (user, goods = []) => {
     .then(qtyMap => (
       goods.map(good => _.assign(
         good.toObject(),
-        { cartCount: qtyMap[good._id], price: good.priceForUser(user), img: good.img }
+        { cartCount: qtyMap[good._id], price: good.priceForUser(user), img: good.img, thumb: good.thumb }
       ))
     ));
 });

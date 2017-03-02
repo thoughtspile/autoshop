@@ -6,17 +6,17 @@ var Good = new keystone.List('Good');
 
 Good.add({
     prices: {
-      retail: { type: Types.Number, initial: false, required: true, label: 'Розничная цена' },
+      retail: { type: Types.Number, initial: false, required: false, label: 'Розничная цена' },
       wholesale: {
-        lg: { type: Types.Number, initial: false, required: true, label: 'Розничная цена' },
-        md: { type: Types.Number, initial: false, required: true, label: 'Средний опт' },
-        sm: { type: Types.Number, initial: false, required: true, label: 'Мелкий опт' },
+        lg: { type: Types.Number, initial: false, required: false, label: 'Розничная цена' },
+        md: { type: Types.Number, initial: false, required: false, label: 'Средний опт' },
+        sm: { type: Types.Number, initial: false, required: false, label: 'Мелкий опт' },
       }
     },
     category: { type: String, initial: false, required: true },
 
     name: { type: Types.Text, default: '', required: true },
-    desc: { type: Types.Text, default: '', required: true },
+    desc: { type: Types.Text, default: '', required: false },
     good_id: { type: Types.Text },
 
     tags: { type: Types.Relationship, ref: 'Tag', many: true },

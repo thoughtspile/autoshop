@@ -372,7 +372,8 @@ module.exports = function () {
 
       i += blockItems.length;
       rowRem -= kind;
-      if (!rowRem === 0) {
+      newRow = false;
+      if (rowRem === 0) {
         resetRow();
       }
     }

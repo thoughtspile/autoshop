@@ -10,15 +10,22 @@ var linkTemplate = _.template('<a href="<%= url %>"><%= text %></a>');
 var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
 
-const pNames = ['block-4-2h', 'block-4-2w', 'block-4-4'];
+const pNames = {
+  2: ['block-1-2', 'block-1-1h'],
+  4: ['block-4-2h', 'block-4-2w', 'block-4-4'],
+};
 const dependencies = ['card'];
-pNames.concat(dependencies).forEach((name) =>  {
+pNames[4].concat(pNames[2]).concat(dependencies).forEach((name) =>  {
     const template = fs.readFileSync(__dirname + '/../partials/' + name + '.hbs', 'utf8');
     hbs.registerPartial(name, template);
 });
-const blockPartials = pNames
+const compileAll = names => names
     .map(p => hbs.partials[p])
     .map(p => typeof p === 'function' ? p : hbs.compile(p));
+const blockPartials = {
+  4: compileAll(pNames[4]),
+  2: compileAll(pNames[2]),
+};
 
 module.exports = function () {
 
@@ -342,24 +349,34 @@ module.exports = function () {
   };
 
   _helpers.pricelistBlocks = (items) => {
+    const chunkSizes = {
+      4: { 0: 3, 1: 3, 2: 4 },
+      2: { 0: 2, 1: 1 },
+    };
     let i = 0;
     let res = '';
+    let newRow = true;
+    let rowRem = 6;
+    const resetRow = () => {
+      newRow = true;
+      rowRem = 6;
+    };
 
     while (i < items.length) {
-      const type = Math.floor(Math.random() * 3);
-      let chunk = [];
-      if (type === 0) {
-        chunk = items.slice(i, i + 3);
-        res += blockPartials[0](chunk);
-      } else if (type === 1) {
-        chunk = items.slice(i, i + 3);
-        res += blockPartials[1](chunk);
-      } else {
-        chunk = items.slice(i, i + 4);
-        res += blockPartials[2](chunk);
+      const kind = newRow ? ([2, 4])[Math.floor(Math.random() * 2)] : rowRem;
+      const type = Math.floor(Math.random() * blockPartials[kind].length);
+
+      const chunkSize = chunkSizes[kind][type];
+      const blockItems = items.slice(i, i + chunkSize);
+      res += blockPartials[kind][type]({ items: blockItems, base: 4 });
+
+      i += blockItems.length;
+      rowRem -= kind;
+      if (!rowRem === 0) {
+        resetRow();
       }
-      i += chunk.length;
     }
+
     return res;
   };
 

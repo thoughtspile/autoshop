@@ -1,7 +1,7 @@
-<div class='col-md-3 col-sm-6 col-xs-12'>
-    {{>card product=this.[0] extend="double"}}
+<div class='col-md-{{base}} col-sm-6 col-xs-6'>
+    {{>card product=items.[0] extend="double"}}
 </div>
-<div class='col-md-3 col-sm-6 col-xs-12'>
-    {{>card product=this.[1]}}
-    {{>card product=this.[2]}}
+<div class='col-md-{{base}} col-sm-6 col-xs-6'>
+    {{>card product=items.[1]}}
+    {{>card product=items.[2]}}
 </div>

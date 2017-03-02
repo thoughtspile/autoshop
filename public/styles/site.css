@@ -5975,14 +5975,17 @@ body {
       text-align: center; }
   .card__title {
     font-size: 20px;
-    max-height: 110px;
+    max-height: 65px;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 0; }
   .card__price {
     position: absolute;
-    bottom: 6px;
-    left: 0; }
+    bottom: 0;
+    right: 0;
+    font-size: 16px; }
+    .card__price--none {
+      font-size: 14px; }
   .card__btn {
     border-color: #ff3b30;
     border-radius: 0;

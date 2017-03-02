@@ -3,7 +3,7 @@
     <img class='card__thumb card__thumb--{{extend}}' src='{{ product.img }}'>
     <div class='card__content card__content--{{extend}}'>
       <h1 class='card__title'>{{ product.name }}</h1>
-      <span class='card__price'>
+      <span class='card__price {{#if product.price}}{{else}}card__price--none{{/if}}'>
         {{#if product.price}}
           {{ product.price }} руб.
         {{else}}

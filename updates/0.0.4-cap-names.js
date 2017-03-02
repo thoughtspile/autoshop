@@ -44,7 +44,7 @@ module.exports = (done) => {
             if (/^[()А-Яа-я\-]+$/.test(frag)) {
               return i === 0 ? cap(frag) : frag.toLowerCase();
             }
-            if (stopwords.indexOf(frag.toUpperCase()) >= 0 || !/^\(?[A-Z]+\)?$/.test(frag)) {
+            if (stopwords.indexOf(frag.toUpperCase()) >= 0 || !/^[()A-Za-z]+$/.test(frag)) {
               return frag.toUpperCase();
             }
             return cap(frag);

@@ -313,7 +313,10 @@ body {
 	&__promo-copy {
 		@extend .card;
 		margin-top: 0;
+    overflow: hidden;
 		height: 400px;
+    padding: 0;
+    border: 10px solid white;
 		@media (max-width: 500px) {
 			height: auto;
 		}
@@ -513,5 +516,18 @@ body {
     &:hover, &:active {
       color: white;
     }
+  }
+}
+
+.slider {
+  overflow: hidden;
+  height: 100%;
+  transition: all 700ms ease;
+  &__img {
+    float: left;
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
   }
 }

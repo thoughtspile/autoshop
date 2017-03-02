@@ -9,6 +9,7 @@ module.exports = {
       './public/js/src/header-cart.js',
       './public/js/src/signin-popup.js',
       './public/js/src/map.js',
+      './public/js/src/promo-slider.js',
     ],
   },
   output: {

@@ -6051,7 +6051,10 @@ body {
 
 .intro__promo-copy {
   margin-top: 0;
-  height: 400px; }
+  overflow: hidden;
+  height: 400px;
+  padding: 0;
+  border: 10px solid white; }
   @media (max-width: 500px) {
     .intro__promo-copy {
       height: auto; } }
@@ -6199,3 +6202,14 @@ body {
       color: #ddd; }
     .header-contact__email:hover, .header-contact__email:active, .header-contact__phone:hover, .header-contact__phone:active {
       color: white; }
+
+.slider {
+  overflow: hidden;
+  height: 100%;
+  transition: all 700ms ease; }
+  .slider__img {
+    float: left;
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%; }

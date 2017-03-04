@@ -2,13 +2,17 @@ const keystone = require('keystone');
 const Types = keystone.Field.Types;
 const _ = require('lodash');
 
-var Good = new keystone.List('Good');
+var Good = new keystone.List('Good', {
+  label: 'Товары',
+  singular: 'товар',
+  plural: 'товары',
+});
 
 Good.add({
     prices: {
       retail: { type: Types.Number, initial: false, required: false, label: 'Розничная цена' },
       wholesale: {
-        lg: { type: Types.Number, initial: false, required: false, label: 'Розничная цена' },
+        lg: { type: Types.Number, initial: false, required: false, label: 'Крупный опт' },
         md: { type: Types.Number, initial: false, required: false, label: 'Средний опт' },
         sm: { type: Types.Number, initial: false, required: false, label: 'Мелкий опт' },
       }
@@ -21,6 +25,8 @@ Good.add({
 
     tags: { type: Types.Relationship, ref: 'Tag', many: true },
 });
+Good.defaultColumns = 'name, category, prices, desc, good_id';
+
 
 // Provide access to Keystone
 Good.schema.virtual('img').get(function () {

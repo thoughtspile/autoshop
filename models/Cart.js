@@ -3,7 +3,11 @@ const Types = keystone.Field.Types;
 const _ = require('lodash');
 const uuid = require('uuid/v4');
 
-const Cart = new keystone.List('Cart');
+const Cart = new keystone.List('Cart', {
+  nocreate: true,
+  noedit: true,
+  nodelete: true,
+});
 
 Cart.add({
     uid: { type: Types.Relationship, ref: 'User' },

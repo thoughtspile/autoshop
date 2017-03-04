@@ -5,7 +5,14 @@ var Types = keystone.Field.Types;
  * User Model
  * ==========
  */
-var User = new keystone.List('User');
+var User = new keystone.List('User', {
+  nocreate: true,
+  noedit: true,
+  nodelete: true,
+  label: 'Пользователи',
+  singular: 'пользователь',
+  plural: 'пользователи',
+});
 
 User.add({
 	name: { type: Types.Name, initial: false, required: false, index: true },
@@ -42,6 +49,7 @@ User.add({
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Администратор', index: true },
 });
+User.defaultColumns = 'name, category, email, phone, about';
 
 // Provide access to Keystone
 User.schema.virtual('canAccessKeystone').get(function () {
@@ -94,9 +102,4 @@ User.schema.static('registerAnon', (sid) => {
     .then((user) => user && user.sid ? user : User.model.create({ sid }));
 });
 
-
-/**
- * Registration
- */
-User.defaultColumns = 'name, email, isAdmin';
 User.register();

@@ -51,7 +51,7 @@ Cart.schema.static('setQty', (user, good_id, qty) => {
 // if sourceUser has a non-empty cart: replace targetUser's cart with sourceUser's
 Cart.schema.static('merge', (srcUser, targetUser) => {
   if (!srcUser || !targetUser || srcUser._id === targetUser._id) {
-    return new Promise();
+    return Promise.resolve();
   }
 
   return Cart.model.count({ uid: srcUser._id }).exec()

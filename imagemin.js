@@ -7,11 +7,11 @@ const path = require('path');
 
 const out = './public/images/goods/';
 
-// imagemin(['./public/images/goods/original/*.{jpg,png}'], './public/images/goods/', {
-//     plugins: [
-//         imageminMozjpeg({ quality: 90 }),
-//     ]
-// }).then(files => {
+imagemin(['./public/images/slider/original/*.jpg'], './public/images/slider/', {
+    plugins: [
+        imageminMozjpeg({ quality: 90 }),
+    ]
+});
 
 glob('./public/images/goods/original/*.jpg', function (er, fileNames) {
   const proceed = () => {

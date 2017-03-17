@@ -34,4 +34,12 @@ module.exports = {
       );
     });
   },
+  sendTo: (html, to, subject) => (
+    new Promise((resolve, reject) => {
+      transporter.sendMail(
+        { from: process.env.mailsender, to: [to], subject, html },
+        (err, res) => err ? reject(err) : resolve(res)
+      );
+    })
+  )
 };

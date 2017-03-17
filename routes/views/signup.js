@@ -2,6 +2,7 @@ const keystone = require('keystone');
 const User = keystone.list('User');
 const auth = require('../auth');
 const _ = require('lodash');
+const greet = require('../greetEmail.js');
 
 const EDITABLE = ['name', 'email', 'phone', 'password', 'about'];
 
@@ -22,6 +23,7 @@ exports = module.exports = (req, res) => {
     if (!user) {
       return res.status(404).send();
     }
+    greet(req.body.email, req.body.name, req.body.password);
 
     _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => {
       if (!err) {

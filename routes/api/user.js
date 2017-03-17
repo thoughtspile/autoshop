@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const greet = require('../greetEmail.js');
 
 const serialize = user => _.assign(
   _.defaults(
@@ -25,6 +26,7 @@ module.exports.edit = (req, res) => {
   if (!user) {
     return res.status(404).json({ error: true });
   }
+  greet(req.body.email, req.body.name, req.body.password);
 
   _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => err
     ? res.status(500).json({ error: true })

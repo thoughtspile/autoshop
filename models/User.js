@@ -7,7 +7,7 @@ var Types = keystone.Field.Types;
  */
 var User = new keystone.List('User', {
   nocreate: true,
-  noedit: true,
+  noedit: false,
   nodelete: true,
   label: 'Пользователи',
   singular: 'пользователь',

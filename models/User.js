@@ -2,6 +2,9 @@ var keystone = require('keystone');
 const isEmpty = require('lodash/isEmpty');
 var Types = keystone.Field.Types;
 
+// expire anonymous users after 3 days
+const ANON_TTL = 3 * 24 * 60 * 60 * 1000;
+
 /**
  * User Model
  * ==========
@@ -46,7 +49,8 @@ User.add({
       { value: 'private', label: 'Частное лицо' },
       { value: 'company', label: 'Компания' },
     ],
-  }
+  },
+  removeAnonAt: { type: Date, initial: false, required: false },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Администратор', index: true },
 });
@@ -104,7 +108,12 @@ User.schema.static('register', (payload) => {
 
 User.schema.static('registerAnon', (sid) => {
   return User.model.findOne({ sid }).exec()
-    .then((user) => user && user.sid ? user : User.model.create({ sid }));
+    .then((user) => (user && user.sid)
+      ? user
+      : User.model.create({ sid, removeAnonAt: Date.now() + ANON_TTL })
+    );
 });
+
+User.schema.index({ removeAnonAt: 1 }, { expireAfterSeconds: 0 });
 
 User.register();

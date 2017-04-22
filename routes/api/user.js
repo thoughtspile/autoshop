@@ -28,7 +28,7 @@ module.exports.edit = (req, res) => {
   }
   greet(req.body.email, req.body.name, req.body.password);
 
-  _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => err
+  _.assign(user, _.pick(req.body, EDITABLE), { removeAnonAt: null }).save((err, user) => err
     ? res.status(500).json({ error: true })
     : res.json({ user: serialize(user) })
   );

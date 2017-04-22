@@ -25,7 +25,7 @@ exports = module.exports = (req, res) => {
     }
     greet(req.body.email, req.body.name, req.body.password);
 
-    _.assign(user, _.pick(req.body, EDITABLE)).save((err, user) => {
+    _.assign(user, _.pick(req.body, EDITABLE), { removeAnonAt: null }).save((err, user) => {
       if (!err) {
         req.flash('success', 'Вы зарегистрировались в магазине!')
         return res.redirect('/');

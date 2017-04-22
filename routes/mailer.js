@@ -27,7 +27,7 @@ module.exports = {
         {
           from: process.env.mailsender,
           to: [process.env.mailreceiver],
-          subject: 'Заказ в магазине автосмазок',
+          subject: 'Заказ в магазине автомасел Turboil',
           html,
         },
         (err, res) => err ? reject(err) : resolve(res)

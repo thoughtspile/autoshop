@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+const isEmpty = require('lodash/isEmpty');
 var Types = keystone.Field.Types;
 
 /**
@@ -15,7 +16,7 @@ var User = new keystone.List('User', {
 });
 
 User.add({
-	name: { type: Types.Name, initial: false, required: false, index: true },
+	name: { type: String, initial: false, required: false, index: true },
 	email: { type: Types.Email, initial: false, required: false, index: true },
 	isVerified: { type: Boolean, default: false, required: true },
 	phone: { type: String, initial: false, required: false },
@@ -54,6 +55,10 @@ User.defaultColumns = 'name, category, email, phone, about';
 // Provide access to Keystone
 User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
+});
+
+User.schema.virtual('readableName').get(function() {
+  return this.name || this.email || '';
 });
 
 User.schema.virtual('isAnonymous').get(function () {

@@ -12,7 +12,7 @@ const ANON_TTL = 3 * 24 * 60 * 60 * 1000;
 var User = new keystone.List('User', {
   nocreate: true,
   noedit: false,
-  nodelete: true,
+  nodelete: false,
   label: 'Пользователи',
   singular: 'пользователь',
   plural: 'пользователи',
@@ -21,7 +21,7 @@ var User = new keystone.List('User', {
 User.add({
 	name: { type: String, initial: false, required: false, index: true },
 	email: { type: Types.Email, initial: false, required: false, index: true },
-	isVerified: { type: Boolean, default: false, required: true },
+	isVerified: { type: Boolean, default: false, required: false },
 	phone: { type: String, initial: false, required: false },
 	sid: { type: String, initial: false, required: false, index: true },
 	password: { type: Types.Password, label: 'Пароль', initial: true, required: false },

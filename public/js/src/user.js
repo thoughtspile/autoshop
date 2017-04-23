@@ -1,7 +1,5 @@
 import adapter from './adapter';
 
-// const reloadStats = () => window.stats && window.stats.reload();
-
 Vue.component('userblock', {
   template: `
     <a class="popup-holder">

@@ -5874,7 +5874,7 @@ body {
   margin-top: 7px; }
   @media (max-width: 990px) and (min-width: 768px) {
     .search-bar {
-      width: 250px; } }
+      width: 200px; } }
 
 .pricelist__item {
   display: block;
@@ -6226,3 +6226,18 @@ body {
     @media (max-width: 991px) {
       .slider__desc {
         height: 200px; } }
+
+@media (min-width: 768px) {
+  .user-block {
+    max-width: 150px;
+    float: right;
+    margin-right: -16px;
+    cursor: pointer; } }
+
+.user-block .popup {
+  padding: 20px; }
+  .user-block .popup a {
+    color: #777;
+    text-decoration: none; }
+    .user-block .popup a:hover {
+      color: #333; }

@@ -3,14 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    bundle: [
-      './public/js/src/addtocart.js',
-      './public/js/src/cart.js',
-      './public/js/src/header-cart.js',
-      './public/js/src/signin-popup.js',
-      './public/js/src/map.js',
-      './public/js/src/promo-slider.js',
-    ],
+    bundle: './public/js/src/index.js',
   },
   output: {
     path: './public/js',

@@ -11,8 +11,10 @@ var scriptTemplate = _.template('<script src="<%= src %>"></script>');
 var cssLinkTemplate = _.template('<link href="<%= href %>" rel="stylesheet">');
 
 const pNames = {
-  2: ['block-1-2', 'block-1-1h'],
-  4: ['block-4-2h', 'block-4-2w', 'block-4-4'],
+  // 2: ['block-1-2', 'block-1-1h'],
+  // 4: ['block-4-2h', 'block-4-2w', 'block-4-4'],
+  2: ['block-1-2'],
+  4: ['block-4-4'],
 };
 const dependencies = ['card'];
 pNames[4].concat(pNames[2]).concat(dependencies).forEach((name) =>  {
@@ -350,8 +352,10 @@ module.exports = function () {
 
   _helpers.pricelistBlocks = (items) => {
     const chunkSizes = {
-      4: { 0: 3, 1: 3, 2: 4 },
-      2: { 0: 2, 1: 1 },
+      // 4: { 0: 3, 1: 3, 2: 4 },
+      // 2: { 0: 2, 1: 1 },
+      4: { 0: 4 },
+      2: { 0: 2 },
     };
     let i = 0;
     let res = '';
